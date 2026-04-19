@@ -1,0 +1,818 @@
+/* ── SHELL ── */
+.shell {
+  background: #f6f1e7;
+  color: #101010;
+  font-family: "PT Mono", "Courier New", monospace;
+  position: relative;
+}
+
+/* scanlines — same as Colossal, slightly lighter */
+.shell::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(16, 16, 16, 0.022) 3px,
+    rgba(16, 16, 16, 0.022) 4px
+  );
+}
+
+/* ── TOP NAV (identical to signal) ── */
+.topNav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 1fr auto auto 1fr;
+  gap: 0.65rem;
+  padding: 0.4rem clamp(1rem, 2.8vw, 1.4rem);
+  border-bottom: 1px solid rgba(16, 16, 16, 0.12);
+  background: rgba(246, 241, 231, 0.94);
+  backdrop-filter: blur(7px);
+}
+
+.topNavBtn {
+  border: 1px solid rgba(16, 16, 16, 0.24);
+  border-radius: 9px;
+  background: transparent;
+  color: rgba(16, 16, 16, 0.8);
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  min-height: 30px;
+  padding: 0.24rem 0.62rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.topNavBtn:first-child { justify-self: start; }
+.topNavBtn:nth-child(2),
+.topNavBtn:nth-child(3) { justify-self: center; }
+.topNavBtn:last-child { justify-self: end; }
+
+.topNavBtn:hover,
+.topNavBtn:focus-visible {
+  background: #101010;
+  color: #f6f1e7;
+  border-color: #101010;
+}
+
+.topNavBtn:disabled {
+  opacity: 0.32;
+  cursor: default;
+}
+
+/* ── TICKER (identical to signal) ── */
+.ticker {
+  overflow: hidden;
+  background: #e8380a;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.tickerTrack {
+  display: flex;
+  animation: tickerScroll 32s linear infinite;
+  white-space: nowrap;
+}
+
+.tickerItem {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 0 3rem;
+}
+
+.tickerItem::after {
+  content: "◆";
+  margin-left: 3rem;
+  opacity: 0.5;
+}
+
+@keyframes tickerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── EDITORIAL HEADER (light, no video bg) ── */
+.header {
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem) clamp(2.5rem, 5vw, 4rem);
+  border-bottom: 1px solid rgba(16, 16, 16, 0.1);
+  display: grid;
+  gap: 0;
+}
+
+.headerEyebrow {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #e8380a;
+  margin: 0 0 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.headerEyebrow::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 1px;
+  background: #e8380a;
+  opacity: 0.45;
+  flex-shrink: 0;
+}
+
+.headerTitle {
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(2.8rem, 8.2vw, 7.6rem);
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #101010;
+  margin: 0 0 1.8rem;
+}
+
+.headerIntro {
+  max-width: 72ch;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  color: rgba(16, 16, 16, 0.6);
+  margin: 0 0 2rem;
+}
+
+.headerMetaRow {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(16, 16, 16, 0.1);
+}
+
+.headerMetaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.headerMetaLabel {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #e8380a;
+  opacity: 0.85;
+}
+
+.headerMetaVal {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: #101010;
+}
+
+/* ── SECTION WRAPPER ── */
+.section {
+}
+
+/* ── SECTION BAR (subtle line + magazine tag) ── */
+.sectionBar {
+  border-top: 1px solid rgba(16, 16, 16, 0.12);
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4rem) clamp(0.9rem, 2vw, 1.2rem);
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e8380a;
+  line-height: 1.35;
+}
+
+/* ── FEATURE TITLE (inline, above copy block) ── */
+.featureTitle {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e8380a;
+  line-height: 1.35;
+  margin-bottom: 0.6rem;
+}
+
+/* ── COVERS WITH SIDE BLURB ── */
+.coversWithBlurb {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 5vw, 4rem);
+  align-items: start;
+}
+
+.coversBlurb {
+  font-size: 0.8rem;
+  line-height: 1.75;
+  color: #101010;
+  opacity: 0.7;
+  padding-top: 0.25rem;
+  position: sticky;
+  top: 4rem;
+}
+
+@media (max-width: 900px) {
+  .coversWithBlurb {
+    grid-template-columns: 1fr;
+  }
+  .coversBlurb {
+    position: static;
+  }
+}
+
+/* ── COVER GRID (portrait, 3-up) ── */
+.coverGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2.5vw, 2rem);
+  background: transparent;
+}
+
+@media (max-width: 760px) {
+  .coverGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .coverGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.coverCell {
+  position: relative;
+  background: #101010;
+  aspect-ratio: 17 / 22;
+  overflow: hidden;
+}
+
+.coverCell video,
+.coverCell img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.coverCellCaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 0.55rem clamp(0.75rem, 2vw, 1rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to top, rgba(10, 10, 10, 0.7) 0%, transparent 100%);
+}
+
+.coverCellLabel {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(246, 241, 231, 0.72);
+}
+
+.coverCellAccent {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e8380a;
+  opacity: 0.85;
+}
+
+/* ── SINGLE VIDEO BLOCK (16:9 or native ratio) ── */
+.videoBlock {
+  position: relative;
+  background: #0a0a0a;
+  margin: 0;
+}
+
+.videoWrap {
+  position: relative;
+  overflow: hidden;
+  background: #0a0a0a;
+  aspect-ratio: 16 / 9;
+}
+
+.videoWrap video,
+.videoWrap img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* corner brackets */
+.videoWrap::before,
+.videoWrap::after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.videoWrap::before {
+  top: 12px;
+  left: 12px;
+  border-top: 1.5px solid #e8380a;
+  border-left: 1.5px solid #e8380a;
+}
+
+.videoWrap::after {
+  bottom: 12px;
+  right: 12px;
+  border-bottom: 1.5px solid #e8380a;
+  border-right: 1.5px solid #e8380a;
+}
+
+.videoFallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(246, 241, 231, 0.25);
+}
+
+.videoCaptionBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem clamp(1.5rem, 5vw, 4rem);
+  border-top: 1px solid rgba(16, 16, 16, 0.08);
+  background: #f6f1e7;
+}
+
+.videoCaptionLabel {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(16, 16, 16, 0.36);
+}
+
+.videoCaptionMeta {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e8380a;
+}
+
+/* ── 2-UP VIDEO GRID ── */
+.videoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(16, 16, 16, 0.08);
+}
+
+@media (max-width: 640px) {
+  .videoGrid { grid-template-columns: 1fr; }
+}
+
+/* ── FEATURE LAYOUT (video + copy side by side) ── */
+.featureLayout {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  padding: clamp(2.5rem, 5vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+  align-items: start;
+}
+
+@media (max-width: 700px) {
+  .featureLayout { grid-template-columns: 1fr; }
+}
+
+.featureVideoWrap {
+  position: relative;
+  overflow: hidden;
+  background: #0a0a0a;
+  width: 100%;
+}
+
+.featureVideoWrap video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.featureVideoAudio {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 3;
+  border: 1px solid rgba(246, 241, 231, 0.6);
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.55);
+  color: rgba(246, 241, 231, 0.9);
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.34rem 0.66rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.featureVideoAudio:hover,
+.featureVideoAudio:focus-visible {
+  background: rgba(246, 241, 231, 0.95);
+  color: #101010;
+}
+
+.featureCopyCol {
+  padding-top: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.featureCopyEyebrow {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e8380a;
+}
+
+.featureCopyText {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.85;
+  color: rgba(16, 16, 16, 0.55);
+  white-space: pre-line;
+}
+
+.featureCopyCaption {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(16, 16, 16, 0.28);
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(16, 16, 16, 0.08);
+}
+
+/* ── 50TH ANNIVERSARY LAYOUT ── */
+.fiftiethLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  border-top: 1px solid rgba(16, 16, 16, 0.08);
+}
+
+@media (max-width: 800px) {
+  .fiftiethLayout { grid-template-columns: 1fr; }
+}
+
+.fiftiethLeft {
+  position: sticky;
+  top: 76px; /* below sticky nav (48px) + ticker (28px) */
+}
+
+.fiftiethOpenerWrap {
+  position: relative;
+  aspect-ratio: 1920 / 1200;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.fiftiethOpenerWrap video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.fiftiethLeftCopy {
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.fiftiethLeftEyebrow {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #e8380a;
+}
+
+.fiftiethLeftText {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.85;
+  color: rgba(16, 16, 16, 0.5);
+  white-space: pre-line;
+}
+
+.fiftiethRight {
+  border-left: 1px solid rgba(16, 16, 16, 0.08);
+}
+
+.fiftiethStackItem {
+  position: relative;
+  aspect-ratio: 2860 / 1200;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.fiftiethStackItem video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.fiftiethStackCaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.55rem clamp(1rem, 2.5vw, 1.5rem);
+  border-top: 1px solid rgba(16, 16, 16, 0.08);
+  border-bottom: 1px solid rgba(16, 16, 16, 0.06);
+  background: #f6f1e7;
+}
+
+.fiftiethStackLabel {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(16, 16, 16, 0.36);
+}
+
+.fiftiethStackMeta {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e8380a;
+}
+
+/* ── 50TH FEATURE (copy left, padded video right) ── */
+.fiftiethFeature {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 0;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .fiftiethFeature { grid-template-columns: 1fr; }
+}
+
+.fiftiethFeatureCopy {
+  padding: clamp(2.5rem, 5vw, 5rem) clamp(1.5rem, 3vw, 2.5rem) clamp(2.5rem, 5vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.fiftiethFeatureVideoCol {
+  padding: clamp(2rem, 4vw, 4rem) clamp(2rem, 5vw, 5rem) clamp(2rem, 4vw, 4rem) 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.fiftiethFeatureVideoWrap {
+  position: relative;
+  width: 72%;
+  aspect-ratio: 61 / 52;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.fiftiethFeatureVideoWrap video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* small Web video under copy */
+.fiftiethWebSmall {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(16, 16, 16, 0.08);
+}
+
+.fiftiethWebSmallWrap {
+  display: block;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #0a0a0a;
+  cursor: pointer;
+}
+
+.fiftiethWebSmallWrap:hover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(232, 56, 10, 0.12);
+  pointer-events: none;
+}
+
+.fiftiethWebSmallWrap video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.fiftiethWebSmallCaption {
+  margin-top: 0.5rem;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(16, 16, 16, 0.3);
+}
+
+/* ── COPY BLOCK ── */
+.copyBlock {
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 5vw, 4rem);
+  border-top: 1px solid rgba(16, 16, 16, 0.08);
+}
+
+.copyText {
+  max-width: 68ch;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  color: rgba(16, 16, 16, 0.6);
+  white-space: pre-line;
+}
+
+/* ── DIVIDER TICKER (identical to signal) ── */
+.sectionTicker {
+  overflow: hidden;
+  background: transparent;
+  border-top: 1px solid rgba(16, 16, 16, 0.08);
+  border-bottom: 1px solid rgba(16, 16, 16, 0.08);
+  height: 36px;
+  display: flex;
+  align-items: center;
+}
+
+.sectionTickerTrack {
+  display: flex;
+  animation: tickerScroll 22s linear infinite;
+  white-space: nowrap;
+}
+
+.sectionTickerItem {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(16, 16, 16, 0.14);
+  padding: 0 2rem;
+}
+
+.sectionTickerItemHi {
+  color: #e8380a;
+  opacity: 0.55;
+}
+
+/* ── CREDITS ── */
+.credits {
+  padding: clamp(2.5rem, 5vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+  border-top: 1px solid rgba(16, 16, 16, 0.08);
+}
+
+.creditsLabel {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #e8380a;
+  margin-bottom: 1.8rem;
+}
+
+.creditsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem 3rem;
+}
+
+.creditItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.creditRole {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #101010;
+  opacity: 0.45;
+}
+
+.creditName {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: #101010;
+}
+
+/* ── FOOTER NAV (identical to signal) ── */
+.footerNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  border-top: 1px solid rgba(16, 16, 16, 0.08);
+}
+
+.footerNavBtn {
+  flex: 1;
+  padding: 2rem clamp(1.5rem, 5vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.footerNavBtn:hover {
+  background: rgba(16, 16, 16, 0.03);
+}
+
+.footerNavBtn:disabled {
+  opacity: 0.28;
+  cursor: default;
+}
+
+.footerNavBtnNext {
+  text-align: right;
+  border-left: 1px solid rgba(16, 16, 16, 0.08);
+}
+
+.footerNavDir {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e8380a;
+}
+
+.footerNavTitle {
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(1rem, 2.2vw, 1.6rem);
+  text-transform: uppercase;
+  color: #101010;
+  letter-spacing: -0.01em;
+}

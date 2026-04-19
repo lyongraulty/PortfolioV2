@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout *)",
+      "Bash(find /c/Users/lyong/BunnySync -type d -empty -delete)",
+      "Bash(curl *)",
+      "Bash(node -e \"const d = require\\('./content/site-data.json'\\); console.log\\(JSON.stringify\\(d.tokens?.nav ?? d.tokens ?? {}, null, 2\\)\\)\")",
+      "Bash(node *)",
+      "Bash(npx tsc *)",
+      "mcp__claude_ai_Figma__get_metadata",
+      "mcp__claude_ai_Figma__use_figma",
+      "mcp__claude_ai_Figma__get_screenshot",
+      "mcp__claude_ai_Figma__get_design_context",
+      "Read(//c/Users/lyong/Projects//**)",
+      "Read(//c/Users/lyong//**)",
+      "Bash(find /d -maxdepth 4 -type d -name \"texas-monthly\")",
+      "Bash(ls /d)",
+      "Bash(ffprobe -v quiet -print_format json -show_streams -select_streams v:0 /c/Users/lyong/BunnySync/media_live/projects/texas-monthly/TexasMonthly_Selena.mp4 /c/Users/lyong/BunnySync/media_live/projects/texas-monthly/TexasMonthly_bumscover_H264.mp4 /c/Users/lyong/BunnySync/media_live/projects/texas-monthly/TexasMonthly_Water.mp4 /c/Users/lyong/BunnySync/media_live/projects/texas-monthly/TexasMonthly_TomBrownsBody_Cover_10sec.mov /c/Users/lyong/BunnySync/media_live/projects/texas-monthly/TexasMonthly_TrumpsApostle_V06.mp4)",
+      "Bash(python3 *)"
+    ]
+  }
+}

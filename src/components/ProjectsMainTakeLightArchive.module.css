@@ -1,0 +1,383 @@
+/* ── PAGE SHELL ── */
+.page {
+  min-height: 100svh;
+  color: #101010;
+  background: #f6f1e7;
+  margin-top: calc(-1 * var(--header-height));
+}
+
+/* grain overlay */
+.page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* ── HIDE SITE NAV ON THIS PAGE ── */
+:global(body:has(.page)) .site-header {
+  display: none !important;
+}
+
+/* ── HERO VIDEO ── */
+.heroSection {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+  background: #080808;
+}
+
+.heroVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.72;
+}
+
+.heroOverlay {
+  position: absolute;
+  left: clamp(1.5rem, 4vw, 3rem);
+  bottom: clamp(2rem, 5vw, 4rem);
+  right: clamp(1.5rem, 4vw, 3rem);
+  display: grid;
+  gap: 0.65rem;
+}
+
+.heroEyebrow {
+  margin: 0;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(246, 241, 231, 0.55);
+}
+
+.heroTitle {
+  margin: 0;
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(4rem, 14vw, 12rem);
+  line-height: 0.84;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: #f6f1e7;
+}
+
+.heroSub {
+  margin: 0;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(246, 241, 231, 0.45);
+  transform: translateY(100%);
+}
+
+/* ── PROJECT STACK ── */
+.stack {
+  display: grid;
+}
+
+/* ── SPECIMEN SECTION ── */
+.specimen {
+  min-height: 140svh;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid rgba(16, 16, 16, 0.16);
+}
+
+/* ── LABEL ROW ── */
+.labelRow {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem clamp(1rem, 4vw, 2.6rem);
+  background: rgba(255, 255, 255, 0.35);
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  gap: 1.5rem;
+}
+
+.labelNum {
+  color: #b43a10;
+  flex-shrink: 0;
+}
+
+.labelCat {
+  color: rgba(16, 16, 16, 0.5);
+  flex: 1;
+}
+
+.labelYear {
+  color: rgba(16, 16, 16, 0.38);
+  flex-shrink: 0;
+}
+
+/* ── TYPE CLOCK ── */
+.typeClock {
+  flex-shrink: 0;
+  padding: clamp(1.6rem, 3.5vw, 3rem) clamp(1rem, 4vw, 2.6rem);
+  display: grid;
+  gap: 0;
+}
+
+/* seq label: "01 — Editorial Animation" with extending line */
+.seqLabel {
+  margin: 0 0 0.9rem;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #b43a10;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.seqLabel em {
+  font-style: normal;
+  opacity: 0.65;
+}
+
+.seqLabel::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 1px;
+  background: #b43a10;
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.wordLead {
+  margin: 0;
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(3rem, 17vw, 14rem);
+  line-height: 0.82;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  color: #101010;
+}
+
+.wordTrail {
+  margin: 0.1rem 0 0;
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(1.8rem, 10vw, 8rem);
+  line-height: 0.88;
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(16, 16, 16, 0.28);
+}
+
+.copy {
+  margin: 1.1rem 0 0;
+  max-width: 62ch;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  color: rgba(16, 16, 16, 0.65);
+}
+
+/* ── DATA ROW ── */
+.dataRow {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(16, 16, 16, 0.1);
+}
+
+.dataStat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.dataLabel {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(16, 16, 16, 0.36);
+}
+
+.dataVal {
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(0.85rem, 2vw, 1.4rem);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #101010;
+  line-height: 1;
+}
+
+/* ── VIDEO ── */
+.videoWrap {
+  position: relative;
+  flex: 1;
+  min-height: 52vh;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.videoEl {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* dark gradient over the video */
+.videoWrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 10, 0.78) 0%,
+    rgba(10, 10, 10, 0.18) 40%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* ── CORNER BRACKETS ── */
+.corners {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.corners::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 28px;
+  height: 28px;
+  border-top: 2px solid #b43a10;
+  border-left: 2px solid #b43a10;
+}
+
+.corners::after {
+  content: "";
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  width: 28px;
+  height: 28px;
+  border-bottom: 2px solid #b43a10;
+  border-right: 2px solid #b43a10;
+}
+
+/* ── VIDEO FOOTER (over video, above gradient) ── */
+.videoFooter {
+  position: absolute;
+  left: clamp(1rem, 3vw, 1.8rem);
+  bottom: clamp(1rem, 3vw, 1.8rem);
+  z-index: 3;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border: 1.5px solid rgba(246, 241, 231, 0.85);
+  border-radius: 999px;
+  padding: 0 1.4rem;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f6f1e7;
+  text-decoration: none;
+  background: rgba(10, 10, 10, 0.35);
+  backdrop-filter: blur(4px);
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  white-space: nowrap;
+}
+
+.button:hover,
+.button:focus-visible {
+  background: #f6f1e7;
+  color: #101010;
+  border-color: #f6f1e7;
+}
+
+/* ── CAPTION BAR ── */
+.captionBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem clamp(1rem, 4vw, 2.6rem);
+  border-top: 1px solid rgba(16, 16, 16, 0.1);
+  background: rgba(255, 255, 255, 0.28);
+  flex-shrink: 0;
+}
+
+.captionLeft {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(16, 16, 16, 0.42);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.captionRight {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #b43a10;
+  flex-shrink: 0;
+}
+
+/* ── FALLBACK / EMPTY ── */
+.mediaFallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(16, 16, 16, 0.45);
+  background: linear-gradient(135deg, rgba(180, 58, 16, 0.14), #f6f1e7);
+}
+
+.emptyState {
+  padding: 3rem clamp(1rem, 4vw, 2.6rem);
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(16, 16, 16, 0.45);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .heroTitle {
+    font-size: clamp(3.5rem, 16vw, 7rem);
+  }
+
+  .dataRow {
+    gap: 1.5rem;
+  }
+}

@@ -1,0 +1,721 @@
+{
+  "schema_version": 1,
+  "source": "local",
+  "generated_at": "2026-04-17T21:26:36.660Z",
+  "type-tokens": [
+    {
+      "token": "h1",
+      "font": "Archivo Black",
+      "weight": 900,
+      "size_px": "",
+      "style": "normal",
+      "letter_spacing": "-0.015em",
+      "line_height": 1.1,
+      "text_transform": "uppercase",
+      "color_light": "hsla(0, 0%, 5%, 1)",
+      "color_dark": "#ffffff",
+      "size_min_px": 32,
+      "size_max_px": 56,
+      "size_fluid_vw": 4
+    },
+    {
+      "token": "h2",
+      "font": "Archivo Black",
+      "weight": 800,
+      "size_px": 40,
+      "style": "normal",
+      "letter_spacing": "0.03em",
+      "line_height": "1.4em",
+      "text_transform": "uppercase",
+      "color_light": "hsla(0, 0%, 5%, 1)",
+      "color_dark": "#ffffff"
+    },
+    {
+      "token": "h3",
+      "font": "Archivo Black",
+      "weight": 600,
+      "size_px": 28,
+      "style": "normal",
+      "letter_spacing": "0.04em",
+      "line_height": "2em",
+      "text_transform": "uppercase",
+      "color_light": "hsla(0, 0%, 5%, 1)",
+      "color_dark": "#ffffff"
+    },
+    {
+      "token": "h4",
+      "font": "Archivo Black",
+      "weight": 800,
+      "size_px": 22,
+      "style": "normal",
+      "letter_spacing": "0.04em",
+      "line_height": "1.4em",
+      "text_transform": "uppercase",
+      "color_light": "hsla(0, 0%, 5%, 1)",
+      "color_dark": "#ffffff"
+    },
+    {
+      "token": "body",
+      "font": "PT Mono",
+      "weight": 400,
+      "size_px": 15,
+      "style": "normal",
+      "letter_spacing": "0.01em",
+      "line_height": 1.85,
+      "text_transform": "none",
+      "color_light": "hsla(0, 0%, 30%, 1)",
+      "color_dark": "#ffffff"
+    },
+    {
+      "token": "type-body",
+      "font": "PT Mono",
+      "weight": 400,
+      "size_px": 15,
+      "style": "normal",
+      "letter_spacing": "0.01em",
+      "line_height": 1.85,
+      "text_transform": "none",
+      "color_light": "hsla(0, 0%, 30%, 1)",
+      "color_dark": "#ffffff"
+    },
+    {
+      "token": "type-caption",
+      "font": "PT Mono",
+      "weight": 400,
+      "size_px": 15,
+      "style": "normal",
+      "letter_spacing": "0.01em",
+      "line_height": 1.7,
+      "text_transform": "none",
+      "color_light": "hsla(0, 0%, 30%, 1)",
+      "color_dark": "#ffffff"
+    },
+    {
+      "token": "type-overline",
+      "font": "PT Mono",
+      "weight": 400,
+      "size_px": 14,
+      "style": "normal",
+      "letter_spacing": "0.08em",
+      "line_height": 1.5,
+      "text_transform": "uppercase",
+      "color_light": "hsla(0, 0%, 5%, 1)",
+      "color_dark": "#ffffff"
+    },
+    {
+      "token": "type-button",
+      "font": "PT Mono",
+      "weight": 500,
+      "size_px": 16,
+      "style": "normal",
+      "letter_spacing": "0.06em",
+      "line_height": 1,
+      "text_transform": "uppercase",
+      "color_light": "hsla(0, 0%, 5%, 1)",
+      "color_dark": "#ffffff"
+    },
+    {
+      "token": "type-meta",
+      "font": "PT Mono",
+      "weight": 400,
+      "size_px": 14,
+      "style": "normal",
+      "letter_spacing": "0.01em",
+      "line_height": 1.5,
+      "text_transform": "none",
+      "color_light": "hsla(0, 0%, 5%, 1)",
+      "color_dark": "#ffffff"
+    },
+    {
+      "token": "type-nav",
+      "font": "Inter",
+      "weight": 400,
+      "size_px": 14,
+      "style": "normal",
+      "letter_spacing": "0.08em",
+      "line_height": 1.2,
+      "text_transform": "uppercase",
+      "color_light": "hsla(0, 0%, 5%, 1)",
+      "color_dark": "#ffffff"
+    },
+    {
+      "token": "hero-h1-override",
+      "font": "Archivo Black",
+      "weight": 900,
+      "size_px": "",
+      "style": "normal",
+      "letter_spacing": "-0.02em",
+      "line_height": 1.12,
+      "text_transform": "uppercase",
+      "color_light": "hsla(0, 0%, 5%, 1)",
+      "color_dark": "#ffffff",
+      "size_min_px": 48,
+      "size_max_px": 96,
+      "size_fluid_vw": 6
+    }
+  ],
+  "font-list": [
+    {
+      "font-list": "Archivo Black"
+    },
+    {
+      "font-list": "PT Mono"
+    },
+    {
+      "font-list": "Inter"
+    },
+    {
+      "font-list": "Montserrat"
+    }
+  ],
+  "pages": [
+    {
+      "page": "1",
+      "title": "MOTION REEL",
+      "button_text": "VIEW REEL",
+      "year": "2026",
+      "category": "Motion Reel",
+      "project_copy": "A tightly edited compilation of recent work - both client and personal",
+      "card_background": "projects/reel/reel-card.jpg",
+      "blocks": [
+        {
+          "id": "block01",
+          "index": 1,
+          "type": "video_embed",
+          "layout": "single",
+          "title": "MOTION REEL",
+          "copy": "\"Con Mi Madre\" // Zoticus // Animation\n\"Tomlinson's\" // Mishnoon // Design & Animation\n\"Glitch Callout\" // Captive // Animation\n\"Tradestation - Fresh Look\" // Black Math // 3D Animation\n\"Reach\" // Mishnoon // Design & Animation\n\"MTN\" // Personal Work // Design & Animation\n\"Idea Energy - unreleased\" // Perfect Form // Design & Animation\n\"Package Sensor\" // Captive // Animation\n\"Ash Britt\" // Zoticus // Design & Animation\n\"Electrolab\" // Zoticus // Design, Lighting, Texture, Camera & Animation\n\"Hammer Down\" // Personal Work // Design, Lighting, Texture, Camera, 2D & 3D Animation\n\"Tradestation - Discipline\" // Black Math // 3D Animation\n\"Universal Returns\" // Captive // Animation\n\"Jump\" // Personal Work // Design & Animation\n\"2019 Title Sequence\" // Personal Work // Design, Lighting, Texture, Camera & Animation\nMusic: \"Same Old Shit\" - Mulle Beats",
+          "media": [
+            {
+              "role": "poster",
+              "url": "projects/reel/reel-thumb.jpg"
+            },
+            {
+              "role": "video",
+              "url": "projects/reel/reel.mp4"
+            }
+          ]
+        },
+        {
+          "id": "block02",
+          "index": 2,
+          "type": "text",
+          "layout": "single",
+          "title": "Credits",
+          "copy": "Project reel metadata can live here during migration.",
+          "media": []
+        }
+      ]
+    },
+    {
+      "page": "2",
+      "slug": "texas-monthly",
+      "title": "Texas Monthly",
+      "year": "2022 - 2025",
+      "category": "Editorial Animation",
+      "button_text": "View Project",
+      "project_copy": "Over the last few years I've been providing editorial animation for Texas Monthly. The goal wasn't to add more—it was to add just enough. Subtle motion that supports the illustration, gives it a sense of depth, and lets the original artwork stay front and center.",
+      "card_background": "projects/texas-monthly/TexasMonthly_3x1_card.mp4",
+      "blocks": [
+        {
+          "id": "block01",
+          "index": 1,
+          "type": "video",
+          "layout": "single",
+          "title": "Media",
+          "copy": "",
+          "media": [
+            {
+              "role": "video",
+              "url": "projects/texas-monthly/TexasMonthly_3x1_card.mp4",
+              "thumbnail_at": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": "3",
+      "slug": "colossal",
+      "title": "Colossal Biosciences",
+      "year": "2025",
+      "category": "Science-Tech Documentary",
+      "button_text": "View Project",
+      "project_copy": "Motion design for a high-profile media launch that blended science, storytelling, and spectacle. Site specific projection, LED and screen installations. Documentary motion design. A bit of VFX",
+      "card_background": "projects/colossal/colossal_3x1_card.mp4",
+      "blocks": [
+        {
+          "id": "block01",
+          "index": 1,
+          "type": "image",
+          "layout": "single",
+          "title": "Dire Wolf Making Of",
+          "copy": "",
+          "media": [
+            {
+              "role": "main_thumb",
+              "url": "projects/colossal/MAIN_THUMB.png",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "step_01",
+              "url": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 1 _SHORT.mp4",
+              "thumbnail_at": 0
+            }
+          ]
+        },
+        {
+          "id": "block02",
+          "index": 2,
+          "type": "image",
+          "layout": "two-up",
+          "title": "Making Of Sequence",
+          "copy": "",
+          "media": [
+            {
+              "role": "step_02_03",
+              "url": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 2 and 3 - SHORT.mp4",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "step_04",
+              "url": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 4 - SHORT.mp4",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "step_05_07",
+              "url": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 5 - 7 - SHORT.mp4",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "step_08",
+              "url": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 8 - SHORT.mp4",
+              "thumbnail_at": 0
+            }
+          ]
+        },
+        {
+          "id": "block03",
+          "index": 3,
+          "type": "image",
+          "layout": "single",
+          "title": "Yellowstone Bioacoustics",
+          "copy": "",
+          "media": [
+            {
+              "role": "yellowstone_aru",
+              "url": "projects/colossal/Belle Epoch - Colossal - Yellowstone Bioacoustics - ARU.mp4",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "yellowstone_map",
+              "url": "projects/colossal/Belle Epoch - Colossal - Yellowstone Bioacoustics - H264 4K - Spectrogram and MAP.mp4",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "yellowstone_master",
+              "url": "projects/colossal/Belle Epoch - Colossal - Yellowstone Bioacoustics - H264 4K - TITLE.mp4",
+              "thumbnail_at": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": "4",
+      "slug": "reebok-sustainability",
+      "title": "Reebok — Sustainability",
+      "year": "2024",
+      "category": "3D / Brand",
+      "button_text": "View Project",
+      "project_copy": "Abstract 3D material exploration for Reebok's sustainability campaign — bouncy simulations, tactile surfaces, and buttery smooth animation.",
+      "card_background": "projects/reebok-sustainability/BlackMath_ReebokSustainability_3x1_card.mp4",
+      "blocks": [
+        {
+          "id": "block01",
+          "index": 1,
+          "type": "video",
+          "layout": "single",
+          "title": "Reebok — Sustainability",
+          "copy": "",
+          "media": [
+            {
+              "role": "video",
+              "url": "projects/reebok-sustainability/BlackMath_ReebokSustainability_3x1_card.mp4"
+            }
+          ]
+        },
+        {
+          "id": "block02",
+          "index": 2,
+          "type": "text",
+          "layout": "single",
+          "title": "Overview",
+          "copy": "Abstract 3D material exploration for Reebok's sustainability campaign — bouncy simulations, tactile surfaces, and buttery smooth animation.",
+          "media": []
+        },
+        {
+          "id": "block03",
+          "index": 3,
+          "type": "text",
+          "layout": "single",
+          "title": "Details",
+          "copy": "3D / Brand / 2024",
+          "media": []
+        }
+      ]
+    },
+    {
+      "page": "5",
+      "slug": "sellout",
+      "title": "Main Title Sequence: Sellout",
+      "year": "2024",
+      "category": "Title Design",
+      "button_text": "View Project",
+      "project_copy": "Title design for a feature film — hand-illustrated characters, charming environments, and original music. A longtime goal, realized frame by frame.",
+      "card_background": "projects/sellout/Sellout_3x1_03_card.png",
+      "blocks": [
+        {
+          "id": "block01",
+          "index": 1,
+          "type": "video",
+          "layout": "single",
+          "title": "Hero",
+          "copy": "",
+          "media": [
+            {
+              "role": "video",
+              "url": "projects/sellout/reel.mp4",
+              "thumbnail_at": 0
+            }
+          ]
+        },
+        {
+          "id": "block02",
+          "index": 2,
+          "type": "image",
+          "layout": "two-up",
+          "title": "Gallery",
+          "copy": "",
+          "media": [
+            {
+              "role": "image",
+              "url": "projects/sellout/album-01.png",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/album-02.png",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/reel-thumb.png",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/still-01.png",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/still-02.png",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/still-03.png",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/still-04.png",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/still-05.png",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/still-06.png",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/still-07.png",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/still-08.png",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/still-09.png",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/still-10.png",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/still-11.gif",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/still-12.gif",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/still-13.gif",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/still-14.gif",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/still-15.gif",
+              "thumbnail_at": 0
+            },
+            {
+              "role": "image",
+              "url": "projects/sellout/still-16.gif",
+              "thumbnail_at": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": "6",
+      "slug": "meta",
+      "title": "Meta — Character Design",
+      "year": "2023",
+      "category": "Character Animation",
+      "button_text": "View Project",
+      "project_copy": "An ensemble of original characters for Meta — DJ, alien robot, monster, and beyond. Each with distinct personality, form language, and movement.",
+      "card_background": "projects/meta/Meta_card.mp4",
+      "blocks": [
+        {
+          "id": "block01",
+          "index": 1,
+          "type": "video",
+          "layout": "single",
+          "title": "Meta — Character Design",
+          "copy": "",
+          "media": [
+            {
+              "role": "video",
+              "url": "projects/meta/Meta_card.mp4"
+            }
+          ]
+        },
+        {
+          "id": "block02",
+          "index": 2,
+          "type": "text",
+          "layout": "single",
+          "title": "Overview",
+          "copy": "An ensemble of original characters for Meta — DJ, alien robot, monster, and beyond. Each with distinct personality, form language, and movement.",
+          "media": []
+        },
+        {
+          "id": "block03",
+          "index": 3,
+          "type": "text",
+          "layout": "single",
+          "title": "Details",
+          "copy": "Character Animation / 2023",
+          "media": []
+        }
+      ]
+    },
+    {
+      "page": "7",
+      "slug": "anheuser-busch",
+      "title": "Anheuser-Busch",
+      "year": "2023",
+      "category": "Brand Animation",
+      "button_text": "View Project",
+      "project_copy": "A liquid-gold logo reveal for the Anheuser-Busch rebrand — precision 3D animation in service of a classic American icon.",
+      "card_background": "projects/anheuser-busch/anheuser-busch_card.png",
+      "blocks": [
+        {
+          "id": "block01",
+          "index": 1,
+          "type": "image",
+          "layout": "single",
+          "title": "Anheuser-Busch",
+          "copy": "",
+          "media": [
+            {
+              "role": "image",
+              "url": "projects/anheuser-busch/anheuser-busch_card.png"
+            }
+          ]
+        },
+        {
+          "id": "block02",
+          "index": 2,
+          "type": "text",
+          "layout": "single",
+          "title": "Overview",
+          "copy": "A liquid-gold logo reveal for the Anheuser-Busch rebrand — precision 3D animation in service of a classic American icon.",
+          "media": []
+        },
+        {
+          "id": "block03",
+          "index": 3,
+          "type": "text",
+          "layout": "single",
+          "title": "Details",
+          "copy": "Brand Animation / 2023",
+          "media": []
+        }
+      ]
+    },
+    {
+      "page": "8",
+      "slug": "drumwave",
+      "title": "Drumwave",
+      "year": "2024",
+      "category": "AR / Data Visualization",
+      "button_text": "View Project",
+      "project_copy": "Making the invisible architecture of your data feel personal — AR motion graphics and data visualization for a consumer data platform.",
+      "card_background": "projects/drumwave/DrumWave_card.mp4",
+      "blocks": [
+        {
+          "id": "block01",
+          "index": 1,
+          "type": "video",
+          "layout": "single",
+          "title": "Drumwave",
+          "copy": "",
+          "media": [
+            {
+              "role": "video",
+              "url": "projects/drumwave/DrumWave_card.mp4"
+            }
+          ]
+        },
+        {
+          "id": "block02",
+          "index": 2,
+          "type": "text",
+          "layout": "single",
+          "title": "Overview",
+          "copy": "Making the invisible architecture of your data feel personal — AR motion graphics and data visualization for a consumer data platform.",
+          "media": []
+        },
+        {
+          "id": "block03",
+          "index": 3,
+          "type": "text",
+          "layout": "single",
+          "title": "Details",
+          "copy": "AR / Data Visualization / 2024",
+          "media": []
+        }
+      ]
+    },
+    {
+      "page": "9",
+      "slug": "netrma-safe-driving",
+      "title": "Netrma Safe Driving",
+      "year": "",
+      "category": "",
+      "button_text": "View Project",
+      "project_copy": "",
+      "card_background": "projects/netrma-safe-driving/NETRMA_card.mp4",
+      "blocks": [
+        {
+          "id": "block01",
+          "index": 1,
+          "type": "video",
+          "layout": "single",
+          "title": "Netrma Safe Driving",
+          "copy": "",
+          "media": [
+            {
+              "role": "video",
+              "url": "projects/netrma-safe-driving/NETRMA_card.mp4"
+            }
+          ]
+        },
+        {
+          "id": "block02",
+          "index": 2,
+          "type": "text",
+          "layout": "single",
+          "title": "Overview",
+          "copy": "",
+          "media": []
+        },
+        {
+          "id": "block03",
+          "index": 3,
+          "type": "text",
+          "layout": "single",
+          "title": "Details",
+          "copy": "",
+          "media": []
+        }
+      ]
+    },
+    {
+      "page": "10",
+      "slug": "lyft",
+      "title": "Lyft — Driver Center",
+      "year": "2022",
+      "category": "Brand Motion",
+      "button_text": "View Project",
+      "project_copy": "3D brand motion for Lyft's Driver Center launch — playful, tactile, and very purple. Character-driven 3D animation at scale for a major platform brand.",
+      "card_background": "projects/lyft/Lyft02_card.mp4",
+      "blocks": [
+        {
+          "id": "block01",
+          "index": 1,
+          "type": "video",
+          "layout": "single",
+          "title": "Lyft — Driver Center",
+          "copy": "",
+          "media": [
+            {
+              "role": "video",
+              "url": "projects/lyft/Lyft02_card.mp4"
+            }
+          ]
+        },
+        {
+          "id": "block02",
+          "index": 2,
+          "type": "text",
+          "layout": "single",
+          "title": "Overview",
+          "copy": "3D brand motion for Lyft's Driver Center launch — playful, tactile, and very purple. Character-driven 3D animation at scale for a major platform brand.",
+          "media": []
+        },
+        {
+          "id": "block03",
+          "index": 3,
+          "type": "text",
+          "layout": "single",
+          "title": "Details",
+          "copy": "Brand Motion / 2022",
+          "media": []
+        }
+      ]
+    }
+  ]
+}

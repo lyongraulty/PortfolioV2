@@ -1,0 +1,650 @@
+/* ── SHELL ── */
+.shell {
+  background: #f0ede6;
+  color: #0f0f0f;
+  font-family: "PT Mono", "Courier New", monospace;
+  position: relative;
+}
+
+.topNav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 1fr auto auto 1fr;
+  gap: 0.65rem;
+  padding: 0.4rem clamp(1rem, 2.8vw, 1.4rem);
+  border-bottom: 1px solid rgba(15, 15, 15, 0.14);
+  background: rgba(240, 237, 230, 0.92);
+  backdrop-filter: blur(7px);
+}
+
+.topNavBtn {
+  border: 1px solid rgba(15, 15, 15, 0.28);
+  border-radius: 9px;
+  background: transparent;
+  color: rgba(15, 15, 15, 0.86);
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  min-height: 30px;
+  padding: 0.24rem 0.62rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.topNavBtn:first-child {
+  justify-self: start;
+}
+
+.topNavBtn:nth-child(2),
+.topNavBtn:nth-child(3) {
+  justify-self: center;
+}
+
+.topNavBtn:last-child {
+  justify-self: end;
+}
+
+.topNavBtn:hover,
+.topNavBtn:focus-visible {
+  background: #0f0f0f;
+  color: #f0ede6;
+}
+
+.topNavBtn:disabled {
+  opacity: 0.36;
+  cursor: default;
+}
+
+/* scanlines */
+.shell::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(15, 15, 15, 0.035) 3px,
+    rgba(15, 15, 15, 0.035) 4px
+  );
+}
+
+/* ── TICKER ── */
+.ticker {
+  overflow: hidden;
+  background: #e8380a;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.tickerTrack {
+  display: flex;
+  animation: tickerScroll 28s linear infinite;
+  white-space: nowrap;
+}
+
+.tickerItem {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 0 3rem;
+}
+
+.tickerItem::after {
+  content: "◆";
+  margin-left: 3rem;
+  opacity: 0.5;
+}
+
+@keyframes tickerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── HEADER ── */
+.header {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sub-section header (e.g. Yellowstone intro) — same dark aesthetic, shorter */
+.sectionHeader {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(15, 15, 15, 0.1);
+}
+
+.headerBg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.35) saturate(0.5);
+}
+
+.headerBgVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.35) saturate(0.5);
+}
+
+.headerInner {
+  position: relative;
+  z-index: 2;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4rem);
+  padding-top: 0;
+}
+
+.headerSeq {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e8380a;
+  margin-bottom: 0.75rem;
+}
+
+.headerTitle {
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(2.6rem, 8.2vw, 7.6rem);
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #f0ede6;
+  margin: 0 0 1.8rem;
+}
+
+.headerIntro {
+  margin: -1rem 0 2rem;
+  max-width: 76ch;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(240, 237, 230, 0.82);
+}
+
+.headerMetaRow {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(240, 237, 230, 0.15);
+}
+
+.headerMetaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.headerMetaLabel {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e8380a;
+  opacity: 0.85;
+}
+
+.headerMetaVal {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: #f0ede6;
+}
+
+/* ── SECTION ── */
+.section {
+  border-top: 1px solid rgba(15, 15, 15, 0.1);
+  background: #f0ede6;
+}
+
+/* ── TYPE BLOCK ── */
+.typeBlock {
+  padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 4rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.typeBlockCompact {
+  padding: clamp(1.2rem, 3vw, 2rem) clamp(1.5rem, 5vw, 4rem);
+}
+
+.typeBlockSeq {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e8380a;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.typeBlockSeq::after {
+  content: "";
+  flex: 1;
+  max-width: 120px;
+  height: 1px;
+  background: #e8380a;
+  opacity: 0.4;
+}
+
+.stepHeading {
+  margin: 0.25rem 0 0;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 11px;
+  line-height: 1.35;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e8380a;
+}
+
+.secondTitle {
+  display: block;
+  margin-top: 0.12rem;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: clamp(0.8rem, 1.4vw, 0.98rem);
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e8380a;
+}
+
+.wordXl {
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  text-transform: uppercase;
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+  display: block;
+  font-size: clamp(7rem, 22vw, 22rem);
+  color: #0f0f0f;
+}
+
+.wordLg {
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  text-transform: uppercase;
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+  display: block;
+  font-size: clamp(4rem, 13vw, 13rem);
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(15, 15, 15, 0.35);
+}
+
+.wordAccent {
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  text-transform: uppercase;
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+  display: block;
+  font-size: clamp(5rem, 16vw, 16rem);
+  color: #e8380a;
+}
+
+.typeBody {
+  max-width: 560px;
+  margin-top: 2.5rem;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(15, 15, 15, 0.6);
+}
+
+/* ── SIGNAL BAR ── */
+.signalBar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 2rem 0 0;
+}
+
+.signalLabel {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(15, 15, 15, 0.38);
+  white-space: nowrap;
+}
+
+.signalDots {
+  display: flex;
+  gap: 3px;
+}
+
+.signalDot {
+  width: 4px;
+  height: 14px;
+  background: #e8380a;
+}
+
+.signalDotDim {
+  opacity: 0.2;
+}
+
+.signalVal {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 10px;
+  color: #e8380a;
+  letter-spacing: 0.1em;
+}
+
+/* ── VIDEO BLOCK ── */
+.videoBlock {
+  position: relative;
+  background: #000;
+}
+
+.videoWrap {
+  position: relative;
+  background: #111;
+  overflow: hidden;
+}
+
+.videoWrap video,
+.videoWrap img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.videoAudio {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 3;
+  border: 1px solid rgba(240, 237, 230, 0.66);
+  border-radius: 999px;
+  background: rgba(15, 15, 15, 0.6);
+  color: rgba(240, 237, 230, 0.94);
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.34rem 0.66rem;
+  cursor: pointer;
+}
+
+.videoAudio:hover,
+.videoAudio:focus-visible {
+  background: rgba(240, 237, 230, 0.95);
+  color: #0f0f0f;
+}
+
+/* corner brackets */
+.videoWrap::before,
+.videoWrap::after {
+  content: "";
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  z-index: 2;
+}
+
+.videoWrap::before {
+  top: 12px;
+  left: 12px;
+  border-top: 2px solid #e8380a;
+  border-left: 2px solid #e8380a;
+}
+
+.videoWrap::after {
+  bottom: 12px;
+  right: 12px;
+  border-bottom: 2px solid #e8380a;
+  border-right: 2px solid #e8380a;
+}
+
+.videoFallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 230, 0.4);
+}
+
+.videoCaptionBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem clamp(1.5rem, 5vw, 4rem);
+  border-top: 1px solid rgba(15, 15, 15, 0.1);
+  background: #f0ede6;
+}
+
+.videoCaptionLabel {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(15, 15, 15, 0.38);
+}
+
+.videoCaptionMeta {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e8380a;
+}
+
+/* ── DIVIDER TICKER ── */
+.sectionTicker {
+  overflow: hidden;
+  background: transparent;
+  border-top: 1px solid rgba(15, 15, 15, 0.1);
+  border-bottom: 1px solid rgba(15, 15, 15, 0.1);
+  height: 36px;
+  display: flex;
+  align-items: center;
+}
+
+.sectionTickerTrack {
+  display: flex;
+  animation: tickerScroll 20s linear infinite;
+  white-space: nowrap;
+}
+
+.sectionTickerItem {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(15, 15, 15, 0.18);
+  padding: 0 2rem;
+}
+
+.sectionTickerItemHi {
+  color: #e8380a;
+  opacity: 0.65;
+}
+
+/* ── GRID SECTION ── */
+.gridBlock {
+  padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 4rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem clamp(3rem, 6vw, 6rem);
+  align-items: start;
+}
+
+@media (max-width: 700px) {
+  .gridBlock { grid-template-columns: 1fr; }
+}
+
+.gridBlockLabel {
+  grid-column: 1 / -1;
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #e8380a;
+  margin-bottom: -2rem;
+}
+
+.gridWordCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.gridCopyCol {
+  padding-top: 1rem;
+}
+
+.gridBody {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.72;
+  color: rgba(15, 15, 15, 0.6);
+}
+
+.gridDataRow {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(15, 15, 15, 0.1);
+}
+
+.gridDataItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.gridDataLabel {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(15, 15, 15, 0.32);
+}
+
+.gridDataVal {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: #0f0f0f;
+}
+
+/* ── CREDITS ── */
+.credits {
+  padding: clamp(3rem, 6vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+  border-top: 1px solid rgba(15, 15, 15, 0.1);
+}
+
+.creditsLabel {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(15, 15, 15, 0.3);
+  margin-bottom: 2rem;
+}
+
+.creditsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem 3rem;
+}
+
+.creditItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.creditRole {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(15, 15, 15, 0.32);
+}
+
+.creditName {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: #0f0f0f;
+}
+
+/* ── FOOTER NAV ── */
+.footerNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  border-top: 1px solid rgba(15, 15, 15, 0.1);
+}
+
+.footerNavBtn {
+  flex: 1;
+  padding: 2rem clamp(1.5rem, 5vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.footerNavBtn:hover {
+  background: rgba(15, 15, 15, 0.04);
+}
+
+.footerNavBtn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.footerNavBtnNext {
+  text-align: right;
+  border-left: 1px solid rgba(15, 15, 15, 0.1);
+}
+
+.footerNavDir {
+  font-family: "PT Mono", "Courier New", monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e8380a;
+}
+
+.footerNavTitle {
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+  text-transform: uppercase;
+  color: #0f0f0f;
+}

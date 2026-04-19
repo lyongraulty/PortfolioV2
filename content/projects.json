@@ -1,0 +1,110 @@
+[
+  {
+    "slug": "texas-monthly",
+    "title": "Texas Monthly",
+    "year": "2022 â€“ 2024",
+    "category": "Editorial Animation",
+    "summary": "Animated editorial covers and custom illustrations for one of America's great regional magazines â€” bringing flat illustration to life, cover by cover.",
+    "detail": "Animated editorial covers and custom illustrations for one of America's great regional magazines â€” bringing flat illustration to life, cover by cover.",
+    "media": {
+      "type": "video",
+      "src": "projects/texas-monthly/TexasMonthly_3x1_card.mp4"
+    }
+  },
+  {
+    "slug": "colossal",
+    "title": "Colossal Biosciences",
+    "year": "2025",
+    "category": "Science-Tech Design",
+    "summary": "Motion design for a high-profile de-extinction launch â€” skull reconstructions, bioacoustic data visualization, lab system design, and documentary graphics for the Dire Wolf reveal.",
+    "detail": "Motion design for a high-profile de-extinction launch â€” skull reconstructions, bioacoustic data visualization, lab system design, and documentary graphics for the Dire Wolf reveal.",
+    "media": {
+      "type": "video",
+      "src": "projects/colossal/colossal_3x1_card.mp4"
+    }
+  },
+  {
+    "slug": "reebok-sustainability",
+    "title": "Reebok â€” Sustainability",
+    "year": "2024",
+    "category": "3D / Brand",
+    "summary": "Abstract 3D material exploration for Reebok's sustainability campaign â€” bouncy simulations, tactile surfaces, and buttery smooth animation.",
+    "detail": "Abstract 3D material exploration for Reebok's sustainability campaign â€” bouncy simulations, tactile surfaces, and buttery smooth animation.",
+    "media": {
+      "type": "video",
+      "src": "projects/reebok-sustainability/BlackMath_ReebokSustainability_3x1_card.mp4"
+    }
+  },
+  {
+    "slug": "sellout",
+    "title": "Main Title Sequence: Sellout",
+    "year": "2024",
+    "category": "Title Design",
+    "summary": "Title design for a feature film â€” hand-illustrated characters, charming environments, and original music. A longtime goal, realized frame by frame.",
+    "detail": "Title design for a feature film â€” hand-illustrated characters, charming environments, and original music. A longtime goal, realized frame by frame.",
+    "media": {
+      "type": "image",
+      "src": "projects/sellout/Sellout_3x1_03_card.png"
+    }
+  },
+  {
+    "slug": "meta",
+    "title": "Meta â€” Character Design",
+    "year": "2023",
+    "category": "Character Animation",
+    "summary": "An ensemble of original characters for Meta â€” DJ, alien robot, monster, and beyond. Each with distinct personality, form language, and movement.",
+    "detail": "An ensemble of original characters for Meta â€” DJ, alien robot, monster, and beyond. Each with distinct personality, form language, and movement.",
+    "media": {
+      "type": "video",
+      "src": "projects/meta/Meta_card.mp4"
+    }
+  },
+  {
+    "slug": "anheuser-busch",
+    "title": "Anheuser-Busch",
+    "year": "2023",
+    "category": "Brand Animation",
+    "summary": "A liquid-gold logo reveal for the Anheuser-Busch rebrand â€” precision 3D animation in service of a classic American icon.",
+    "detail": "A liquid-gold logo reveal for the Anheuser-Busch rebrand â€” precision 3D animation in service of a classic American icon.",
+    "media": {
+      "type": "image",
+      "src": "projects/anheuser-busch/anheuser-busch_card.png"
+    }
+  },
+  {
+    "slug": "drumwave",
+    "title": "Drumwave",
+    "year": "2024",
+    "category": "AR / Data Visualization",
+    "summary": "Making the invisible architecture of your data feel personal â€” AR motion graphics and data visualization for a consumer data platform.",
+    "detail": "Making the invisible architecture of your data feel personal â€” AR motion graphics and data visualization for a consumer data platform.",
+    "media": {
+      "type": "video",
+      "src": "projects/drumwave/DrumWave_card.mp4"
+    }
+  },
+  {
+    "slug": "netrma-safe-driving",
+    "title": "Netrma Safe Driving",
+    "year": "",
+    "category": "",
+    "summary": "",
+    "detail": "",
+    "media": {
+      "type": "video",
+      "src": "projects/netrma-safe-driving/NETRMA_card.mp4"
+    }
+  },
+  {
+    "slug": "lyft",
+    "title": "Lyft â€” Driver Center",
+    "year": "2022",
+    "category": "Brand Motion",
+    "summary": "3D brand motion for Lyft's Driver Center launch â€” playful, tactile, and very purple. Character-driven 3D animation at scale for a major platform brand.",
+    "detail": "3D brand motion for Lyft's Driver Center launch â€” playful, tactile, and very purple. Character-driven 3D animation at scale for a major platform brand.",
+    "media": {
+      "type": "video",
+      "src": "projects/lyft/Lyft02_card.mp4"
+    }
+  }
+]

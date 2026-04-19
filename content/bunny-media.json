@@ -1,0 +1,374 @@
+[
+  {
+    "slug": "anheuser-busch",
+    "media": {
+      "card": {
+        "type": "image",
+        "src": "projects/anheuser-busch/anheuser-busch_card.png"
+      },
+      "blocks": []
+    },
+    "files": [
+      "projects/anheuser-busch/anheuser-busch_card.png"
+    ],
+    "updated_at": "2026-04-17T18:31:48.344Z"
+  },
+  {
+    "slug": "colossal",
+    "media": {
+      "card": {
+        "type": "video",
+        "src": "projects/colossal/colossal_3x1_card.mp4"
+      },
+      "blocks": [
+        {
+          "title": "Dire Wolf Making Of",
+          "layout": "single",
+          "copy": "",
+          "items": [
+            {
+              "src": "projects/colossal/MAIN_THUMB.png",
+              "type": "image",
+              "role": "main_thumb"
+            },
+            {
+              "src": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 1 _SHORT.mp4",
+              "type": "video",
+              "role": "step_01"
+            }
+          ],
+          "slot": 1
+        },
+        {
+          "title": "Making Of Sequence",
+          "layout": "two-up",
+          "copy": "",
+          "items": [
+            {
+              "src": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 2 and 3 - SHORT.mp4",
+              "type": "video",
+              "role": "step_02_03"
+            },
+            {
+              "src": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 4 - SHORT.mp4",
+              "type": "video",
+              "role": "step_04"
+            },
+            {
+              "src": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 5 - 7 - SHORT.mp4",
+              "type": "video",
+              "role": "step_05_07"
+            },
+            {
+              "src": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 8 - SHORT.mp4",
+              "type": "video",
+              "role": "step_08"
+            }
+          ],
+          "slot": 2
+        },
+        {
+          "title": "Yellowstone Bioacoustics",
+          "layout": "single",
+          "copy": "",
+          "items": [
+            {
+              "src": "projects/colossal/Belle Epoch - Colossal - Yellowstone Bioacoustics - ARU.mp4",
+              "type": "video",
+              "role": "yellowstone_aru"
+            },
+            {
+              "src": "projects/colossal/Belle Epoch - Colossal - Yellowstone Bioacoustics - H264 4K - Spectrogram and MAP.mp4",
+              "type": "video",
+              "role": "yellowstone_map"
+            },
+            {
+              "src": "projects/colossal/Belle Epoch - Colossal - Yellowstone Bioacoustics - H264 4K - TITLE.mp4",
+              "type": "video",
+              "role": "yellowstone_master"
+            }
+          ],
+          "slot": 3
+        }
+      ]
+    },
+    "files": [
+      "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 1 _SHORT.mp4",
+      "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 2 and 3 - SHORT.mp4",
+      "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 4 - SHORT.mp4",
+      "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 5 - 7 - SHORT.mp4",
+      "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 8 - SHORT.mp4",
+      "projects/colossal/Belle Epoch - Colossal - Yellowstone Bioacoustics - ARU.mp4",
+      "projects/colossal/Belle Epoch - Colossal - Yellowstone Bioacoustics - H264 4K - Spectrogram and MAP.mp4",
+      "projects/colossal/Belle Epoch - Colossal - Yellowstone Bioacoustics - H264 4K - TITLE.mp4",
+      "projects/colossal/colossal_card01.mp4",
+      "projects/colossal/colossal_card02.mp4",
+      "projects/colossal/colossal_pageheader.mp4",
+      "projects/colossal/colossal_pageheader2.mp4",
+      "projects/colossal/MAIN_THUMB.png"
+    ],
+    "updated_at": "2026-04-17T18:31:48.352Z"
+  },
+  {
+    "slug": "drumwave",
+    "media": {
+      "card": {
+        "type": "video",
+        "src": "projects/drumwave/DrumWave_card.mp4"
+      },
+      "blocks": []
+    },
+    "files": [
+      "projects/drumwave/DrumWave_card.mp4"
+    ],
+    "updated_at": "2026-04-17T18:31:48.352Z"
+  },
+  {
+    "slug": "lyft",
+    "folder": "projects/lyft",
+    "media": {
+      "card": {
+        "type": "video",
+        "src": "projects/lyft/Lyft02_card.mp4"
+      },
+      "blocks": []
+    },
+    "files": [
+      "projects/lyft/Lyft_cardfallback.png",
+      "projects/lyft/Lyft02_card.mp4"
+    ],
+    "updated_at": "2026-04-17T21:15:24.960Z"
+  },
+  {
+    "slug": "meta",
+    "media": {
+      "card": {
+        "type": "video",
+        "src": "projects/meta/Meta_card.mp4"
+      },
+      "blocks": []
+    },
+    "files": [
+      "projects/meta/BlackMath_Dancers_Showcase_06_lg.png",
+      "projects/meta/CuteAnimals_Crying.png",
+      "projects/meta/CuteAnimals_IceCream.png",
+      "projects/meta/CuteAnimals_Showcase_01.png",
+      "projects/meta/CuteAnimals_Showcase_CowandDucky02_lg.png",
+      "projects/meta/CuteAnimals_Showcase_SwimmiesCoffee02_lg.png",
+      "projects/meta/CuteAnimals_Swimmies01.png",
+      "projects/meta/CuteAnimals_Swimmies02.png",
+      "projects/meta/Meta_card.mp4"
+    ],
+    "updated_at": "2026-04-17T18:31:48.353Z"
+  },
+  {
+    "slug": "netrma-safe-driving",
+    "media": {
+      "card": {
+        "type": "video",
+        "src": "projects/netrma-safe-driving/NETRMA_card.mp4"
+      },
+      "blocks": []
+    },
+    "files": [
+      "projects/netrma-safe-driving/NETRMA_card.mp4",
+      "projects/netrma-safe-driving/NETRMA_fallback.png"
+    ],
+    "updated_at": "2026-04-17T18:31:48.353Z"
+  },
+  {
+    "slug": "reebok-sustainability",
+    "media": {
+      "card": {
+        "type": "video",
+        "src": "projects/reebok-sustainability/BlackMath_ReebokSustainability_3x1_card.mp4"
+      },
+      "blocks": []
+    },
+    "files": [
+      "projects/reebok-sustainability/BlackMath_ReebokSustainability_3x1_card.mp4",
+      "projects/reebok-sustainability/Reebok_3x1_01_fallback.png"
+    ],
+    "updated_at": "2026-04-17T18:31:48.353Z"
+  },
+  {
+    "slug": "sellout",
+    "media": {
+      "card": {
+        "type": "image",
+        "src": "projects/sellout/Sellout_3x1_03_card.png"
+      },
+      "blocks": [
+        {
+          "slot": 1,
+          "layout": "single",
+          "title": "Hero",
+          "copy": "",
+          "items": [
+            {
+              "role": "video",
+              "type": "video",
+              "src": "projects/sellout/reel.mp4"
+            }
+          ]
+        },
+        {
+          "slot": 2,
+          "layout": "two-up",
+          "title": "Gallery",
+          "copy": "",
+          "items": [
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/album-01.png"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/album-02.png"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/reel-thumb.png"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/still-01.png"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/still-02.png"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/still-03.png"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/still-04.png"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/still-05.png"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/still-06.png"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/still-07.png"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/still-08.png"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/still-09.png"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/still-10.png"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/still-11.gif"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/still-12.gif"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/still-13.gif"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/still-14.gif"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/still-15.gif"
+            },
+            {
+              "role": "image",
+              "type": "image",
+              "src": "projects/sellout/still-16.gif"
+            }
+          ]
+        }
+      ]
+    },
+    "files": [
+      "projects/sellout/album-01.png",
+      "projects/sellout/album-02.png",
+      "projects/sellout/reel-thumb.png",
+      "projects/sellout/reel.mp4",
+      "projects/sellout/Sellout_3x1_03_card.png",
+      "projects/sellout/still-01.png",
+      "projects/sellout/still-02.png",
+      "projects/sellout/still-03.png",
+      "projects/sellout/still-04.png",
+      "projects/sellout/still-05.png",
+      "projects/sellout/still-06.png",
+      "projects/sellout/still-07.png",
+      "projects/sellout/still-08.png",
+      "projects/sellout/still-09.png",
+      "projects/sellout/still-10.png",
+      "projects/sellout/still-11.gif",
+      "projects/sellout/still-12.gif",
+      "projects/sellout/still-13.gif",
+      "projects/sellout/still-14.gif",
+      "projects/sellout/still-15.gif",
+      "projects/sellout/still-16.gif"
+    ],
+    "updated_at": "2026-04-17T18:31:48.354Z"
+  },
+  {
+    "slug": "texas-monthly",
+    "media": {
+      "card": {
+        "type": "video",
+        "src": "projects/texas-monthly/TexasMonthly_3x1_card.mp4"
+      },
+      "blocks": [
+        {
+          "slot": 1,
+          "layout": "single",
+          "title": "Media",
+          "copy": "",
+          "items": [
+            {
+              "role": "video",
+              "type": "video",
+              "src": "projects/texas-monthly/TexasMonthly_3x1_card.mp4"
+            }
+          ]
+        }
+      ]
+    },
+    "files": [
+      "projects/texas-monthly/TexasMonthly_3x1_card.mp4",
+      "projects/texas-monthly/TexasMonthly_TRIM_3x1_card.mp4"
+    ],
+    "updated_at": "2026-04-17T18:31:48.354Z"
+  }
+]
