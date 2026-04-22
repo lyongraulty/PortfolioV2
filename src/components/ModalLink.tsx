@@ -5,7 +5,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { type ReactNode } from "react";
 
 type ModalLinkProps = {
-  modal: "reel" | "contact" | "music" | "sandbox" | "project" | "project-page";
+  modal: "reel" | "contact" | "sandbox" | "project" | "project-page";
   slug?: string;
   page?: string;
   className?: string;

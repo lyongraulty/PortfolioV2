@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import styles from "./ContactOverlayContent.module.css";
 
 const CONTACT_EMAIL = "hello@lyongraulty.com";
 
@@ -15,22 +16,10 @@ function validateContactForm(values: {
   subject: string;
   message: string;
 }) {
-  if (values.name.length < 2) {
-    return "Please enter your name.";
-  }
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-    return "Please enter a valid email address.";
-  }
-
-  if (values.subject.length < 2) {
-    return "Please enter a subject.";
-  }
-
-  if (values.message.length < 10) {
-    return "Please add at least 10 characters in your message.";
-  }
-
+  if (values.name.length < 2) return "Please enter your name.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) return "Please enter a valid email address.";
+  if (values.subject.length < 2) return "Please enter a subject.";
+  if (values.message.length < 10) return "Please add at least 10 characters in your message.";
   return "";
 }
 
@@ -43,9 +32,7 @@ export function ContactOverlayContent() {
 
   useEffect(() => {
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
 
@@ -66,9 +53,7 @@ export function ContactOverlayContent() {
 
     setCopyCount((prev) => prev + 1);
     setIsCopied(true);
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => setIsCopied(false), 1600);
   };
 
@@ -97,9 +82,7 @@ export function ContactOverlayContent() {
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
@@ -121,61 +104,87 @@ export function ContactOverlayContent() {
   };
 
   return (
-    <div className="contact-content">
-      <div className="contact-copy">
-        <h1 className="contact-title">Let&apos;s talk</h1>
-        <p>Get in touch to inquire about pricing details or arrange a booking.</p>
-        <p>
-          I&apos;d love to hear about your goals and show you how motion design can fit into your strategy.
-        </p>
-        <p>I work mostly day rate but can arrange a project based bid.</p>
-        <p>Remote or in studio in the Austin, TX area.</p>
-        <p>You can email me directly or, if a form is more your jam, fill it in here.</p>
-        <div className="contact-email-row">
-          <a className="contact-email" href={`mailto:${CONTACT_EMAIL}`}>
+    <div className={styles.root}>
+      <div className={styles.systemBar}>
+        <p>Contact</p>
+        <p>Austin, TX &mdash; Remote available</p>
+      </div>
+
+      <div className={styles.inner}>
+        {/* left: copy */}
+        <div className={styles.copyPanel}>
+          <h1 className={styles.title}>Let&apos;s<br />talk</h1>
+
+          <div className={styles.copyBody}>
+            <p>Get in touch to inquire about pricing details or arrange a booking.</p>
+            <p>I&apos;d love to hear about your goals and show you how motion design can fit into your strategy.</p>
+            <p>I work mostly day rate but can arrange a project-based bid.</p>
+            <p>Remote or in studio in the Austin, TX area.</p>
+          </div>
+
+          <div className={styles.divider} />
+
+          <a className={styles.emailLink} href={`mailto:${CONTACT_EMAIL}`}>
             {CONTACT_EMAIL}
           </a>
-          <div className="contact-copy-row">
-            <button type="button" className="project-button type-button" onClick={handleCopy}>
-              COPY EMAIL
+
+          <div className={styles.copyRow}>
+            <button type="button" className={styles.submitBtn} onClick={handleCopy}>
+              Copy Email
             </button>
             {isCopied ? (
-              <span key={copyCount} className="contact-copy-note" role="status" aria-live="polite">
-                Email copied!
+              <span key={copyCount} className={styles.copyNote} role="status" aria-live="polite">
+                Copied!
               </span>
             ) : null}
           </div>
+
+          <div className={styles.socials}>
+            <a className={styles.socialBtn} href="https://www.instagram.com/lyongraulty" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a className={styles.socialBtn} href="https://www.linkedin.com/in/lyongraulty" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a className={styles.socialBtn} href="https://www.pinterest.com/lyongraulty" target="_blank" rel="noopener noreferrer">Pinterest</a>
+          </div>
+        </div>
+
+        {/* right: form */}
+        <div className={styles.formPanel}>
+          <p className={styles.formLabel}>Send a message</p>
+
+          <form className={styles.form} aria-label="Contact form" onSubmit={handleSubmit}>
+            <div className={styles.field}>
+              <label htmlFor="contact-name">Name</label>
+              <input id="contact-name" name="name" type="text" autoComplete="name" placeholder="Your name" required minLength={2} />
+            </div>
+            <div className={styles.field}>
+              <label htmlFor="contact-email">Email</label>
+              <input id="contact-email" name="email" type="email" autoComplete="email" placeholder="your@email.com" required />
+            </div>
+            <div className={styles.field}>
+              <label htmlFor="contact-subject">Subject</label>
+              <input id="contact-subject" name="subject" type="text" autoComplete="off" placeholder="What's this about?" required minLength={2} />
+            </div>
+            <div className={styles.field}>
+              <label htmlFor="contact-message">Message</label>
+              <textarea id="contact-message" name="message" rows={4} placeholder="Tell me about the project..." required minLength={10} />
+            </div>
+
+            <div className={styles.submitRow}>
+              <button type="submit" className={styles.submitBtn} disabled={isSubmitting}>
+                {isSubmitting ? "Sending..." : "Send Message"}
+              </button>
+              {status.message ? (
+                <p
+                  className={`${styles.formStatus}${status.isError ? ` ${styles.formStatusError}` : ""}`}
+                  role="status"
+                  aria-live="polite"
+                >
+                  {status.message}
+                </p>
+              ) : null}
+            </div>
+          </form>
         </div>
       </div>
-
-      <form className="contact-form" aria-label="Contact form" onSubmit={handleSubmit}>
-        <div className="contact-field">
-          <label htmlFor="contact-name">Name</label>
-          <input id="contact-name" name="name" type="text" autoComplete="name" required minLength={2} />
-        </div>
-        <div className="contact-field">
-          <label htmlFor="contact-email">Email</label>
-          <input id="contact-email" name="email" type="email" autoComplete="email" required />
-        </div>
-        <div className="contact-field">
-          <label htmlFor="contact-subject">Subject</label>
-          <input id="contact-subject" name="subject" type="text" autoComplete="off" required minLength={2} />
-        </div>
-        <div className="contact-field">
-          <label htmlFor="contact-message">Message</label>
-          <textarea id="contact-message" name="message" rows={6} required minLength={10} />
-        </div>
-        <div className="contact-submit-row">
-          <button type="submit" className="project-button type-button" disabled={isSubmitting}>
-            {isSubmitting ? "SENDING..." : "SEND MESSAGE"}
-          </button>
-          {status.message ? (
-            <p className={`contact-form-status${status.isError ? " is-error" : ""}`} role="status" aria-live="polite">
-              {status.message}
-            </p>
-          ) : null}
-        </div>
-      </form>
     </div>
   );
 }

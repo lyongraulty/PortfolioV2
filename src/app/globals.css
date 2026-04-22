@@ -990,6 +990,23 @@ body.projectpage-overlay-open .site-header-backdrop {
   display: none;
 }
 
+.window-panel--contact {
+  width: min(860px, 100%);
+  background-color: #f6f1e7;
+  background-image: linear-gradient(to bottom, rgba(16, 16, 16, 0.03) 1px, transparent 1px);
+  background-size: 100% 4px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-content: unset;
+  justify-items: unset;
+}
+
+.window-panel--contact .window-close {
+  color: #101010;
+}
+
 .window-close {
   position: absolute;
   top: clamp(0.2rem, 1vw, 0.35rem);

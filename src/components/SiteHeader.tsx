@@ -17,7 +17,6 @@ const navItems: NavItem[] = [
   { href: "/#projects", label: "Projects" },
   { href: "/contact", label: "Contact" },
   { href: "/sandbox", label: "Sandbox" },
-  { href: "/music", label: "Music" },
 ];
 
 export function SiteHeader() {
@@ -158,13 +157,6 @@ export function SiteHeader() {
                 return (
                   <li key={item.href}>
                     <ModalLink modal="sandbox">{item.label}</ModalLink>
-                  </li>
-                );
-              }
-              if (item.href === "/music") {
-                return (
-                  <li key={item.href}>
-                    <ModalLink modal="music">{item.label}</ModalLink>
                   </li>
                 );
               }

@@ -8,6 +8,7 @@ type StaticOverlayWindowProps = {
   dialogLabel?: string;
   onClose?: () => void;
   children?: ReactNode;
+  panelClassName?: string;
 };
 
 function closeToPreviousOrHome(router: ReturnType<typeof useRouter>) {
@@ -18,7 +19,7 @@ function closeToPreviousOrHome(router: ReturnType<typeof useRouter>) {
   }
 }
 
-export function StaticOverlayWindow({ title, dialogLabel, onClose, children }: StaticOverlayWindowProps) {
+export function StaticOverlayWindow({ title, dialogLabel, onClose, children, panelClassName }: StaticOverlayWindowProps) {
   const router = useRouter();
   const handleClose = useCallback(() => {
     if (onClose) {
@@ -49,7 +50,7 @@ export function StaticOverlayWindow({ title, dialogLabel, onClose, children }: S
 
   return (
     <div className="window-overlay" role="dialog" aria-modal="true" aria-label={ariaLabel} onClick={handleBackdropClick}>
-      <div className="window-panel">
+      <div className={`window-panel${panelClassName ? ` ${panelClassName}` : ""}`}>
         <button type="button" className="window-close" aria-label="Close modal" onClick={handleClose} />
         {title ? <h2>{title}</h2> : null}
         {children}

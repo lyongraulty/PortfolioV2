@@ -214,7 +214,7 @@
       "year": "2022 - 2025",
       "category": "Editorial Animation",
       "button_text": "View Project",
-      "project_copy": "Over the last few years I've been providing editorial animation for Texas Monthly. The goal wasn't to add more—it was to add just enough. Subtle motion that supports the illustration, gives it a sense of depth, and lets the original artwork stay front and center.",
+      "project_copy": "Over the last few years I've been providing editorial animation for Texas Monthly. The goal wasn't to add anything extra — it was to add just enough subtle motion to support the illustration, give it a sense of depth, and let the original artwork stay front and center.",
       "card_background": "projects/texas-monthly/TexasMonthly_3x1_card.mp4",
       "blocks": [
         {
@@ -241,7 +241,7 @@
       "year": "2025",
       "category": "Science-Tech Documentary",
       "button_text": "View Project",
-      "project_copy": "Motion design for a high-profile media launch that blended science, storytelling, and spectacle. Site specific projection, LED and screen installations. Documentary motion design. A bit of VFX",
+      "project_copy": "Motion design for a high-profile media launch — one with science, storytelling, and a bit of spectacle. Site-specific projections, large-scale screen installations, and the unique challenge of making cutting-edge science feel understandable and alive.",
       "card_background": "projects/colossal/colossal_3x1_card.mp4",
       "blocks": [
         {
@@ -345,16 +345,7 @@
             }
           ]
         },
-        {
-          "id": "block02",
-          "index": 2,
-          "type": "text",
-          "layout": "single",
-          "title": "Overview",
-          "copy": "Abstract 3D material exploration for Reebok's sustainability campaign — bouncy simulations, tactile surfaces, and buttery smooth animation.",
-          "media": []
-        },
-        {
+         {
           "id": "block03",
           "index": 3,
           "type": "text",

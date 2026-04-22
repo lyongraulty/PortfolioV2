@@ -90,14 +90,10 @@ export function OverlayController() {
 
   if (modal === "contact") {
     return (
-      <StaticOverlayWindow dialogLabel="Let's talk overlay" onClose={handleClose}>
+      <StaticOverlayWindow dialogLabel="Let's talk overlay" onClose={handleClose} panelClassName="window-panel--contact">
         <ContactOverlayContent />
       </StaticOverlayWindow>
     );
-  }
-
-  if (modal === "music") {
-    return <StaticOverlayWindow title="Music" onClose={handleClose} />;
   }
 
   if (modal === "sandbox") {

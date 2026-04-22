@@ -1,0 +1,250 @@
+.root {
+  display: contents;
+}
+
+.systemBar {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.72rem calc(clamp(1.4rem, 3vw, 2.2rem) + 5px) 0.72rem clamp(1.4rem, 3vw, 2.2rem);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+  background: #e8380a;
+}
+
+.systemBar p {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.inner {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.inner::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── copy panel ── */
+.copyPanel {
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  border-right: 1px solid rgba(16, 16, 16, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-family: var(--font-archivo-black), "Arial Black", sans-serif;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #101010;
+  margin-bottom: 1.6rem;
+}
+
+.copyBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  color: rgba(16, 16, 16, 0.82);
+  font-size: 12px;
+  line-height: 1.75;
+  margin-bottom: 1.6rem;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(16, 16, 16, 0.2);
+  margin: 1.2rem 0;
+}
+
+.emailLink {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: #101010;
+  text-decoration: none;
+  margin-bottom: 0.75rem;
+  transition: color 0.18s;
+}
+
+.emailLink:hover {
+  color: rgba(16, 16, 16, 0.5);
+}
+
+.copyRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.copyNote {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #e8380a;
+}
+
+.socials {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: auto;
+  padding-top: 1.6rem;
+}
+
+.socialBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(16, 16, 16, 0.2);
+  border-radius: 7px;
+  padding: 0.3rem 0.55rem;
+  font-family: var(--font-pt-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(16, 16, 16, 0.5);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.socialBtn:hover {
+  background: #101010;
+  color: #f6f1e7;
+  border-color: #101010;
+}
+
+/* ── form panel ── */
+.formPanel {
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.formLabel {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #101010;
+  margin-bottom: 1.6rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(16, 16, 16, 0.1);
+  padding: 0.9rem 0;
+  transition: border-top-color 0.15s;
+}
+
+.field:last-of-type {
+  border-bottom: 1px solid rgba(16, 16, 16, 0.1);
+}
+
+.field:focus-within {
+  border-top-color: rgba(16, 16, 16, 0.4);
+}
+
+.field label {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #101010;
+  margin-bottom: 0.4rem;
+}
+
+.field input,
+.field textarea {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #101010;
+  font-family: var(--font-pt-mono), monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: none;
+  width: 100%;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: rgba(16, 16, 16, 0.3);
+}
+
+.field textarea {
+  min-height: 100px;
+}
+
+.submitRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.2rem;
+}
+
+.submitBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(16, 16, 16, 0.3);
+  border-radius: 7px;
+  padding: 0.56rem 0.9rem;
+  font-family: var(--font-pt-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #101010;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.submitBtn:hover,
+.submitBtn:focus-visible {
+  background: #101010;
+  color: #f6f1e7;
+  border-color: #101010;
+}
+
+.submitBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+.formStatus {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(16, 16, 16, 0.5);
+}
+
+.formStatusError {
+  color: #e8380a;
+}
+
+@media (max-width: 620px) {
+  .inner {
+    grid-template-columns: 1fr;
+  }
+
+  .copyPanel {
+    border-right: none;
+    border-bottom: 1px solid rgba(16, 16, 16, 0.1);
+  }
+}

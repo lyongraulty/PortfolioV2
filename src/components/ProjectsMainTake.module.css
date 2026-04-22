@@ -62,7 +62,9 @@
 
 .card {
   position: relative;
-  min-height: 72vh;
+  aspect-ratio: 3 / 1;
+  min-height: 40vh;
+  max-height: 100vh;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
   animation: cardReveal 480ms ease both;
@@ -130,10 +132,6 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.58);
-}
-
-.firstCard {
-  min-height: 82vh;
 }
 
 .firstCard .title {
@@ -218,11 +216,7 @@
   }
 
   .card {
-    min-height: 64vh;
-  }
-
-  .firstCard {
-    min-height: 72vh;
+    min-height: 30vh;
   }
 
   .description {
