@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anheuser-Busch — Case Study v1</title>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0d0d0d; }
+
+    .shell {
+      background: #0d0d0d; color: #f0ede6;
+      font-family: "PT Mono","Courier New",monospace;
+      max-width: 1400px; margin: 0 auto;
+      border-left: 1px solid rgba(240,237,230,0.05);
+      border-right: 1px solid rgba(240,237,230,0.05);
+    }
+    .shell::after {
+      content: ""; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+      background: repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(240,237,230,0.016) 3px, rgba(240,237,230,0.016) 4px);
+    }
+
+    .topNav {
+      position: sticky; top: 0; z-index: 20;
+      display: grid; grid-template-columns: 1fr auto auto 1fr;
+      gap: 0.65rem; padding: 0.4rem clamp(1rem,2.8vw,1.4rem);
+      border-bottom: 1px solid rgba(240,237,230,0.08);
+      background: rgba(13,13,13,0.92); backdrop-filter: blur(8px);
+    }
+    .topNavBtn {
+      border: 1px solid rgba(240,237,230,0.18); border-radius: 9px;
+      background: transparent; color: rgba(240,237,230,0.65);
+      font-family: "PT Mono","Courier New",monospace; font-size: 10px;
+      letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;
+      min-height: 30px; padding: 0.24rem 0.62rem; cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .topNavBtn:first-child { justify-self: start; }
+    .topNavBtn:nth-child(2), .topNavBtn:nth-child(3) { justify-self: center; }
+    .topNavBtn:last-child { justify-self: end; }
+    .topNavBtn:hover { background: #f0ede6; color: #0d0d0d; border-color: #f0ede6; }
+    .topNavBtn:disabled { opacity: 0.26; cursor: default; }
+
+    .ticker { overflow: hidden; background: #e8380a; height: 28px; display: flex; align-items: center; }
+    .tickerTrack { display: flex; animation: tickerScroll 28s linear infinite; white-space: nowrap; }
+    .tickerItem { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #fff; padding: 0 3rem; }
+    @keyframes tickerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .heroBlock { position: relative; width: 100%; aspect-ratio: 2/1; background: #050505; }
+    .heroBlock video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    .projectInfo {
+      display: grid; grid-template-columns: 5fr 7fr;
+      gap: clamp(1rem,3vw,2.5rem);
+      padding: clamp(1.5rem,4vw,3.5rem) clamp(1.5rem,5vw,4rem);
+      border-bottom: 1px solid rgba(240,237,230,0.09);
+    }
+    .projectSeq { font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(232,56,10,0.85); margin-bottom: 0.7rem; }
+    .projectTitle {
+      font-family: "Arial Black","Arial",sans-serif; font-weight: 900;
+      font-size: clamp(1.8rem,4.5vw,4rem); line-height: 0.92;
+      text-transform: uppercase; color: #f0ede6; letter-spacing: -0.01em;
+    }
+    .projectInfoRight { display: flex; align-items: flex-start; padding-top: 0.25rem; }
+    .projectCopy { font-size: clamp(11px,1.2vw,13px); line-height: 1.7; color: rgba(240,237,230,0.72); max-width: 56ch; }
+
+    .metaStrip { display: flex; border-bottom: 1px solid rgba(240,237,230,0.09); overflow-x: auto; }
+    .metaCell {
+      flex: 1; min-width: 100px;
+      padding: clamp(0.75rem,1.8vw,1.1rem) clamp(1rem,2vw,1.5rem);
+      border-right: 1px solid rgba(240,237,230,0.09);
+      display: flex; flex-direction: column; gap: 0.35rem;
+    }
+    .metaCell:last-child { border-right: none; }
+    .metaLabel { font-size: 8px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(232,56,10,0.75); }
+    .metaValue { font-size: 12px; color: rgba(240,237,230,0.82); }
+
+    .sectionTicker {
+      overflow: hidden; background: rgba(232,56,10,0.12);
+      border-top: 1px solid rgba(232,56,10,0.22); border-bottom: 1px solid rgba(232,56,10,0.22);
+      height: 24px; display: flex; align-items: center;
+      margin: clamp(2rem,5vw,4rem) 0 0;
+    }
+    .sectionTickerTrack { display: flex; animation: tickerScroll 32s linear infinite; white-space: nowrap; }
+    .sectionTickerItem { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(232,56,10,0.9); padding: 0 3rem; }
+
+    .sectionLabel {
+      padding: clamp(1.5rem,3vw,2.5rem) clamp(1.5rem,5vw,4rem) clamp(0.75rem,1.5vw,1rem);
+      display: flex; align-items: baseline; gap: 1.5rem;
+    }
+    .sectionLabelTitle {
+      font-family: "Arial Black","Arial",sans-serif; font-weight: 900;
+      font-size: clamp(1rem,2vw,1.4rem); text-transform: uppercase;
+      color: rgba(240,237,230,0.9); letter-spacing: 0.04em;
+    }
+    .sectionLabelDesc { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(240,237,230,0.35); }
+
+    .padded { padding: 0 clamp(1.5rem,5vw,4rem); }
+    .spaceAfter { margin-bottom: clamp(1rem,2.5vw,2rem); }
+    .spaceLarge { margin-bottom: clamp(2rem,4vw,3.5rem); }
+
+    .mediaGrid1 { display: grid; grid-template-columns: 1fr; gap: clamp(0.5rem,1.2vw,1rem); }
+    .mediaGrid2 { display: grid; grid-template-columns: repeat(2,1fr); gap: clamp(0.5rem,1.2vw,1rem); }
+    .mediaGrid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(0.5rem,1.2vw,1rem); }
+
+    .mediaItem {
+      position: relative; overflow: hidden;
+      background: #0a0a0a; border: 1px solid rgba(240,237,230,0.06);
+    }
+    .mediaItem.aspect169 { aspect-ratio: 16/9; }
+    .mediaItem.aspect21 { aspect-ratio: 2/1; }
+    .mediaItem.aspect31 { aspect-ratio: 3/1; }
+    .mediaItem.aspectFree { aspect-ratio: auto; }
+    .mediaItem video, .mediaItem img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .mediaItem.aspectFree img { position: relative; width: 100%; height: auto; display: block; }
+
+    .mediaBadge {
+      position: absolute; bottom: 0.5rem; left: 0.5rem; z-index: 2;
+      font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(240,237,230,0.8); background: rgba(13,13,13,0.72);
+      border: 1px solid rgba(240,237,230,0.14); border-radius: 4px; padding: 0.12rem 0.4rem;
+    }
+
+    /* Process step layout: number + label beside video */
+    .processRow {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: clamp(1rem,2vw,1.5rem); align-items: start;
+    }
+    .processNum {
+      font-family: "Arial Black","Arial",sans-serif; font-weight: 900;
+      font-size: clamp(3rem,6vw,6rem); line-height: 1; color: rgba(232,56,10,0.2);
+      user-select: none; padding-top: 0.1rem; min-width: 3ch; text-align: right;
+    }
+
+    .creditsBlock {
+      padding: clamp(2rem,5vw,4rem) clamp(1.5rem,5vw,4rem) clamp(1rem,2.5vw,2rem);
+      border-top: 1px solid rgba(240,237,230,0.09);
+      margin-top: clamp(2rem,5vw,4rem);
+    }
+    .creditsLabel { font-size: 8px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(240,237,230,0.35); margin-bottom: 1.25rem; }
+    .creditsGrid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 0.5rem; }
+    .creditItem { padding: 0.6rem 0.75rem; border: 1px solid rgba(240,237,230,0.07); background: rgba(240,237,230,0.02); }
+    .creditRole { font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(240,237,230,0.38); margin-bottom: 0.22rem; }
+    .creditName { font-size: 11px; color: rgba(240,237,230,0.82); font-weight: 700; }
+
+    .footerNav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: clamp(0.75rem,1.8vw,1.1rem) clamp(1.5rem,5vw,4rem);
+      border-top: 1px solid rgba(240,237,230,0.09);
+    }
+    .footerNavBtn {
+      font-family: "PT Mono","Courier New",monospace; font-size: 10px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(240,237,230,0.5); background: transparent; border: none; cursor: pointer;
+    }
+    .footerNavBtn:hover { color: #f0ede6; }
+    .footerClose { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(232,56,10,0.8); }
+  </style>
+</head>
+<body>
+<div class="shell">
+
+  <nav class="topNav">
+    <button class="topNavBtn" disabled>← Previous</button>
+    <button class="topNavBtn">07 / Case Study</button>
+    <button class="topNavBtn">Anheuser-Busch</button>
+    <button class="topNavBtn">Next →</button>
+  </nav>
+
+  <div class="ticker">
+    <div class="tickerTrack">
+      <span class="tickerItem">Anheuser-Busch</span>
+      <span class="tickerItem">Springbox</span>
+      <span class="tickerItem">Brand Identity</span>
+      <span class="tickerItem">Logo Animation</span>
+      <span class="tickerItem">Motion System</span>
+      <span class="tickerItem">Anheuser-Busch</span>
+      <span class="tickerItem">Springbox</span>
+      <span class="tickerItem">Brand Identity</span>
+      <span class="tickerItem">Logo Animation</span>
+      <span class="tickerItem">Motion System</span>
+    </div>
+  </div>
+
+  <!-- HERO: 2x1 -->
+  <div class="heroBlock">
+    <video autoplay muted loop playsinline preload="metadata">
+      <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/anheuser-busch/Springbox_AnheuserBusch_2x1_HERO.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- PROJECT INFO -->
+  <div class="projectInfo">
+    <div>
+      <p class="projectSeq">07 / Case Study</p>
+      <h1 class="projectTitle">Anheuser-&#8203;Busch</h1>
+    </div>
+    <div class="projectInfoRight">
+      <p class="projectCopy">Brand motion identity for Anheuser-Busch, produced at Springbox. The work focused on constructing a cinematic logo reveal system and a layered process animation suite — defining how the AB mark moves across broadcast, digital, and OOH applications.</p>
+    </div>
+  </div>
+
+  <!-- META STRIP -->
+  <div class="metaStrip">
+    <div class="metaCell"><span class="metaLabel">Client</span><span class="metaValue">Anheuser-Busch</span></div>
+    <div class="metaCell"><span class="metaLabel">Studio</span><span class="metaValue">Springbox</span></div>
+    <div class="metaCell"><span class="metaLabel">Year</span><span class="metaValue">2019</span></div>
+    <div class="metaCell"><span class="metaLabel">Category</span><span class="metaValue">Brand Identity</span></div>
+    <div class="metaCell"><span class="metaLabel">Role</span><span class="metaValue">Motion Design</span></div>
+  </div>
+
+  <!-- ═══════════════════════════ -->
+  <!-- SECTION: LOGO PROCESS      -->
+  <!-- ═══════════════════════════ -->
+
+  <div class="sectionTicker">
+    <div class="sectionTickerTrack">
+      <span class="sectionTickerItem">Logo Animation</span>
+      <span class="sectionTickerItem">Construction</span>
+      <span class="sectionTickerItem">Mark Reveal</span>
+      <span class="sectionTickerItem">Brand System</span>
+      <span class="sectionTickerItem">Logo Animation</span>
+      <span class="sectionTickerItem">Construction</span>
+      <span class="sectionTickerItem">Mark Reveal</span>
+      <span class="sectionTickerItem">Brand System</span>
+    </div>
+  </div>
+
+  <div class="sectionLabel">
+    <span class="sectionLabelTitle">Logo Process</span>
+    <span class="sectionLabelDesc">Mark Construction + Reveal Animation</span>
+  </div>
+
+  <!-- Main logo process — full width -->
+  <div class="padded spaceAfter">
+    <div class="processRow">
+      <span class="processNum">01</span>
+      <div class="mediaItem aspect169">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/anheuser-busch/Springbox_AnheuserBusch_LogoProcess02.mp4" type="video/mp4">
+        </video>
+        <span class="mediaBadge">Logo Process — v2</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logo process original + card image -->
+  <div class="padded spaceAfter">
+    <div class="mediaGrid2">
+      <div class="processRow" style="align-items:center;">
+        <span class="processNum" style="font-size:clamp(2rem,4vw,4rem);">02</span>
+        <div class="mediaItem aspect169">
+          <video autoplay muted loop playsinline preload="metadata">
+            <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/anheuser-busch/Springbox_AnheuserBusch_LogoProcess.mov" type="video/quicktime">
+            <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/anheuser-busch/Springbox_AnheuserBusch_LogoProcess.mov" type="video/mp4">
+          </video>
+          <span class="mediaBadge">Logo Process — Original</span>
+        </div>
+      </div>
+      <div class="mediaItem aspect31">
+        <img src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/anheuser-busch/AnheuserBusch_3x1_v2_card.png" alt="Anheuser-Busch brand card" loading="lazy">
+        <span class="mediaBadge">Brand Card — 3×1</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ -->
+  <!-- SECTION: PROCESS ANIMATION -->
+  <!-- ═══════════════════════════ -->
+
+  <div class="sectionTicker">
+    <div class="sectionTickerTrack">
+      <span class="sectionTickerItem">Process Animation</span>
+      <span class="sectionTickerItem">Layered System</span>
+      <span class="sectionTickerItem">Brand Motion</span>
+      <span class="sectionTickerItem">Broadcast Ready</span>
+      <span class="sectionTickerItem">Process Animation</span>
+      <span class="sectionTickerItem">Layered System</span>
+      <span class="sectionTickerItem">Brand Motion</span>
+      <span class="sectionTickerItem">Broadcast Ready</span>
+    </div>
+  </div>
+
+  <div class="sectionLabel">
+    <span class="sectionLabelTitle">Brand Motion</span>
+    <span class="sectionLabelDesc">Process Animations — Brand System</span>
+  </div>
+
+  <!-- Process pair -->
+  <div class="padded spaceLarge">
+    <div class="mediaGrid2">
+      <div class="processRow" style="align-items:center;">
+        <span class="processNum" style="font-size:clamp(2rem,4vw,4rem);">03</span>
+        <div class="mediaItem aspect169">
+          <video autoplay muted loop playsinline preload="metadata">
+            <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/anheuser-busch/Springbox_AnheuserBusch_Process02.mp4" type="video/mp4">
+          </video>
+          <span class="mediaBadge">Process — 02</span>
+        </div>
+      </div>
+      <div class="processRow" style="align-items:center;">
+        <span class="processNum" style="font-size:clamp(2rem,4vw,4rem);">04</span>
+        <div class="mediaItem aspect169">
+          <video autoplay muted loop playsinline preload="metadata">
+            <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/anheuser-busch/Springbox_AnheuserBusch_Process03.mp4" type="video/mp4">
+          </video>
+          <span class="mediaBadge">Process — 03</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREDITS -->
+  <div class="creditsBlock">
+    <p class="creditsLabel">Credits</p>
+    <div class="creditsGrid">
+      <div class="creditItem"><p class="creditRole">Client</p><p class="creditName">Anheuser-Busch</p></div>
+      <div class="creditItem"><p class="creditRole">Studio</p><p class="creditName">Springbox</p></div>
+      <div class="creditItem"><p class="creditRole">Motion Design</p><p class="creditName">Lyon Graulty</p></div>
+      <div class="creditItem"><p class="creditRole">Creative Direction</p><p class="creditName">Springbox</p></div>
+    </div>
+  </div>
+
+  <div class="footerNav">
+    <button class="footerNavBtn">← Prev</button>
+    <span class="footerClose">✕ Close</span>
+    <button class="footerNavBtn">Next →</button>
+  </div>
+
+</div>
+</body>
+</html>

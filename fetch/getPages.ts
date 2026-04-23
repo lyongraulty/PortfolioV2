@@ -1,5 +1,4 @@
 import "server-only";
-import generatedSiteData from "../content/generated/site-data.json";
 import siteData from "../content/site-data.json";
 import projectManifest from "../content/projects.json";
 
@@ -90,11 +89,7 @@ function inferMediaType(src: string): "video" | "image" {
 }
 
 function getLocalPages(): PageRow[] {
-  const generatedEnvelope = generatedSiteData as Record<string, unknown>;
-  const sourceEnvelope = siteData as Record<string, unknown>;
-  const localEnvelope =
-    Array.isArray(generatedEnvelope.pages) && generatedEnvelope.pages.length > 0 ? generatedEnvelope : sourceEnvelope;
-  const rawPagesFromLocal = extractPages(localEnvelope);
+  const rawPagesFromLocal = extractPages(siteData as Record<string, unknown>);
 
   const projectRows = (projectManifest as ProjectRow[]).filter(isObject);
 

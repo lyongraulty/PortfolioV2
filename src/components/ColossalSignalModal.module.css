@@ -254,11 +254,10 @@
 .stepHeading {
   margin: 0.25rem 0 0;
   font-family: "PT Mono", "Courier New", monospace;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.35;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #e8380a;
+  letter-spacing: 0.02em;
+  color: rgba(15, 15, 15, 0.72);
 }
 
 .secondTitle {
@@ -395,29 +394,6 @@
   color: #0f0f0f;
 }
 
-/* corner brackets */
-.videoWrap::before,
-.videoWrap::after {
-  content: "";
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  z-index: 2;
-}
-
-.videoWrap::before {
-  top: 12px;
-  left: 12px;
-  border-top: 2px solid #e8380a;
-  border-left: 2px solid #e8380a;
-}
-
-.videoWrap::after {
-  bottom: 12px;
-  right: 12px;
-  border-bottom: 2px solid #e8380a;
-  border-right: 2px solid #e8380a;
-}
 
 .videoFallback {
   position: absolute;

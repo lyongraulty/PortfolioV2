@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meta — Case Study v1</title>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0d0d0d; }
+
+    .shell {
+      background: #0d0d0d;
+      color: #f0ede6;
+      font-family: "PT Mono", "Courier New", monospace;
+      max-width: 1400px;
+      margin: 0 auto;
+      border-left: 1px solid rgba(240,237,230,0.05);
+      border-right: 1px solid rgba(240,237,230,0.05);
+    }
+
+    .shell::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      background: repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(240,237,230,0.016) 3px, rgba(240,237,230,0.016) 4px);
+    }
+
+    /* NAV */
+    .topNav {
+      position: sticky; top: 0; z-index: 20;
+      display: grid; grid-template-columns: 1fr auto auto 1fr;
+      gap: 0.65rem; padding: 0.4rem clamp(1rem,2.8vw,1.4rem);
+      border-bottom: 1px solid rgba(240,237,230,0.08);
+      background: rgba(13,13,13,0.92); backdrop-filter: blur(8px);
+    }
+    .topNavBtn {
+      border: 1px solid rgba(240,237,230,0.18); border-radius: 9px;
+      background: transparent; color: rgba(240,237,230,0.65);
+      font-family: "PT Mono","Courier New",monospace; font-size: 10px;
+      letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;
+      min-height: 30px; padding: 0.24rem 0.62rem; text-align: center; cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .topNavBtn:first-child { justify-self: start; }
+    .topNavBtn:nth-child(2), .topNavBtn:nth-child(3) { justify-self: center; }
+    .topNavBtn:last-child { justify-self: end; }
+    .topNavBtn:hover { background: #f0ede6; color: #0d0d0d; border-color: #f0ede6; }
+    .topNavBtn:disabled { opacity: 0.26; cursor: default; }
+
+    /* TICKER */
+    .ticker {
+      overflow: hidden; background: #e8380a; height: 28px;
+      display: flex; align-items: center;
+    }
+    .tickerTrack {
+      display: flex; animation: tickerScroll 28s linear infinite; white-space: nowrap;
+    }
+    .tickerItem { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #fff; padding: 0 3rem; }
+    @keyframes tickerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* HERO VIDEO */
+    .heroBlock {
+      position: relative; width: 100%; aspect-ratio: 16/9; background: #050505;
+    }
+    .heroBlock video {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+
+    /* PROJECT INFO */
+    .projectInfo {
+      display: grid; grid-template-columns: 5fr 7fr;
+      gap: clamp(1rem,3vw,2.5rem);
+      padding: clamp(1.5rem,4vw,3.5rem) clamp(1.5rem,5vw,4rem);
+      border-bottom: 1px solid rgba(240,237,230,0.09);
+    }
+    .projectInfoLeft {}
+    .projectSeq {
+      font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
+      color: rgba(232,56,10,0.85); margin-bottom: 0.7rem;
+    }
+    .projectTitle {
+      font-family: "Arial Black","Arial",sans-serif; font-weight: 900;
+      font-size: clamp(2.2rem,5.5vw,4.8rem); line-height: 0.92;
+      text-transform: uppercase; color: #f0ede6;
+      letter-spacing: -0.01em;
+    }
+    .projectInfoRight { display: flex; align-items: flex-start; padding-top: 0.25rem; }
+    .projectCopy {
+      font-size: clamp(11px,1.2vw,13px); line-height: 1.7;
+      color: rgba(240,237,230,0.72); max-width: 56ch;
+    }
+
+    /* META STRIP */
+    .metaStrip {
+      display: flex; border-bottom: 1px solid rgba(240,237,230,0.09);
+      overflow-x: auto;
+    }
+    .metaCell {
+      flex: 1; min-width: 100px;
+      padding: clamp(0.75rem,1.8vw,1.1rem) clamp(1rem,2vw,1.5rem);
+      border-right: 1px solid rgba(240,237,230,0.09);
+      display: flex; flex-direction: column; gap: 0.35rem;
+    }
+    .metaCell:last-child { border-right: none; }
+    .metaLabel {
+      font-size: 8px; letter-spacing: 0.26em; text-transform: uppercase;
+      color: rgba(232,56,10,0.75);
+    }
+    .metaValue { font-size: 12px; color: rgba(240,237,230,0.82); }
+
+    /* SECTION TICKER */
+    .sectionTicker {
+      overflow: hidden; background: rgba(232,56,10,0.12);
+      border-top: 1px solid rgba(232,56,10,0.22);
+      border-bottom: 1px solid rgba(232,56,10,0.22);
+      height: 24px; display: flex; align-items: center;
+      margin: clamp(2rem,5vw,4rem) 0 0;
+    }
+    .sectionTickerTrack {
+      display: flex; animation: tickerScroll 32s linear infinite; white-space: nowrap;
+    }
+    .sectionTickerItem {
+      font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(232,56,10,0.9); padding: 0 3rem;
+    }
+
+    /* SECTION LABEL */
+    .sectionLabel {
+      padding: clamp(1.5rem,3vw,2.5rem) clamp(1.5rem,5vw,4rem) clamp(0.75rem,1.5vw,1rem);
+      display: flex; align-items: baseline; gap: 1.5rem;
+    }
+    .sectionLabelTitle {
+      font-family: "Arial Black","Arial",sans-serif; font-weight: 900;
+      font-size: clamp(1rem,2vw,1.4rem); text-transform: uppercase;
+      color: rgba(240,237,230,0.9); letter-spacing: 0.04em;
+    }
+    .sectionLabelDesc {
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(240,237,230,0.35);
+    }
+
+    /* MEDIA BLOCKS */
+    .padded { padding: 0 clamp(1.5rem,5vw,4rem); }
+    .spaceAfter { margin-bottom: clamp(1rem,2.5vw,2rem); }
+    .spaceLarge { margin-bottom: clamp(2rem,4vw,3.5rem); }
+
+    .mediaGrid1 { display: grid; grid-template-columns: 1fr; gap: clamp(0.5rem,1.2vw,1rem); }
+    .mediaGrid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(0.5rem,1.2vw,1rem); }
+    .mediaGrid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.5rem,1.2vw,1rem); }
+    .mediaGrid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(0.5rem,1.2vw,1rem); }
+
+    .mediaItem {
+      position: relative; overflow: hidden;
+      background: #0a0a0a;
+      border: 1px solid rgba(240,237,230,0.06);
+    }
+    .mediaItem.aspect169 { aspect-ratio: 16/9; }
+    .mediaItem.aspect11 { aspect-ratio: 1/1; }
+    .mediaItem.aspect43 { aspect-ratio: 4/3; }
+    .mediaItem.aspectTall { aspect-ratio: 9/16; }
+    .mediaItem.aspectFree { aspect-ratio: auto; }
+    .mediaItem video, .mediaItem img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+    .mediaItem.aspectFree { position: relative; }
+    .mediaItem.aspectFree img {
+      position: relative; width: 100%; height: auto; display: block;
+    }
+
+    .mediaBadge {
+      position: absolute; bottom: 0.5rem; left: 0.5rem; z-index: 2;
+      font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(240,237,230,0.8); background: rgba(13,13,13,0.72);
+      border: 1px solid rgba(240,237,230,0.14); border-radius: 4px;
+      padding: 0.12rem 0.4rem;
+    }
+    .mediaBadgeOrange { background: rgba(232,56,10,0.85); color: #fff; border-color: transparent; }
+
+    /* FEATURE LAYOUT — copy left, video right */
+    .featureLayout {
+      display: grid; grid-template-columns: 2fr 5fr;
+      gap: clamp(1rem,2.5vw,2rem); align-items: start;
+    }
+    .featureCopy {}
+    .featureEyebrow {
+      font-size: 8px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(232,56,10,0.8); margin-bottom: 0.6rem;
+    }
+    .featureHeading {
+      font-family: "Arial Black","Arial",sans-serif; font-weight: 900;
+      font-size: clamp(1rem,2vw,1.5rem); text-transform: uppercase;
+      color: #f0ede6; line-height: 1.1; margin-bottom: 0.8rem; letter-spacing: 0.01em;
+    }
+    .featureBody {
+      font-size: clamp(10px,1.1vw,12px); line-height: 1.72;
+      color: rgba(240,237,230,0.6); max-width: 30ch;
+    }
+
+    /* SHOWCASE row — full-width image */
+    .showcaseImg {
+      width: 100%; display: block; border: 1px solid rgba(240,237,230,0.06);
+    }
+
+    /* CREDITS */
+    .creditsBlock {
+      padding: clamp(2rem,5vw,4rem) clamp(1.5rem,5vw,4rem) clamp(1rem,2.5vw,2rem);
+      border-top: 1px solid rgba(240,237,230,0.09);
+      margin-top: clamp(2rem,5vw,4rem);
+    }
+    .creditsLabel {
+      font-size: 8px; letter-spacing: 0.26em; text-transform: uppercase;
+      color: rgba(240,237,230,0.35); margin-bottom: 1.25rem;
+    }
+    .creditsGrid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.5rem;
+    }
+    .creditItem {
+      padding: 0.6rem 0.75rem;
+      border: 1px solid rgba(240,237,230,0.07);
+      background: rgba(240,237,230,0.02);
+    }
+    .creditRole {
+      font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(240,237,230,0.38); margin-bottom: 0.22rem;
+    }
+    .creditName {
+      font-size: 11px; color: rgba(240,237,230,0.82); font-weight: 700;
+    }
+
+    /* FOOTER NAV */
+    .footerNav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: clamp(0.75rem,1.8vw,1.1rem) clamp(1.5rem,5vw,4rem);
+      border-top: 1px solid rgba(240,237,230,0.09);
+      margin-top: 0;
+    }
+    .footerNavBtn {
+      font-family: "PT Mono","Courier New",monospace; font-size: 10px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(240,237,230,0.5); background: transparent; border: none; cursor: pointer;
+      transition: color 0.15s;
+    }
+    .footerNavBtn:hover { color: #f0ede6; }
+    .footerClose {
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(232,56,10,0.8);
+    }
+  </style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- TOP NAV -->
+  <nav class="topNav">
+    <button class="topNavBtn" disabled>← Previous</button>
+    <button class="topNavBtn">05 / Case Study</button>
+    <button class="topNavBtn">Meta</button>
+    <button class="topNavBtn">Next →</button>
+  </nav>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="tickerTrack">
+      <span class="tickerItem">Meta</span>
+      <span class="tickerItem">Character Design</span>
+      <span class="tickerItem">Black Math</span>
+      <span class="tickerItem">Cute Animals</span>
+      <span class="tickerItem">3D Animation</span>
+      <span class="tickerItem">Brand Characters</span>
+      <span class="tickerItem">Meta</span>
+      <span class="tickerItem">Character Design</span>
+      <span class="tickerItem">Black Math</span>
+      <span class="tickerItem">Cute Animals</span>
+      <span class="tickerItem">3D Animation</span>
+      <span class="tickerItem">Brand Characters</span>
+    </div>
+  </div>
+
+  <!-- HERO VIDEO -->
+  <div class="heroBlock">
+    <video autoplay muted loop playsinline preload="metadata">
+      <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/Meta_card.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- PROJECT INFO -->
+  <div class="projectInfo">
+    <div class="projectInfoLeft">
+      <p class="projectSeq">05 / Case Study</p>
+      <h1 class="projectTitle">Meta</h1>
+    </div>
+    <div class="projectInfoRight">
+      <p class="projectCopy">Two distinct character universes developed for Meta's social platforms — Black Math's expressive dancer ensemble and the Cute Animals collection. Each character was fully rigged and animated for use across AR filters, sticker packs, and motion campaigns.</p>
+    </div>
+  </div>
+
+  <!-- META STRIP -->
+  <div class="metaStrip">
+    <div class="metaCell">
+      <span class="metaLabel">Client</span>
+      <span class="metaValue">Meta</span>
+    </div>
+    <div class="metaCell">
+      <span class="metaLabel">Studio</span>
+      <span class="metaValue">Black Math</span>
+    </div>
+    <div class="metaCell">
+      <span class="metaLabel">Year</span>
+      <span class="metaValue">2022</span>
+    </div>
+    <div class="metaCell">
+      <span class="metaLabel">Category</span>
+      <span class="metaValue">Character Design</span>
+    </div>
+    <div class="metaCell">
+      <span class="metaLabel">Role</span>
+      <span class="metaValue">Motion Design, 3D</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- SECTION: BLACK MATH CHARACTERS     -->
+  <!-- ═══════════════════════════════════ -->
+
+  <div class="sectionTicker">
+    <div class="sectionTickerTrack">
+      <span class="sectionTickerItem">Black Math Characters</span>
+      <span class="sectionTickerItem">Dancer Ensemble</span>
+      <span class="sectionTickerItem">3D Rigging</span>
+      <span class="sectionTickerItem">Character Animation</span>
+      <span class="sectionTickerItem">Black Math Characters</span>
+      <span class="sectionTickerItem">Dancer Ensemble</span>
+      <span class="sectionTickerItem">3D Rigging</span>
+      <span class="sectionTickerItem">Character Animation</span>
+    </div>
+  </div>
+
+  <div class="sectionLabel">
+    <span class="sectionLabelTitle">Black Math</span>
+    <span class="sectionLabelDesc">Dancer Ensemble — Character + Animation</span>
+  </div>
+
+  <!-- Feature: Lineup Dancers (full-width) -->
+  <div class="padded spaceAfter">
+    <div class="mediaGrid1">
+      <div class="mediaItem aspect169">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/Black%20Math%20-%20Meta%20%20-%20LineupDancers.mp4" type="video/mp4">
+        </video>
+        <span class="mediaBadge">Lineup — Full Ensemble</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Turntable pair -->
+  <div class="padded spaceAfter">
+    <div class="mediaGrid2">
+      <div class="mediaItem aspect169">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/BlackMath_Turntable01.mp4" type="video/mp4">
+        </video>
+        <span class="mediaBadge">Turntable — Character A</span>
+      </div>
+      <div class="mediaItem aspect169">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/BlackMath_Turntable02.mp4" type="video/mp4">
+        </video>
+        <span class="mediaBadge">Turntable — Character B</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Character actions: Nope Robot + Proud Dancer + Godzilla BTS -->
+  <div class="padded spaceAfter">
+    <div class="mediaGrid3">
+      <div class="mediaItem aspect169">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/BlackMath_NopeRobot.mp4" type="video/mp4">
+        </video>
+        <span class="mediaBadge">Nope Robot</span>
+      </div>
+      <div class="mediaItem aspect169">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/BlackMath_ProudDancergimmegimme.mp4" type="video/mp4">
+        </video>
+        <span class="mediaBadge">Proud Dancer</span>
+      </div>
+      <div class="mediaItem aspect169">
+        <video controls preload="metadata">
+          <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/BlackMath_Godzilla_BTS.mp4" type="video/mp4">
+        </video>
+        <span class="mediaBadge">Godzilla — BTS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GIF strip: two animation loops -->
+  <div class="padded spaceAfter">
+    <div class="mediaGrid2">
+      <div class="mediaItem aspect169">
+        <img src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/Black%20Math%20-%20Meta%20%20-%20AN080_a13_lg_BAKED.gif" alt="Character animation loop A" loading="lazy">
+        <span class="mediaBadge mediaBadgeOrange">GIF</span>
+      </div>
+      <div class="mediaItem aspect169">
+        <img src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/Black%20Math%20-%20Meta%20%20-%20AN080_a13_lg_BAKED_1.gif" alt="Character animation loop B" loading="lazy">
+        <span class="mediaBadge mediaBadgeOrange">GIF</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dancer Showcase — full width PNG -->
+  <div class="padded spaceLarge">
+    <img class="showcaseImg" src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/BlackMath_Dancers_Showcase_06_lg.png" alt="Dancer character showcase" loading="lazy">
+  </div>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- SECTION: CUTE ANIMALS              -->
+  <!-- ═══════════════════════════════════ -->
+
+  <div class="sectionTicker">
+    <div class="sectionTickerTrack">
+      <span class="sectionTickerItem">Cute Animals Collection</span>
+      <span class="sectionTickerItem">Character Lineup</span>
+      <span class="sectionTickerItem">Sticker Pack</span>
+      <span class="sectionTickerItem">AR Filters</span>
+      <span class="sectionTickerItem">Cute Animals Collection</span>
+      <span class="sectionTickerItem">Character Lineup</span>
+      <span class="sectionTickerItem">Sticker Pack</span>
+      <span class="sectionTickerItem">AR Filters</span>
+    </div>
+  </div>
+
+  <div class="sectionLabel">
+    <span class="sectionLabelTitle">Cute Animals</span>
+    <span class="sectionLabelDesc">Character Collection — Showcase Renders</span>
+  </div>
+
+  <!-- 3-up showcase PNGs -->
+  <div class="padded spaceAfter">
+    <div class="mediaGrid3">
+      <div class="mediaItem aspectFree">
+        <img src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/CuteAnimals_Showcase_01.png" alt="Cute Animals lineup" loading="lazy" style="position:relative;width:100%;height:auto;display:block;">
+      </div>
+      <div class="mediaItem aspectFree">
+        <img src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/CuteAnimals_Showcase_CowandDucky02_lg.png" alt="Cow and Ducky showcase" loading="lazy" style="position:relative;width:100%;height:auto;display:block;">
+      </div>
+      <div class="mediaItem aspectFree">
+        <img src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/CuteAnimals_Showcase_SwimmiesCoffee02_lg.png" alt="Swimmies and Coffee showcase" loading="lazy" style="position:relative;width:100%;height:auto;display:block;">
+      </div>
+    </div>
+  </div>
+
+  <!-- 4-up individual character stills -->
+  <div class="padded spaceLarge">
+    <div class="mediaGrid4">
+      <div class="mediaItem aspect11">
+        <img src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/CuteAnimals_Crying.png" alt="Crying character" loading="lazy">
+        <span class="mediaBadge">Crying</span>
+      </div>
+      <div class="mediaItem aspect11">
+        <img src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/CuteAnimals_IceCream.png" alt="Ice Cream character" loading="lazy">
+        <span class="mediaBadge">Ice Cream</span>
+      </div>
+      <div class="mediaItem aspect11">
+        <img src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/CuteAnimals_Swimmies01.png" alt="Swimmies character 1" loading="lazy">
+        <span class="mediaBadge">Swimmies A</span>
+      </div>
+      <div class="mediaItem aspect11">
+        <img src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/meta/CuteAnimals_Swimmies02.png" alt="Swimmies character 2" loading="lazy">
+        <span class="mediaBadge">Swimmies B</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREDITS -->
+  <div class="creditsBlock">
+    <p class="creditsLabel">Credits</p>
+    <div class="creditsGrid">
+      <div class="creditItem">
+        <p class="creditRole">Client</p>
+        <p class="creditName">Meta Platforms</p>
+      </div>
+      <div class="creditItem">
+        <p class="creditRole">Studio</p>
+        <p class="creditName">Black Math</p>
+      </div>
+      <div class="creditItem">
+        <p class="creditRole">Character Design</p>
+        <p class="creditName">Lyon Graulty</p>
+      </div>
+      <div class="creditItem">
+        <p class="creditRole">3D Animation</p>
+        <p class="creditName">Lyon Graulty</p>
+      </div>
+      <div class="creditItem">
+        <p class="creditRole">Rigging</p>
+        <p class="creditName">Black Math</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER NAV -->
+  <div class="footerNav">
+    <button class="footerNavBtn">← Prev</button>
+    <span class="footerClose">✕ Close</span>
+    <button class="footerNavBtn">Next →</button>
+  </div>
+
+</div>
+</body>
+</html>

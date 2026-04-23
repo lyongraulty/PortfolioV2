@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dire Wolf Modal - Dark Ritual</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #060606;
+    --fg: #efece6;
+    --muted: rgba(239,236,230,0.45);
+    --rule: rgba(239,236,230,0.14);
+    --accent: #d94c19;
+    --mono: "IBM Plex Mono", "Courier New", monospace;
+    --display: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  }
+  body { background: var(--bg); color: var(--fg); font-family: var(--mono); overflow-x: hidden; }
+  body::before {
+    content: "";
+    position: fixed; inset: 0; pointer-events: none; z-index: 999;
+    background-image: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.04), transparent 55%),
+      radial-gradient(circle at 80% 70%, rgba(217,76,25,0.06), transparent 65%);
+    mix-blend-mode: screen;
+  }
+  .grain {
+    position: fixed; inset: 0; pointer-events: none; z-index: 1000; opacity: 0.16;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='1.1' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.26'/%3E%3C/svg%3E");
+    background-size: 150px 150px;
+  }
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 20; height: 58px;
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    padding: 0 clamp(1rem, 3vw, 2.5rem); border-bottom: 1px solid var(--rule);
+    backdrop-filter: blur(9px); background: rgba(6,6,6,0.8);
+  }
+  .nav .left, .nav .right { font-size: 21px; color: var(--muted); }
+  .nav .right { text-align: right; }
+  .nav .center { display: flex; gap: 1.6rem; align-items: center; }
+  .nav .close, .nav .share {
+    text-transform: uppercase; letter-spacing: 0.18em; font-size: 10px; padding: 0.35rem 0.75rem;
+    border: 1px solid var(--rule); color: var(--fg);
+  }
+  .nav .share { color: var(--muted); border-color: transparent; }
+  .hero {
+    min-height: 92vh; padding-top: 58px; border-bottom: 1px solid var(--rule);
+    display: grid; align-items: end; position: relative;
+    background: linear-gradient(130deg, #0f0f0f 0%, #070707 60%, #160d09 100%);
+  }
+  .hero-title {
+    font-family: var(--display); line-height: 0.82; text-transform: uppercase;
+    font-size: clamp(4rem, 15vw, 16rem); letter-spacing: -0.05em;
+    padding: 0 clamp(1rem, 3vw, 2.5rem) clamp(1.2rem, 3vw, 2.2rem);
+  }
+  .hero-title span { display: block; color: var(--accent); font-size: 0.72em; margin-left: clamp(1rem, 10vw, 8rem); }
+  .hero-sub {
+    position: absolute; left: clamp(1rem, 3vw, 2.5rem); top: 90px;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+  }
+  .hero-index {
+    position: absolute; right: clamp(1rem, 3vw, 2.5rem); bottom: 1.2rem;
+    font-family: var(--display); font-size: clamp(4rem, 13vw, 13rem); color: rgba(239,236,230,0.06);
+  }
+  .section-label {
+    padding: 1rem clamp(1rem, 3vw, 2.5rem); border-bottom: 1px solid var(--rule);
+    font-size: 9px; letter-spacing: 0.19em; text-transform: uppercase; color: var(--muted);
+  }
+  .type-clock {
+    border-bottom: 1px solid var(--rule);
+    padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 3vw, 2.5rem);
+    position: relative;
+  }
+  .type-clock-word {
+    font-family: var(--display); text-transform: uppercase;
+    font-size: clamp(3.8rem, 18vw, 20rem); line-height: 0.78; letter-spacing: -0.05em;
+  }
+  .type-clock-word.outline {
+    color: transparent; -webkit-text-stroke: 1px rgba(239,236,230,0.24);
+  }
+  .type-clock p {
+    margin-top: 1.1rem; max-width: 58ch; line-height: 1.8; font-size: 13px; color: var(--muted);
+  }
+  .video {
+    border-bottom: 1px solid var(--rule);
+    min-height: 62vh;
+    background-image: linear-gradient(12deg, rgba(0,0,0,0.65), rgba(0,0,0,0.25)), url("mockup/02_colossal.jpg");
+    background-size: cover; background-position: center;
+    position: relative;
+  }
+  .video.alt {
+    min-height: 46vh;
+    margin: clamp(1rem, 4vw, 2.5rem);
+    border: 1px solid var(--rule);
+    background-position: 50% 35%;
+  }
+  .video .caption {
+    position: absolute; right: 1rem; bottom: 0.8rem;
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(239,236,230,0.6);
+  }
+  @media (max-width: 720px) {
+    .nav { grid-template-columns: auto 1fr auto; }
+    .nav .center { justify-content: center; gap: 0.8rem; }
+    .hero-title span { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<nav class="nav">
+  <div class="left">&lt;</div>
+  <div class="center"><span class="close">Close</span><span class="share">Share</span></div>
+  <div class="right">&gt;</div>
+</nav>
+
+<header class="hero">
+  <p class="hero-sub">02 / science-tech / modal study</p>
+  <h1 class="hero-title">Colossal <span>Dire Wolf</span></h1>
+  <div class="hero-index">02</div>
+</header>
+
+<div class="section-label">01 / Fossil Read</div>
+<section class="type-clock">
+  <div class="type-clock-word outline">SKULL</div>
+  <p>Massive headline as specimen plate. Smaller mono copy becomes annotation, as if pinned to a museum card.</p>
+</section>
+<section class="video"><p class="caption">process_01.mp4 / skull rebuild</p></section>
+
+<div class="section-label">02 / Signal Synthesis</div>
+<section class="type-clock">
+  <div class="type-clock-word">SOUND</div>
+  <div class="type-clock-word outline">BAND</div>
+  <p>The scale jump from filled to outline creates a pulse. This feels stark and theatrical on scroll.</p>
+</section>
+<section class="video alt"><p class="caption">process_02.mp4 / bioacoustic model</p></section>
+
+<div class="section-label">03 / Broadcast Reveal</div>
+<section class="type-clock">
+  <div class="type-clock-word">RE</div>
+  <div class="type-clock-word outline">VEAL</div>
+  <p>Split-word stack adds rhythm before the final media block. Dramatic enough to hold between videos.</p>
+</section>
+<section class="video"><p class="caption">process_03.mp4 / launch package</p></section>
+</body>
+</html>

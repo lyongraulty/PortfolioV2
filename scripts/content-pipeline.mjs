@@ -5,7 +5,6 @@ import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CONTENT_DIR = path.join(ROOT, "content");
 const WORKBOOK_DIR = path.join(CONTENT_DIR, "workbook");
-const GENERATED_DIR = path.join(CONTENT_DIR, "generated");
 const LOCAL_PROJECTS_MEDIA_DIR = path.join(ROOT, "public", "projects");
 
 const SOURCE_SITE_DATA = path.join(CONTENT_DIR, "site-data.json");
@@ -1015,11 +1014,10 @@ export async function buildGeneratedContentFromRows({
     pages: legacyPages,
   };
 
-  await fs.mkdir(GENERATED_DIR, { recursive: true });
-  await fs.writeFile(path.join(GENERATED_DIR, "project-content.json"), `${JSON.stringify(projectContent, null, 2)}\n`, "utf8");
-  await fs.writeFile(path.join(GENERATED_DIR, "site-data.json"), `${JSON.stringify(legacySiteData, null, 2)}\n`, "utf8");
+  await fs.writeFile(path.join(CONTENT_DIR, "project-content.json"), `${JSON.stringify(projectContent, null, 2)}\n`, "utf8");
+  await fs.writeFile(path.join(CONTENT_DIR, "site-data.json"), `${JSON.stringify(legacySiteData, null, 2)}\n`, "utf8");
   await fs.writeFile(
-    path.join(GENERATED_DIR, "content-errors.json"),
+    path.join(CONTENT_DIR, "archive", "content-errors.json"),
     `${JSON.stringify({ generated_at: generatedAt, warnings }, null, 2)}\n`,
     "utf8",
   );

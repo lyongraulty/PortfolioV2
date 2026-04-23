@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colossal — Concept A: Specimen</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #080808;
+    --white: #f2f0eb;
+    --accent: #E8380A;
+    --mono: "PT Mono", "Courier New", monospace;
+    --display: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+    --rule: rgba(242,240,235,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--mono);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    height: 52px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(1.5rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--rule);
+    background: rgba(8,8,8,0.92);
+    backdrop-filter: blur(10px);
+  }
+  .nav-arrow {
+    font-family: var(--mono); font-size: 18px;
+    color: var(--white); opacity: 0.4;
+    cursor: pointer; transition: opacity .15s;
+    letter-spacing: 0; padding: 0 .5rem;
+  }
+  .nav-arrow:hover { opacity: 1; }
+  .nav-center {
+    display: flex; align-items: center; gap: 2.5rem;
+  }
+  .nav-close {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--white);
+    border: 1px solid rgba(242,240,235,0.3);
+    padding: .4rem 1rem; border-radius: 2px;
+    cursor: pointer; transition: background .15s, color .15s;
+  }
+  .nav-close:hover { background: var(--white); color: var(--black); }
+  .nav-share {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(242,240,235,0.45);
+    cursor: pointer; transition: color .15s;
+  }
+  .nav-share:hover { color: var(--white); }
+
+  /* ── HEADER ── */
+  .header {
+    padding-top: 52px;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* Grain texture overlay */
+  .header::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+    background-size: 200px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Ruler lines — decorative */
+  .header-ruler {
+    position: absolute; top: 52px; left: 0; right: 0;
+    height: 1px; background: var(--rule); z-index: 2;
+  }
+  .header-ruler::after {
+    content: "";
+    position: absolute; top: 0; left: clamp(1.5rem, 4vw, 3rem);
+    width: 60%; height: 40vh;
+    border-left: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+  }
+
+  .header-meta {
+    position: absolute; top: calc(52px + 2rem); right: clamp(1.5rem, 4vw, 3rem);
+    z-index: 3;
+    display: flex; flex-direction: column; gap: .5rem;
+    text-align: right;
+  }
+  .header-meta-label {
+    font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
+    color: rgba(242,240,235,0.3);
+  }
+  .header-meta-value {
+    font-size: 11px; letter-spacing: .06em;
+    color: rgba(242,240,235,0.6);
+  }
+
+  .header-taxonomy {
+    position: absolute; top: calc(52px + 2rem); left: clamp(1.5rem, 4vw, 3rem);
+    z-index: 3;
+  }
+  .header-taxonomy p {
+    font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+    color: rgba(242,240,235,0.25);
+    margin-bottom: .3rem;
+  }
+  .header-taxonomy .binomial {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    color: rgba(242,240,235,0.5);
+    letter-spacing: .02em;
+  }
+
+  .header-body {
+    position: relative; z-index: 3;
+    padding: 0 clamp(1.5rem, 4vw, 3rem) clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .header-eyebrow {
+    font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.2rem;
+  }
+
+  .header-title {
+    font-family: var(--display); font-weight: 900;
+    font-size: clamp(3.5rem, 11vw, 10rem);
+    line-height: 0.88;
+    letter-spacing: -.03em;
+    text-transform: uppercase;
+    color: var(--white);
+    max-width: 16ch;
+  }
+
+  .header-title em {
+    display: block;
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .header-index {
+    position: absolute; bottom: clamp(2.5rem, 5vw, 4rem); right: clamp(1.5rem, 4vw, 3rem);
+    font-family: var(--display); font-weight: 900;
+    font-size: clamp(5rem, 16vw, 14rem);
+    line-height: 1; letter-spacing: -.04em;
+    color: rgba(242,240,235,0.04);
+    z-index: 2;
+    user-select: none;
+  }
+
+  /* ── SHARED ── */
+  .section-label {
+    display: flex; align-items: center; gap: 1.2rem;
+    padding: 1.2rem clamp(1.5rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--rule);
+    font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+    color: rgba(242,240,235,0.25);
+  }
+  .section-label::after {
+    content: "";
+    flex: 1; height: 1px;
+    background: var(--rule);
+  }
+
+  /* ── VIDEO BLOCK ── */
+  .video-block {
+    position: relative;
+    border-bottom: 1px solid var(--rule);
+  }
+  .video-block.full {
+    aspect-ratio: 16/9;
+  }
+  .video-block.contained {
+    padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .video-frame {
+    width: 100%; aspect-ratio: 16/9;
+    background: #111;
+    background-image: url('mockup/02_colossal.jpg');
+    background-size: cover; background-position: center;
+    position: relative;
+  }
+  .video-block.full .video-frame {
+    aspect-ratio: unset;
+    position: absolute; inset: 0;
+  }
+  .video-block.full { min-height: 56vw; }
+
+  .video-caption {
+    position: absolute; bottom: 1.2rem; right: 1.5rem;
+    font-size: 9px; letter-spacing: .12em; text-transform: uppercase;
+    color: rgba(242,240,235,0.3);
+  }
+
+  /* ── TYPE CLOCK — large specimen label ── */
+  .type-clock {
+    padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--rule);
+    position: relative; overflow: hidden;
+  }
+
+  /* Measurement tick marks */
+  .type-clock::before {
+    content: "";
+    position: absolute; top: 0; left: clamp(1.5rem, 4vw, 3rem);
+    right: clamp(1.5rem, 4vw, 3rem);
+    height: 100%;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        var(--rule) 0,
+        var(--rule) 1px,
+        transparent 1px,
+        transparent 12.5%
+      );
+    pointer-events: none;
+  }
+
+  .type-clock-word {
+    font-family: var(--display); font-weight: 900;
+    font-size: clamp(5rem, 18vw, 18rem);
+    line-height: 0.85;
+    letter-spacing: -.04em;
+    text-transform: uppercase;
+    color: var(--white);
+    position: relative; z-index: 1;
+  }
+
+  .type-clock-word.ghost {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(242,240,235,0.15);
+  }
+
+  .type-clock-word.accent { color: var(--accent); }
+
+  .type-clock-annotation {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-top: 2rem;
+    position: relative; z-index: 1;
+  }
+  .type-clock-body {
+    font-size: clamp(12px, 1.5vw, 14px);
+    line-height: 1.85;
+    color: rgba(242,240,235,0.65);
+    max-width: 52ch;
+  }
+  .type-clock-data {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .type-clock-data dt {
+    font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(242,240,235,0.3); margin-bottom: .2rem;
+  }
+  .type-clock-data dd {
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+    font-family: var(--display); font-weight: 900;
+    letter-spacing: -.02em; line-height: 1;
+    color: var(--white);
+  }
+  .type-clock-data dd small {
+    font-size: .35em; letter-spacing: .08em;
+    color: rgba(242,240,235,0.4);
+    font-family: var(--mono); font-weight: 400;
+  }
+
+  /* ── SPECIMEN STRIP — horizontal scrolling data row ── */
+  .specimen-strip {
+    border-bottom: 1px solid var(--rule);
+    overflow: hidden; white-space: nowrap;
+    padding: .9rem 0;
+    background: rgba(232,56,10,0.06);
+  }
+  .specimen-strip-inner {
+    display: inline-flex; gap: 3rem;
+    animation: ticker 20s linear infinite;
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .specimen-strip span {
+    font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(242,240,235,0.3);
+  }
+  .specimen-strip strong {
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  /* ── TWO-COLUMN TYPE ── */
+  .two-col {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--rule);
+  }
+  .two-col-cell {
+    padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 4vw, 3rem);
+    position: relative;
+  }
+  .two-col-cell + .two-col-cell {
+    border-left: 1px solid var(--rule);
+  }
+  .two-col-label {
+    font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
+    color: rgba(242,240,235,0.25); margin-bottom: 1.5rem;
+  }
+  .two-col-text {
+    font-size: clamp(13px, 1.6vw, 15px);
+    line-height: 1.9; color: rgba(242,240,235,0.65);
+  }
+
+  /* ── CREDITS ── */
+  .credits {
+    padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 4vw, 3rem);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 2.5rem;
+  }
+  .credit-item dt {
+    font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
+    color: rgba(242,240,235,0.25); margin-bottom: .4rem;
+  }
+  .credit-item dd {
+    font-size: 13px; line-height: 1.6;
+    color: rgba(242,240,235,0.7);
+  }
+
+  /* ── FOOTER NAV ── */
+  .footer-nav {
+    border-top: 1px solid var(--rule);
+    display: grid; grid-template-columns: 1fr 1fr;
+  }
+  .footer-nav-item {
+    padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3rem);
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .footer-nav-item:hover { background: rgba(242,240,235,0.03); }
+  .footer-nav-item + .footer-nav-item {
+    border-left: 1px solid var(--rule);
+    text-align: right;
+  }
+  .footer-nav-dir {
+    font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
+    color: rgba(242,240,235,0.25); margin-bottom: .8rem;
+  }
+  .footer-nav-title {
+    font-family: var(--display); font-weight: 900;
+    font-size: clamp(1.2rem, 3vw, 2.2rem);
+    text-transform: uppercase; letter-spacing: -.01em;
+    color: var(--white);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-arrow">&#8592;</span>
+  <div class="nav-center">
+    <span class="nav-close">Close</span>
+    <span class="nav-share">Share</span>
+  </div>
+  <span class="nav-arrow">&#8594;</span>
+</nav>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-ruler"></div>
+
+  <div class="header-taxonomy">
+    <p>Genus / Species</p>
+    <span class="binomial">Aenocyon dirus</span>
+  </div>
+
+  <div class="header-meta">
+    <div>
+      <div class="header-meta-label">Client</div>
+      <div class="header-meta-value">Colossal Biosciences</div>
+    </div>
+    <div>
+      <div class="header-meta-label">Year</div>
+      <div class="header-meta-value">2025</div>
+    </div>
+    <div>
+      <div class="header-meta-label">Studio</div>
+      <div class="header-meta-value">Belle Epoch</div>
+    </div>
+  </div>
+
+  <div class="header-body">
+    <div class="header-eyebrow">02 — Science-Tech Design</div>
+    <h1 class="header-title">
+      Colossal<br>
+      <em>Dire Wolf</em>
+    </h1>
+  </div>
+
+  <div class="header-index">02</div>
+</header>
+
+<!-- SPECIMEN STRIP -->
+<div class="specimen-strip">
+  <div class="specimen-strip-inner">
+    <span>Pleistocene epoch</span>
+    <strong>/ De-extinction /</strong>
+    <span>Bioacoustic visualization</span>
+    <strong>/ Motion Design /</strong>
+    <span>Colossal Biosciences</span>
+    <strong>/ Belle Epoch /</strong>
+    <span>Skull reconstruction</span>
+    <strong>/ 2025 /</strong>
+    <span>Aenocyon dirus</span>
+    <strong>/ Documentary graphics /</strong>
+    <span>Pleistocene epoch</span>
+    <strong>/ De-extinction /</strong>
+    <span>Bioacoustic visualization</span>
+    <strong>/ Motion Design /</strong>
+    <span>Colossal Biosciences</span>
+    <strong>/ Belle Epoch /</strong>
+    <span>Skull reconstruction</span>
+    <strong>/ 2025 /</strong>
+    <span>Aenocyon dirus</span>
+    <strong>/ Documentary graphics /</strong>
+  </div>
+</div>
+
+<!-- SECTION 1 — TYPE CLOCK: SKULL -->
+<div class="section-label">01 — Skull Reconstruction</div>
+<div class="type-clock">
+  <div class="type-clock-word ghost">SKULL</div>
+  <div class="type-clock-annotation">
+    <p class="type-clock-body">
+      Three-dimensional reconstruction of the dire wolf skull from fossil record — built frame by frame, surface by surface. Every ridge and suture rendered with anatomical precision, then given motion language that communicates the animal's extinct presence.
+    </p>
+    <dl class="type-clock-data">
+      <dt>Specimens analyzed</dt>
+      <dd>4,000<small> fossils</small></dd>
+    </dl>
+  </div>
+</div>
+
+<!-- VIDEO 1 — FULL BLEED -->
+<div class="video-block full">
+  <div class="video-frame"></div>
+  <div class="video-caption">process-01.mp4 — skull reconstruction</div>
+</div>
+
+<!-- SECTION 2 — TYPE CLOCK: SOUND -->
+<div class="section-label">02 — Bioacoustic Data</div>
+<div class="type-clock">
+  <div class="type-clock-word accent">SOUND</div>
+  <div class="type-clock-annotation">
+    <p class="type-clock-body">
+      What does an extinct apex predator sound like? Bioacoustic modeling from living relatives gave us data. Motion design gave it form — frequency bands rendered as flowing geometry, waveforms animated to the underlying science.
+    </p>
+    <dl class="type-clock-data">
+      <dt>Frequency range</dt>
+      <dd>80<small> Hz</small></dd>
+    </dl>
+  </div>
+</div>
+
+<!-- VIDEO 2 -->
+<div class="video-block contained">
+  <div class="video-frame"></div>
+  <div class="video-caption">process-02.mp4 — bioacoustic visualization</div>
+</div>
+
+<!-- SECTION 3 — TWO COL BREAK -->
+<div class="section-label">03 — Lab Systems</div>
+<div class="two-col">
+  <div class="two-col-cell">
+    <div class="type-clock-word" style="font-size:clamp(3rem,10vw,9rem);line-height:.85;letter-spacing:-.03em;">LAB<br>SYS<br><span style="color:rgba(242,240,235,0.12);-webkit-text-stroke:1px rgba(242,240,235,0.15)">TEM</span></div>
+  </div>
+  <div class="two-col-cell">
+    <div class="two-col-label">Motion Design — Lab System UI</div>
+    <p class="two-col-text">
+      Branded animation extensions for Colossal's internal lab systems — motion language that carries the weight of the scientific work happening inside those walls. Consistent visual logic across screens, readouts, and data states.
+    </p>
+    <br>
+    <p class="two-col-text" style="color:rgba(242,240,235,0.35);font-size:12px;">
+      The challenge: build a motion system rigorous enough for scientists, expressive enough for media. Every transition earns its place.
+    </p>
+  </div>
+</div>
+
+<!-- VIDEO 3 -->
+<div class="video-block full">
+  <div class="video-frame"></div>
+  <div class="video-caption">process-03.mp4 — lab system UI</div>
+</div>
+
+<!-- SECTION 4 — TYPE CLOCK: REVEAL -->
+<div class="section-label">04 — Reveal</div>
+<div class="type-clock" style="padding-bottom:clamp(6rem,12vw,12rem);">
+  <div class="type-clock-word">RE</div>
+  <div class="type-clock-word ghost" style="text-align:right;">VEAL</div>
+  <div class="type-clock-annotation" style="margin-top:3rem;">
+    <p class="type-clock-body">
+      Documentary graphics and broadcast package for the global Dire Wolf reveal — the moment Colossal's work went public. A motion identity that could hold up under the weight of the story.
+    </p>
+  </div>
+</div>
+
+<!-- VIDEO 4 -->
+<div class="video-block full">
+  <div class="video-frame"></div>
+  <div class="video-caption">process-04.mp4 — reveal package</div>
+</div>
+
+<!-- CREDITS -->
+<div class="section-label">Credits</div>
+<dl class="credits">
+  <div class="credit-item">
+    <dt>Client</dt>
+    <dd>Colossal Biosciences</dd>
+  </div>
+  <div class="credit-item">
+    <dt>Role</dt>
+    <dd>Motion Designer<br>Title Design</dd>
+  </div>
+  <div class="credit-item">
+    <dt>Studio</dt>
+    <dd>Belle Epoch</dd>
+  </div>
+  <div class="credit-item">
+    <dt>Year</dt>
+    <dd>2025</dd>
+  </div>
+  <div class="credit-item">
+    <dt>Category</dt>
+    <dd>Science-Tech<br>Design</dd>
+  </div>
+</dl>
+
+<!-- FOOTER NAV -->
+<nav class="footer-nav">
+  <div class="footer-nav-item">
+    <div class="footer-nav-dir">&#8592; Previous</div>
+    <div class="footer-nav-title">Texas Monthly</div>
+  </div>
+  <div class="footer-nav-item">
+    <div class="footer-nav-dir">Next &#8594;</div>
+    <div class="footer-nav-title">Reebok</div>
+  </div>
+</nav>
+
+</body>
+</html>

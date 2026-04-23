@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=PT+Mono&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f6f1e7;
+      --fg: #101010;
+      --border: rgba(16, 16, 16, 0.1);
+      --border-mid: rgba(16, 16, 16, 0.2);
+      --muted: rgba(16, 16, 16, 0.48);
+      --subtle: rgba(16, 16, 16, 0.3);
+      --lines: linear-gradient(to bottom, rgba(16, 16, 16, 0.03) 1px, transparent 1px);
+      --lines-size: 100% 4px;
+      --font-display: 'Archivo Black', 'Arial Black', sans-serif;
+      --font-body: 'PT Mono', monospace;
+      --pad: clamp(1.4rem, 3vw, 2.2rem);
+    }
+
+    html, body {
+      background: #0a0a0a;
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-size: 13px;
+      line-height: 1.6;
+      min-height: 100svh;
+    }
+
+    /* ── fake page behind ── */
+    .fake-page {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 6vw, 4rem);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: rgba(255,255,255,0.06);
+      user-select: none;
+    }
+
+    /* ── overlay backdrop ── */
+    .window-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 6, 8, 0.86);
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      overflow: auto;
+    }
+
+    /* ── panel: flex column so inner can fill height ── */
+    .window-panel {
+      position: relative;
+      width: min(860px, 100%);
+      min-height: 70vh;
+      max-height: calc(100vh - 2rem);
+      background: var(--bg);
+      background-image: var(--lines);
+      background-size: var(--lines-size);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* grain */
+    .window-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.07;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+
+    /* ── close button ── */
+    .window-close {
+      position: absolute;
+      top: clamp(0.2rem, 1vw, 0.35rem);
+      right: clamp(0.2rem, 1vw, 0.35rem);
+      width: clamp(1.6rem, 5vw, 2rem);
+      height: clamp(1.6rem, 5vw, 2rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      color: var(--fg);
+      cursor: pointer;
+      z-index: 200;
+      transition: background 150ms ease, color 150ms ease;
+    }
+
+    .window-close:hover { background: var(--fg); color: var(--bg); }
+
+    .window-close::before,
+    .window-close::after {
+      content: "";
+      position: absolute;
+      width: clamp(0.75rem, 2.6vw, 0.9rem);
+      height: 1.5px;
+      background: currentColor;
+      border-radius: 999px;
+    }
+
+    .window-close::before { transform: rotate(45deg); }
+    .window-close::after  { transform: rotate(-45deg); }
+
+    /* ── system bar ── */
+    .system-bar {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.72rem calc(var(--pad) + 5px) 0.72rem var(--pad);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+      background: #E8380A;
+    }
+
+    .system-bar p {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    /* ── contact-inner fills remaining panel height ── */
+    .contact-inner {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .contact-inner::-webkit-scrollbar { display: none; }
+
+    /* ── copy panel ── */
+    .copy-panel {
+      padding: var(--pad);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .kicker {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 0.94;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 1.6rem;
+      color: var(--fg);
+    }
+
+    .copy-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      color: rgba(16, 16, 16, 0.82);
+      font-size: 12px;
+      line-height: 1.75;
+      margin-bottom: 1.6rem;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border-mid);
+      margin: 1.2rem 0;
+    }
+
+    .email-link {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--fg);
+      text-decoration: none;
+      margin-bottom: 0.75rem;
+      transition: color 0.18s;
+    }
+
+    .email-link:hover { color: var(--muted); }
+
+    .copy-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .copy-note {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #E8380A;
+      animation: fadeIn 180ms ease;
+    }
+
+    /* socials pinned to bottom via margin-top: auto on a flex column */
+    .socials {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: auto;
+      padding-top: 1.6rem;
+    }
+
+    .socials .btn {
+      padding: 0.3rem 0.55rem;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      border-color: var(--border-mid);
+      color: var(--muted);
+    }
+
+    .socials .btn:hover {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+    }
+
+    /* ── form panel ── */
+    .form-panel {
+      padding: var(--pad);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-label-bar {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg);
+      margin-bottom: 1.6rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border);
+      padding: 0.9rem 0;
+      transition: border-top-color 0.15s;
+    }
+
+    .field:last-of-type { border-bottom: 1px solid var(--border); }
+    .field:focus-within { border-top-color: rgba(16,16,16,0.4); }
+
+    .field label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg);
+      margin-bottom: 0.4rem;
+    }
+
+    .field input,
+    .field textarea {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-size: 13px;
+      line-height: 1.5;
+      resize: none;
+      width: 100%;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder { color: var(--subtle); }
+
+    .field textarea { min-height: 100px; }
+
+    /* ── submit ── */
+    .submit-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 1.2rem;
+    }
+
+    /* ── shared button ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-mid);
+      border-radius: 7px;
+      padding: 0.56rem 0.9rem;
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg);
+      background: transparent;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:hover, .btn:focus-visible {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+    }
+
+    .btn:disabled { opacity: 0.4; cursor: default; pointer-events: none; }
+
+    .form-status {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    .form-status.is-error { color: #E8380A; }
+
+    /* ── animations ── */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(3px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── responsive ── */
+    @media (max-width: 620px) {
+      .contact-inner { grid-template-columns: 1fr; }
+      .copy-panel { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="fake-page">Projects</div>
+
+  <div class="window-overlay" id="overlay" onclick="handleBackdropClick(event)">
+    <div class="window-panel">
+      <button class="window-close" type="button" aria-label="Close" onclick="closeOverlay()"></button>
+
+      <div class="system-bar">
+        <p>Contact</p>
+        <p>Austin, TX &mdash; Remote available</p>
+      </div>
+
+      <div class="contact-inner">
+
+        <!-- LEFT: copy -->
+        <div class="copy-panel">
+          <h1 class="title">Let&rsquo;s<br>talk</h1>
+
+          <div class="copy-body">
+            <p>Get in touch to inquire about pricing details or arrange a booking.</p>
+            <p>I&rsquo;d love to hear about your goals and show you how motion design can fit into your strategy.</p>
+            <p>I work mostly day rate but can arrange a project-based bid.</p>
+            <p>Remote or in studio in the Austin, TX area.</p>
+          </div>
+
+          <div class="divider"></div>
+
+          <a class="email-link" href="mailto:hello@lyongraulty.com">hello@lyongraulty.com</a>
+
+          <div class="copy-row">
+            <button class="btn" type="button" onclick="handleCopy()">Copy Email</button>
+            <span class="copy-note" id="copy-note" style="display:none;">Copied!</span>
+          </div>
+
+          <div class="socials">
+            <a class="btn" href="#">Instagram</a>
+            <a class="btn" href="#">LinkedIn</a>
+            <a class="btn" href="#">Pinterest</a>
+          </div>
+        </div>
+
+        <!-- RIGHT: form -->
+        <div class="form-panel">
+          <p class="form-label-bar">Send a message</p>
+
+          <form class="contact-form" aria-label="Contact form" onsubmit="handleSubmit(event)">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required minlength="2" />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="your@email.com" required />
+            </div>
+            <div class="field">
+              <label for="subject">Subject</label>
+              <input id="subject" name="subject" type="text" autocomplete="off" placeholder="What&rsquo;s this about?" required minlength="2" />
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4" placeholder="Tell me about the project..." required minlength="10"></textarea>
+            </div>
+
+            <div class="submit-row">
+              <button class="btn" type="submit" id="submit-btn">Send Message</button>
+              <span class="form-status" id="form-status" role="status" aria-live="polite"></span>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let copyTimeout = null;
+
+    function closeOverlay() {
+      document.getElementById('overlay').style.display = 'none';
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target === e.currentTarget) closeOverlay();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeOverlay();
+    });
+
+    function handleCopy() {
+      navigator.clipboard.writeText('hello@lyongraulty.com').catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = 'hello@lyongraulty.com';
+        ta.style.cssText = 'position:absolute;left:-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      });
+
+      const note = document.getElementById('copy-note');
+      note.style.display = 'inline';
+      clearTimeout(copyTimeout);
+      copyTimeout = setTimeout(() => { note.style.display = 'none'; }, 1600);
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.currentTarget;
+      const btn = document.getElementById('submit-btn');
+      const status = document.getElementById('form-status');
+
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      status.textContent = '';
+      status.className = 'form-status';
+
+      await new Promise(r => setTimeout(r, 1000));
+
+      form.reset();
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+      status.textContent = 'Message sent. Thanks for reaching out.';
+    }
+  </script>
+
+</body>
+</html>

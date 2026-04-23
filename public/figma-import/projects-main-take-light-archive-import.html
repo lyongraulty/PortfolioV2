@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects Main Take - Light Archive (Figma Import Safe)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --paper: #f6f1e7;
+      --ink: #101010;
+      --muted: rgba(16, 16, 16, 0.62);
+      --rule: rgba(16, 16, 16, 0.16);
+      --accent: #b43a10;
+      --display: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+      --mono: "Courier New", Courier, monospace;
+    }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--mono);
+      line-height: 1.45;
+    }
+    .page {
+      width: min(1520px, 100%);
+      margin: 0 auto;
+      border-left: 1px solid var(--rule);
+      border-right: 1px solid var(--rule);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(246, 241, 231, 0.9));
+    }
+    .nav {
+      height: 56px;
+      display: grid;
+      grid-template-columns: 32px 1fr 32px;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0 1.2rem;
+      border-bottom: 1px solid var(--rule);
+      background: rgba(246, 241, 231, 0.9);
+    }
+    .arrow {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--muted);
+    }
+    .nav-center {
+      display: flex;
+      justify-content: center;
+      gap: 0.45rem;
+    }
+    .chip {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      padding: 0.38rem 0.74rem;
+      background: rgba(255, 255, 255, 0.68);
+    }
+    .hero {
+      padding: 2.4rem 1.2rem 1.8rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero p {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(3rem, 10vw, 8.7rem);
+      line-height: 0.83;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+    }
+    .hero h1 span {
+      display: block;
+      font-size: 0.58em;
+      color: var(--accent);
+    }
+    .hero .copy {
+      margin-top: 1rem;
+      max-width: 78ch;
+      font-size: 13px;
+      line-height: 1.78;
+      color: rgba(16, 16, 16, 0.74);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .status {
+      padding: 0.72rem 1.2rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.4);
+    }
+    .section {
+      border-bottom: 1px solid var(--rule);
+    }
+    .label {
+      border-bottom: 1px solid var(--rule);
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      padding: 0.8rem 1.2rem;
+      background: rgba(255, 255, 255, 0.38);
+    }
+    .type-block {
+      padding: 1.3rem 1.2rem 1.55rem;
+    }
+    .meta {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+    .word {
+      margin-top: 0.35rem;
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 10vw, 8rem);
+      line-height: 0.84;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+    }
+    .word.alt {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(16, 16, 16, 0.32);
+      font-size: clamp(1.6rem, 6vw, 4.6rem);
+      line-height: 0.9;
+      margin-top: 0.1rem;
+    }
+    .desc {
+      margin-top: 0.95rem;
+      max-width: 72ch;
+      font-size: 13px;
+      line-height: 1.8;
+      color: rgba(16, 16, 16, 0.72);
+    }
+    .media {
+      position: relative;
+      min-height: clamp(260px, 48vw, 580px);
+      overflow: hidden;
+      border-top: 1px solid var(--rule);
+    }
+    .media.inset {
+      min-height: clamp(230px, 35vw, 480px);
+      margin: 1rem;
+      border: 1px solid var(--rule);
+    }
+    .media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.04) saturate(1.02);
+    }
+    .overlay {
+      position: absolute;
+      left: 1rem;
+      right: 1rem;
+      bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8rem;
+      color: #fff;
+    }
+    .overlay .tag {
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    }
+    .overlay .button {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      border-radius: 999px;
+      padding: 0.5rem 0.9rem;
+      background: rgba(0, 0, 0, 0.34);
+    }
+    .credits {
+      padding: 1.2rem;
+      border-top: 1px solid var(--rule);
+      background: rgba(255, 255, 255, 0.45);
+    }
+    .credits h3 {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .credits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem 1.2rem;
+    }
+    .credits-grid p {
+      font-size: 12px;
+      line-height: 1.55;
+    }
+    @media (max-width: 880px) {
+      .status {
+        flex-direction: column;
+      }
+      .credits-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-center {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <span class="arrow">&lt;</span>
+      <div class="nav-center">
+        <span class="chip">Close</span>
+        <span class="chip">Share</span>
+      </div>
+      <span class="arrow">&gt;</span>
+    </nav>
+
+    <header class="hero">
+      <p>Project Selection / Archive Light / Figma Safe</p>
+      <h1>Colossal <span>Project Specimens</span></h1>
+      <p class="copy">
+        This piece was an exciting challenge: visualizing breakthrough science in a way that felt both cinematic and clear.
+        From microscopic cell animations to bold typographic transitions, every moment had to balance precision with energy.
+        I worked closely with the team to craft motion that contextualizes the lab footage and interviews without overwhelming it -
+        a rewarding push to make complexity feel intuitive and alive.
+      </p>
+    </header>
+
+    <div class="status">
+      <span>8 live project pages loaded</span>
+      <span>Open any specimen to preview split modal behavior</span>
+    </div>
+
+    <section class="section">
+      <div class="label"><span>01 / Science-Tech Design</span><span>Page 03</span></div>
+      <div class="type-block">
+        <p class="meta">Colossal Biosciences</p>
+        <h2 class="word">Dire Wolf</h2>
+        <p class="word alt">Making Of</p>
+        <p class="desc">Skull reconstruction, bioacoustic mapping, lab systems, and reveal graphics composed as one clear narrative.</p>
+      </div>
+      <div class="media">
+        <img src="/mockup/02_colossal.jpg" alt="Colossal project still" />
+        <div class="overlay">
+          <span class="tag">Specimen 01</span>
+          <span class="button">View Project</span>
+        </div>
+      </div>
+      <div class="credits">
+        <h3>Credits</h3>
+        <div class="credits-grid">
+          <p>Creative Lead: Chris Klee</p>
+          <p>Director: Ryan Padgett</p>
+          <p>Visual Designer: Nathan Walker</p>
+          <p>Editor: Kaley Hanson</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="label"><span>02 / Editorial Animation</span><span>Page 02</span></div>
+      <div class="type-block">
+        <p class="meta">Texas Monthly</p>
+        <h2 class="word">Cover</h2>
+        <p class="word alt">Motion</p>
+        <p class="desc">Animated editorial covers and custom illustrations with strong pacing between title typography and artwork reveals.</p>
+      </div>
+      <div class="media inset">
+        <img src="/mockup/01_texas_monthly.jpg" alt="Texas Monthly project still" />
+        <div class="overlay">
+          <span class="tag">Specimen 02</span>
+          <span class="button">View Project</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="label"><span>03 / 3D Brand</span><span>Page 04</span></div>
+      <div class="type-block">
+        <p class="meta">Reebok Sustainability</p>
+        <h2 class="word">Material</h2>
+        <p class="word alt">Systems</p>
+        <p class="desc">Tactile simulations and smooth 3D transitions framed with restrained annotation copy and high-contrast type clocks.</p>
+      </div>
+      <div class="media">
+        <img src="/mockup/03_reebok.jpg" alt="Reebok project still" />
+        <div class="overlay">
+          <span class="tag">Specimen 03</span>
+          <span class="button">View Project</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="label"><span>04 / Character + Title Work</span><span>Pages 05-08</span></div>
+      <div class="type-block">
+        <p class="meta">Sellout / Meta / Anheuser-Busch / Drumwave / Lyft</p>
+        <h2 class="word">Motion</h2>
+        <p class="word alt">Library</p>
+        <p class="desc">Additional projects maintain the same framing system: numbered labels, dramatic type shifts, and clear call-to-action entry points.</p>
+      </div>
+      <div class="media inset">
+        <img src="/mockup/04_sellout.jpg" alt="Sellout project still" />
+        <div class="overlay">
+          <span class="tag">Specimen 04</span>
+          <span class="button">View Project</span>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

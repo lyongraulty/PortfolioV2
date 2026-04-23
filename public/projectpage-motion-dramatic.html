@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Page Motion - Dramatic</title>
+  <style>
+    :root { --enter: 390ms; --exit: 320ms; --inset: 68%; --xin: 44px; --xout: 46px; --yin: 28px; --bg:#0b0b0b; --fg:#fff; --rule:rgba(255,255,255,.22); --mono:"IBM Plex Mono","Courier New",monospace; --display:"Arial Black","Helvetica Neue",Arial,sans-serif; }
+    *{box-sizing:border-box} body{margin:0;font-family:var(--mono);background:#161616;color:var(--fg)}
+    .stage{min-height:100vh;display:grid;place-items:center;padding:2rem}.open-btn{border:1px solid #fff;color:#fff;background:transparent;text-transform:uppercase;letter-spacing:.14em;padding:.7rem 1rem;cursor:pointer}
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.3);display:none}.overlay.show{display:block}
+    .shell{position:fixed;inset:0;background:var(--bg);display:grid;grid-template-columns:minmax(280px,34vw) 1fr;grid-template-rows:56px 1fr;animation:enter var(--enter) cubic-bezier(.18,.84,.2,1)}
+    .shell.closing{animation:exit var(--exit) cubic-bezier(.7,0,.84,0)}
+    .nav{grid-column:1 / -1;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:auto 1fr auto;align-items:center;padding:0 1rem}
+    .center{justify-self:center;display:flex;gap:1rem}.btn{border:1px solid var(--rule);background:transparent;color:#fff;padding:.3rem .6rem;cursor:pointer}.share{border-color:transparent;color:rgba(255,255,255,.7)}
+    .side{border-right:1px solid var(--rule);padding:1.2rem}.index{letter-spacing:.14em;font-size:12px;opacity:.6} h1{margin:.5rem 0;font-family:var(--display);text-transform:uppercase;letter-spacing:-.04em;line-height:.9}
+    .main{padding:1rem;overflow:auto}.block{margin-bottom:1rem;border:1px solid var(--rule);background:#111;min-height:220px;display:grid;place-items:center}
+    @keyframes enter{from{clip-path:inset(0 0 0 var(--inset));transform:translateX(var(--xin));opacity:.94}to{clip-path:inset(0 0 0 0);transform:translateX(0);opacity:1}}
+    @keyframes exit{from{clip-path:inset(0 0 0 0);transform:translateX(0);opacity:1}to{clip-path:inset(0 0 0 var(--inset));transform:translateX(var(--xout));opacity:.94}}
+    @media (max-width:900px){.shell{grid-template-columns:1fr;grid-template-rows:56px auto 1fr}.side{border-right:0;border-bottom:1px solid var(--rule)}@keyframes enter{from{transform:translateY(var(--yin));opacity:0}to{transform:translateY(0);opacity:1}}@keyframes exit{from{transform:translateY(0);opacity:1}to{transform:translateY(var(--yin));opacity:0}}}
+  </style>
+</head>
+<body>
+  <main class="stage"><button class="open-btn" id="openBtn">Open Dramatic Motion</button></main>
+  <div class="overlay" id="overlay"><section class="shell" id="shell"><nav class="nav"><button class="btn">&lt;</button><div class="center"><button class="btn" id="closeBtn">Close</button><button class="btn share">Share</button></div><button class="btn">&gt;</button></nav><aside class="side"><p class="index">02.</p><h1>Colossal<br>Dire Wolf</h1></aside><section class="main"><div class="block">Media / Type Block A</div><div class="block">Media / Type Block B</div></section></section></div>
+  <script>
+    const overlay=document.getElementById("overlay"), shell=document.getElementById("shell");
+    document.getElementById("openBtn").addEventListener("click",()=>overlay.classList.add("show"));
+    document.getElementById("closeBtn").addEventListener("click",()=>{shell.classList.add("closing");setTimeout(()=>{overlay.classList.remove("show");shell.classList.remove("closing")},330);});
+  </script>
+</body>
+</html>

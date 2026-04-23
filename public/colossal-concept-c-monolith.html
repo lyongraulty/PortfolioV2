@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colossal — Concept C: Monolith</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #060606;
+    --white: #eeebe3;
+    --accent: #E8380A;
+    --mono: "PT Mono", "Courier New", monospace;
+    --display: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--mono);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    height: 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(1.5rem, 4vw, 3rem);
+    mix-blend-mode: difference;
+  }
+  .nav-arrow {
+    font-family: var(--mono); font-size: 18px;
+    color: var(--white); opacity: 0.5;
+    cursor: pointer; transition: opacity .15s;
+    user-select: none;
+  }
+  .nav-arrow:hover { opacity: 1; }
+  .nav-center { display: flex; align-items: center; gap: 2rem; }
+  .nav-close {
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--white); cursor: pointer;
+    padding: .3rem .8rem;
+    border: 1px solid rgba(238,235,227,0.35);
+    transition: background .15s, color .15s;
+  }
+  .nav-close:hover { background: var(--white); color: var(--black); }
+  .nav-share {
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: rgba(238,235,227,0.4);
+    cursor: pointer; transition: color .15s;
+  }
+  .nav-share:hover { color: var(--white); }
+
+  /* ── WORD SCREEN — full-viewport type slam ── */
+  .word-screen {
+    min-height: 100svh;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    padding-top: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .word-screen.invert {
+    background: var(--white);
+    color: var(--black);
+  }
+  .word-screen.dark {
+    background: var(--black);
+    color: var(--white);
+  }
+  .word-screen.accent-bg {
+    background: var(--accent);
+    color: var(--black);
+  }
+
+  /* The giant word fills the screen width */
+  .monolith-word {
+    font-family: var(--display);
+    text-transform: uppercase;
+    line-height: .82;
+    letter-spacing: -.03em;
+    display: block;
+    /* Scales to fill screen width — tuned per word */
+  }
+
+  .w-dire   { font-size: clamp(6rem, 28.5vw, 28.5vw); }
+  .w-wolf   { font-size: clamp(6rem, 35vw, 35vw); }
+  .w-skull  { font-size: clamp(6rem, 26vw, 26vw); }
+  .w-sound  { font-size: clamp(6rem, 26vw, 26vw); }
+  .w-lab    { font-size: clamp(6rem, 38vw, 38vw); }
+  .w-reveal { font-size: clamp(6rem, 22vw, 22vw); }
+
+  /* Thin counter in corner */
+  .screen-counter {
+    position: absolute;
+    bottom: clamp(1.5rem, 4vw, 3rem);
+    right: clamp(1.5rem, 4vw, 3rem);
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .18em; text-transform: uppercase;
+    opacity: .35;
+  }
+  .word-screen.invert .screen-counter { color: var(--black); }
+  .word-screen.dark .screen-counter   { color: var(--white); }
+  .word-screen.accent-bg .screen-counter { color: var(--black); }
+
+  /* Micro category label, top-left under nav */
+  .screen-label {
+    position: absolute;
+    top: calc(48px + 1.25rem);
+    left: clamp(1.5rem, 4vw, 3rem);
+    font-family: var(--mono); font-size: 9px;
+    letter-spacing: .2em; text-transform: uppercase;
+    opacity: .35;
+  }
+  .word-screen.invert .screen-label { color: var(--black); }
+  .word-screen.dark .screen-label   { color: var(--white); }
+  .word-screen.accent-bg .screen-label { color: var(--black); }
+
+  /* ── VIDEO BLOCK ── */
+  .video-block {
+    position: relative;
+    background: #000;
+    line-height: 0;
+  }
+
+  .video-wrap {
+    position: relative;
+    aspect-ratio: 16/9;
+    background: url("mockup/02_colossal.jpg") center/cover no-repeat;
+    overflow: hidden;
+  }
+  .video-overlay {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(6,6,6,0.38);
+  }
+  .play-ring {
+    width: 88px; height: 88px;
+    border: 1px solid rgba(238,235,227,0.5);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: border-color .2s, transform .2s;
+  }
+  .play-ring:hover { border-color: var(--white); transform: scale(1.06); }
+  .play-ring svg { width: 22px; height: 22px; fill: var(--white); margin-left: 4px; }
+
+  /* ── BODY SCREEN — type + copy after word slam ── */
+  .body-screen {
+    padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 4vw, 3rem);
+    position: relative;
+  }
+  .body-screen.invert {
+    background: var(--white);
+    color: var(--black);
+  }
+  .body-screen.dark {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  .body-copy {
+    max-width: 520px;
+    font-family: var(--mono); font-size: 14px;
+    line-height: 1.72;
+    opacity: .72;
+  }
+  .body-screen.dark .body-copy  { color: var(--white); }
+  .body-screen.invert .body-copy { color: var(--black); }
+
+  .body-stat-row {
+    display: flex; gap: 3rem; flex-wrap: wrap;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(6,6,6,0.12);
+  }
+  .body-screen.dark .body-stat-row { border-color: rgba(238,235,227,0.1); }
+
+  .body-stat { display: flex; flex-direction: column; gap: .25rem; }
+  .body-stat-val {
+    font-family: var(--display);
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    text-transform: uppercase; line-height: 1;
+    letter-spacing: -.02em;
+  }
+  .body-screen.invert .body-stat-val { color: var(--black); }
+  .body-screen.dark   .body-stat-val { color: var(--white); }
+
+  .body-stat-label {
+    font-family: var(--mono); font-size: 9px;
+    letter-spacing: .2em; text-transform: uppercase;
+    opacity: .45;
+  }
+
+  /* ── RULE ── */
+  .h-rule {
+    height: 1px;
+    background: rgba(238,235,227,0.08);
+  }
+  .h-rule.on-white { background: rgba(6,6,6,0.1); }
+
+  /* ── CREDITS ── */
+  .credits {
+    padding: clamp(3rem, 6vw, 6rem) clamp(1.5rem, 4vw, 3rem);
+    border-top: 1px solid rgba(238,235,227,0.08);
+  }
+  .credits-label {
+    font-family: var(--mono); font-size: 9px;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: rgba(238,235,227,0.3);
+    margin-bottom: 2.5rem;
+  }
+  .credits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.75rem 3rem;
+  }
+  .credit { display: flex; flex-direction: column; gap: .2rem; }
+  .credit-role {
+    font-family: var(--mono); font-size: 9px;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: rgba(238,235,227,0.35);
+  }
+  .credit-name {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--white);
+  }
+
+  /* ── FOOTER NAV ── */
+  .footer-nav {
+    display: flex; justify-content: space-between;
+    border-top: 1px solid rgba(238,235,227,0.08);
+  }
+  .footer-btn {
+    flex: 1;
+    padding: 2.5rem clamp(1.5rem, 4vw, 3rem);
+    display: flex; flex-direction: column; gap: .5rem;
+    cursor: pointer; text-decoration: none;
+    transition: background .15s;
+  }
+  .footer-btn:hover { background: rgba(238,235,227,0.04); }
+  .footer-btn.next { text-align: right; border-left: 1px solid rgba(238,235,227,0.08); }
+  .footer-dir {
+    font-family: var(--mono); font-size: 9px;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .footer-title {
+    font-family: var(--display);
+    font-size: clamp(1.2rem, 3vw, 2.2rem);
+    text-transform: uppercase; color: var(--white);
+    letter-spacing: -.01em;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-arrow">←</span>
+  <div class="nav-center">
+    <span class="nav-close">Close</span>
+    <span class="nav-share">Share</span>
+  </div>
+  <span class="nav-arrow">→</span>
+</nav>
+
+<!-- ════════════════════════════════════
+     HEADER — two stacked word screens
+════════════════════════════════════ -->
+<div class="word-screen dark">
+  <span class="screen-label">Colossal Biosciences — 2025</span>
+  <span class="monolith-word w-dire">Dire</span>
+  <span class="screen-counter">00</span>
+</div>
+
+<div class="word-screen invert">
+  <span class="monolith-word w-wolf">Wolf</span>
+  <span class="screen-counter">—</span>
+</div>
+
+<!-- ════════════════════════════════════
+     01 — SKULL
+════════════════════════════════════ -->
+<div class="word-screen dark">
+  <span class="screen-label">01 — Skull Reconstruction</span>
+  <span class="monolith-word w-skull">Skull</span>
+  <span class="screen-counter">01</span>
+</div>
+
+<div class="video-block">
+  <div class="video-wrap">
+    <div class="video-overlay">
+      <div class="play-ring">
+        <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="body-screen invert">
+  <p class="body-copy">
+    4,000 fossil specimens. CT-derived geometry. A cranial structure rebuilt from extinction —
+    bone by bone, rendered in full photorealism for the world to see.
+  </p>
+  <div class="body-stat-row" style="border-top:1px solid rgba(6,6,6,0.1)">
+    <div class="body-stat">
+      <span class="body-stat-val">4K</span>
+      <span class="body-stat-label">Fossil specimens</span>
+    </div>
+    <div class="body-stat">
+      <span class="body-stat-val">10K</span>
+      <span class="body-stat-label">Years extinct</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     02 — SOUND
+════════════════════════════════════ -->
+<div class="word-screen accent-bg">
+  <span class="screen-label">02 — Bioacoustic Data</span>
+  <span class="monolith-word w-sound">Sound</span>
+  <span class="screen-counter">02</span>
+</div>
+
+<div class="video-block">
+  <div class="video-wrap">
+    <div class="video-overlay">
+      <div class="play-ring">
+        <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="body-screen dark">
+  <p class="body-copy">
+    Bioacoustic data made visible — frequency spectrograms, territory range animations,
+    and waveform geometry derived from modern wolf relatives. The howl, reconstructed.
+  </p>
+  <div class="body-stat-row">
+    <div class="body-stat">
+      <span class="body-stat-val">80Hz</span>
+      <span class="body-stat-label">Low frequency</span>
+    </div>
+    <div class="body-stat">
+      <span class="body-stat-val">1.2K</span>
+      <span class="body-stat-label">High frequency (Hz)</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     03 — LAB
+════════════════════════════════════ -->
+<div class="word-screen invert">
+  <span class="screen-label">03 — Lab System Design</span>
+  <span class="monolith-word w-lab">Lab</span>
+  <span class="screen-counter">03</span>
+</div>
+
+<div class="video-block">
+  <div class="video-wrap">
+    <div class="video-overlay">
+      <div class="play-ring">
+        <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="body-screen invert">
+  <p class="body-copy">
+    Instrument interfaces, sample tracking UIs, procedural data displays — a visual language for
+    Colossal's laboratory environments designed to feel like they belong inside the actual science.
+  </p>
+  <div class="body-stat-row" style="border-top:1px solid rgba(6,6,6,0.1)">
+    <div class="body-stat">
+      <span class="body-stat-val">12</span>
+      <span class="body-stat-label">System designs</span>
+    </div>
+    <div class="body-stat">
+      <span class="body-stat-val">UI+</span>
+      <span class="body-stat-label">Motion</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     04 — REVEAL
+════════════════════════════════════ -->
+<div class="word-screen dark">
+  <span class="screen-label">04 — Documentary Graphics</span>
+  <span class="monolith-word w-reveal">Reveal</span>
+  <span class="screen-counter">04</span>
+</div>
+
+<div class="video-block">
+  <div class="video-wrap">
+    <div class="video-overlay">
+      <div class="play-ring">
+        <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="body-screen dark">
+  <p class="body-copy">
+    Lower thirds, title cards, timeline animations, and the final reveal sequence —
+    broadcast-ready motion graphics for the global press launch seen by millions.
+  </p>
+</div>
+
+<!-- ── CREDITS ── -->
+<div class="credits">
+  <div class="credits-label">Credits</div>
+  <div class="credits-grid">
+    <div class="credit">
+      <span class="credit-role">Motion Design</span>
+      <span class="credit-name">Lyon Graulty</span>
+    </div>
+    <div class="credit">
+      <span class="credit-role">Client</span>
+      <span class="credit-name">Colossal Biosciences</span>
+    </div>
+    <div class="credit">
+      <span class="credit-role">3D / VFX</span>
+      <span class="credit-name">Lyon Graulty</span>
+    </div>
+    <div class="credit">
+      <span class="credit-role">Year</span>
+      <span class="credit-name">2025</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER NAV ── -->
+<nav class="footer-nav">
+  <a class="footer-btn" href="#">
+    <span class="footer-dir">← Prev</span>
+    <span class="footer-title">Texas Monthly</span>
+  </a>
+  <a class="footer-btn next" href="#">
+    <span class="footer-dir">Next →</span>
+    <span class="footer-title">Reebok</span>
+  </a>
+</nav>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Subhead Type Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=PT+Mono&family=Archivo+Black&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #f6f1e7;
+    color: #101010;
+    font-family: "PT Mono", "Courier New", monospace;
+    padding: 3rem 4rem;
+  }
+
+  .page-label {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #e8380a;
+    margin-bottom: 3rem;
+  }
+
+  .display-title {
+    font-family: "Archivo Black", "Arial Black", Arial, sans-serif;
+    font-size: clamp(2.8rem, 8.2vw, 7.6rem);
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: #101010;
+    margin-bottom: 4rem;
+  }
+
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem 5rem;
+  }
+
+  .option {
+    border-top: 1px solid rgba(16,16,16,0.12);
+    padding-top: 1.2rem;
+  }
+
+  .option-tag {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(16,16,16,0.3);
+    margin-bottom: 1.4rem;
+  }
+
+  .body {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(16, 16, 16, 0.65);
+    margin-top: 0.8rem;
+    max-width: 52ch;
+  }
+
+  /* ── OPTION A — current: 9px PT Mono red ── */
+  .sub-a {
+    font-family: "PT Mono", "Courier New", monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #e8380a;
+  }
+
+  /* ── OPTION B — 11px PT Mono red, slightly more presence ── */
+  .sub-b {
+    font-family: "PT Mono", "Courier New", monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #e8380a;
+  }
+
+  /* ── OPTION C — sectionBar scale (clamp ~14–17px) PT Mono red ── */
+  .sub-c {
+    font-family: "PT Mono", "Courier New", monospace;
+    font-size: clamp(0.86rem, 1.6vw, 1.08rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #e8380a;
+  }
+
+  /* ── OPTION D — Archivo Black 13px dark, no all-caps ── */
+  .sub-d {
+    font-family: "Archivo Black", "Arial Black", Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.01em;
+    color: #101010;
+  }
+
+  /* ── OPTION E — Archivo Black 13px red, all caps ── */
+  .sub-e {
+    font-family: "Archivo Black", "Arial Black", Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #e8380a;
+  }
+
+  /* ── OPTION F — PT Mono 13px dark, dimmed ── */
+  .sub-f {
+    font-family: "PT Mono", "Courier New", monospace;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(16,16,16,0.5);
+  }
+</style>
+</head>
+<body>
+
+  <p class="page-label">Editorial Animation · 2022–2025</p>
+  <h1 class="display-title">Texas Monthly</h1>
+
+  <div class="options">
+
+    <div class="option">
+      <p class="option-tag">A — current · 9px PT Mono red</p>
+      <p class="sub-a">Editorial Animation</p>
+      <p class="body">For this true crime piece, the work leaned more into tone. Moody, atmospheric animations that extend the feeling of the illustrations—letting moments linger, adding tension.</p>
+    </div>
+
+    <div class="option">
+      <p class="option-tag">B — 11px PT Mono red</p>
+      <p class="sub-b">Editorial Animation</p>
+      <p class="body">For this true crime piece, the work leaned more into tone. Moody, atmospheric animations that extend the feeling of the illustrations—letting moments linger, adding tension.</p>
+    </div>
+
+    <div class="option">
+      <p class="option-tag">C — sectionBar scale · ~14–17px PT Mono red</p>
+      <p class="sub-c">Editorial Animation</p>
+      <p class="body">For this true crime piece, the work leaned more into tone. Moody, atmospheric animations that extend the feeling of the illustrations—letting moments linger, adding tension.</p>
+    </div>
+
+    <div class="option">
+      <p class="option-tag">D — Archivo Black 13px dark</p>
+      <p class="sub-d">Editorial Animation</p>
+      <p class="body">For this true crime piece, the work leaned more into tone. Moody, atmospheric animations that extend the feeling of the illustrations—letting moments linger, adding tension.</p>
+    </div>
+
+    <div class="option">
+      <p class="option-tag">E — Archivo Black 13px red all-caps</p>
+      <p class="sub-e">Editorial Animation</p>
+      <p class="body">For this true crime piece, the work leaned more into tone. Moody, atmospheric animations that extend the feeling of the illustrations—letting moments linger, adding tension.</p>
+    </div>
+
+    <div class="option">
+      <p class="option-tag">F — 13px PT Mono dimmed dark</p>
+      <p class="sub-f">Editorial Animation</p>
+      <p class="body">For this true crime piece, the work leaned more into tone. Moody, atmospheric animations that extend the feeling of the illustrations—letting moments linger, adding tension.</p>
+    </div>
+
+  </div>
+
+</body>
+</html>

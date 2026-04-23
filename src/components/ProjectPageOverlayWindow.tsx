@@ -435,6 +435,139 @@ function isCreditsBlock(block: ProjectBlock): boolean {
   return title.includes("credit") || copy.includes("creative lead") || copy.includes("director") || copy.includes("editor");
 }
 
+// ─── SHARED LAYOUT PRIMITIVES ─────────────────────────────────────────────
+// Each primitive accepts `s` (a CSS module object) so signal / editorial /
+// contract themes share structure while keeping their own visual tokens.
+
+type CssModule = Record<string, string>;
+
+function ProjectTopNav({
+  s,
+  previousPage,
+  nextPage,
+  isReady,
+  shareState,
+  onPrev,
+  onClose,
+  onShare,
+  onNext,
+}: {
+  s: CssModule;
+  previousPage: number | null;
+  nextPage: number | null;
+  isReady: boolean;
+  shareState: "idle" | "copied" | "error";
+  onPrev: () => void;
+  onClose: () => void;
+  onShare: () => void;
+  onNext: () => void;
+}) {
+  return (
+    <nav className={s.topNav} aria-label="Project controls">
+      <button type="button" className={s.topNavBtn} onClick={onPrev} disabled={!previousPage || !isReady} aria-label="Previous project">
+        Prev
+      </button>
+      <button type="button" className={s.topNavBtn} onClick={onClose}>
+        Close
+      </button>
+      <button type="button" className={s.topNavBtn} onClick={onShare} disabled={!isReady}>
+        {shareState === "copied" ? "Copied" : shareState === "error" ? "Failed" : "Share"}
+      </button>
+      <button type="button" className={s.topNavBtn} onClick={onNext} disabled={!nextPage || !isReady} aria-label="Next project">
+        Next
+      </button>
+    </nav>
+  );
+}
+
+function ProjectTicker({ s, items }: { s: CssModule; items: string[] }) {
+  const doubled = [...items, ...items];
+  return (
+    <div className={s.ticker}>
+      <div className={s.tickerTrack}>
+        {doubled.map((t, i) => (
+          <span key={i} className={s.tickerItem}>{t}</span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ProjectSectionDivider({ s, label = "◆ CONTINUED ◆" }: { s: CssModule; label?: string }) {
+  const bar = "────────────────";
+  const items = [bar, label, bar, label, bar, label, bar, label, bar, label, bar, label];
+  return (
+    <div className={s.sectionTicker}>
+      <div className={s.sectionTickerTrack}>
+        {items.map((t, i) => (
+          <span key={i} className={`${s.sectionTickerItem}${i % 2 === 1 ? ` ${s.sectionTickerItemHi}` : ""}`}>{t}</span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ProjectCredits({
+  s,
+  label,
+  entries,
+}: {
+  s: CssModule;
+  label: string;
+  entries: Array<{ role: string; name: string }>;
+}) {
+  return (
+    <div className={s.credits}>
+      <div className={s.creditsLabel}>{label}</div>
+      <div className={s.creditsGrid}>
+        {entries.map((entry, i) => (
+          <div key={i} className={s.creditItem}>
+            <span className={s.creditRole}>{entry.role}</span>
+            <span className={s.creditName}>{entry.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ProjectFooterNav({
+  s,
+  previousPage,
+  nextPage,
+  previousTitle,
+  nextTitle,
+  onPrev,
+  onNext,
+}: {
+  s: CssModule;
+  previousPage: number | null;
+  nextPage: number | null;
+  previousTitle: string;
+  nextTitle: string;
+  onPrev: () => void;
+  onNext: () => void;
+}) {
+  return (
+    <nav className={s.footerNav} aria-label="Project pagination">
+      <button type="button" className={s.footerNavBtn} onClick={onPrev} disabled={!previousPage} aria-label="Previous project">
+        <span className={s.footerNavDir}>Prev</span>
+        <span className={s.footerNavTitle}>{previousTitle}</span>
+      </button>
+      <button
+        type="button"
+        className={`${s.footerNavBtn} ${s.footerNavBtnNext}`}
+        onClick={onNext}
+        disabled={!nextPage}
+        aria-label="Next project"
+      >
+        <span className={s.footerNavDir}>Next</span>
+        <span className={s.footerNavTitle}>{nextTitle}</span>
+      </button>
+    </nav>
+  );
+}
+
 function SignalVideoBlock({
   src,
   captionLabel,
@@ -534,35 +667,6 @@ function FeatureVideo({ src }: { src: string }) {
   );
 }
 
-function EditorialDividerTicker() {
-  const items = ["────────────────", "◆ CONTINUED ◆", "────────────────", "◆ CONTINUED ◆",
-                 "────────────────", "◆ CONTINUED ◆", "────────────────", "◆ CONTINUED ◆",
-                 "────────────────", "◆ CONTINUED ◆", "────────────────", "◆ CONTINUED ◆"];
-  return (
-    <div className={editorial.sectionTicker}>
-      <div className={editorial.sectionTickerTrack}>
-        {items.map((t, i) => (
-          <span key={i} className={`${editorial.sectionTickerItem}${i % 2 === 1 ? ` ${editorial.sectionTickerItemHi}` : ""}`}>{t}</span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function DividerTicker({ s }: { s: Record<string, string> }) {
-  const items = ["────────────────", "◆ SIGNAL CONTINUES ◆", "────────────────", "◆ SIGNAL CONTINUES ◆",
-                 "────────────────", "◆ SIGNAL CONTINUES ◆", "────────────────", "◆ SIGNAL CONTINUES ◆",
-                 "────────────────", "◆ SIGNAL CONTINUES ◆", "────────────────", "◆ SIGNAL CONTINUES ◆"];
-  return (
-    <div className={s.sectionTicker}>
-      <div className={s.sectionTickerTrack}>
-        {items.map((t, i) => (
-          <span key={i} className={`${s.sectionTickerItem}${i % 2 === 1 ? ` ${s.sectionTickerItemHi}` : ""}`}>{t}</span>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export function ProjectPageOverlayWindow({ pageId, onClose }: { pageId: string; onClose?: () => void }) {
   const router = useRouter();
@@ -677,6 +781,7 @@ export function ProjectPageOverlayWindow({ pageId, onClose }: { pageId: string; 
   const pageYear = toPageText(pageData?.year);
   const pageCategory = toPageText(pageData?.category);
   const pageClient = toPageText((pageData as Record<string, unknown> | null)?.client) || title;
+  const pageStudio = toPageText((pageData as Record<string, unknown> | null)?.studio);
   const streamHeaderMedia = useMemo(() => {
     const card = toCmsMediaUrl(pageData?.card_background ?? pageData?.["card-background"]);
     if (card) return card;
@@ -862,42 +967,20 @@ export function ProjectPageOverlayWindow({ pageId, onClose }: { pageId: string; 
             </div>
           ) : useColossalLayout ? (
             <div className={signal.shell}>
-              <nav className={signal.topNav} aria-label="Project controls">
-                <button
-                  type="button"
-                  className={signal.topNavBtn}
-                  onClick={() => navigateToPage(previousPage)}
-                  disabled={!previousPage || !isReady}
-                  aria-label="Previous project"
-                >
-                  Prev
-                </button>
-                <button type="button" className={signal.topNavBtn} onClick={closeOverlay}>
-                  Close
-                </button>
-                <button type="button" className={signal.topNavBtn} onClick={shareProject} disabled={!isReady}>
-                  {shareState === "copied" ? "Copied" : shareState === "error" ? "Failed" : "Share"}
-                </button>
-                <button
-                  type="button"
-                  className={signal.topNavBtn}
-                  onClick={() => navigateToPage(nextPage)}
-                  disabled={!nextPage || !isReady}
-                  aria-label="Next project"
-                >
-                  Next
-                </button>
-              </nav>
+              <ProjectTopNav
+                s={signal}
+                previousPage={previousPage}
+                nextPage={nextPage}
+                isReady={isReady}
+                shareState={shareState}
+                onPrev={() => navigateToPage(previousPage)}
+                onClose={closeOverlay}
+                onShare={shareProject}
+                onNext={() => navigateToPage(nextPage)}
+              />
 
               {/* ── TICKER ── */}
-              <div className={signal.ticker}>
-                <div className={signal.tickerTrack}>
-                  {["Colossal Biosciences", "Dire Wolf", "De-extinction - 2025", "Science-Tech Design", "Motion Design: Lyon Graulty",
-                    "Colossal Biosciences", "Dire Wolf", "De-extinction - 2025", "Science-Tech Design", "Motion Design: Lyon Graulty"].map((t, i) => (
-                    <span key={i} className={signal.tickerItem}>{t}</span>
-                  ))}
-                </div>
-              </div>
+              <ProjectTicker s={signal} items={["Colossal Biosciences", "Dire Wolf", "De-extinction - 2025", "Science-Tech Design", "Motion Design: Lyon Graulty"]} />
 
               {/* ── HEADER ── */}
               <header className={signal.header}>
@@ -925,6 +1008,10 @@ export function ProjectPageOverlayWindow({ pageId, onClose }: { pageId: string; 
                       <span className={signal.headerMetaVal}>Colossal Biosciences</span>
                     </div>
                     <div className={signal.headerMetaItem}>
+                      <span className={signal.headerMetaLabel}>Studio</span>
+                      <span className={signal.headerMetaVal}>Belle Epoch</span>
+                    </div>
+                    <div className={signal.headerMetaItem}>
                       <span className={signal.headerMetaLabel}>Year</span>
                       <span className={signal.headerMetaVal}>2025</span>
                     </div>
@@ -940,22 +1027,22 @@ export function ProjectPageOverlayWindow({ pageId, onClose }: { pageId: string; 
               <section className={signal.section}>
                 <div className={`${signal.typeBlock} ${signal.typeBlockCompact}`}>
                   <div className={signal.typeBlockSeq}>Making Of Sequence</div>
-                  <p className={signal.stepHeading}>1) Collect Dire Wolf Cells</p>
+                  <p className={signal.stepHeading}>1) Collect Dire Wolf cells</p>
                 </div>
                 <SignalVideoBlock src={colossalMedia.step1} captionLabel="Making Of - Step 01" captionMeta="01 / 05" />
               </section>
 
-              <DividerTicker s={signal} />
+              <ProjectSectionDivider s={signal} label="◆ SIGNAL CONTINUES ◆" />
 
               <section className={signal.section}>
                 <div className={`${signal.typeBlock} ${signal.typeBlockCompact}`}>
                   <div className={signal.typeBlockSeq}>Making Of Sequence</div>
-                  <p className={signal.stepHeading}>2/3) Sequence DW Genome &amp; Identify Pure Gray Wolf</p>
+                  <p className={signal.stepHeading}>2/3) Sequence DW genome &amp; identify Pure Gray Wolf</p>
                 </div>
                 <SignalVideoBlock src={colossalMedia.step23} captionLabel="Making Of - Step 02 / 03" captionMeta="02 / 05" />
               </section>
 
-              <DividerTicker s={signal} />
+              <ProjectSectionDivider s={signal} label="◆ SIGNAL CONTINUES ◆" />
 
               <section className={signal.section}>
                 <div className={`${signal.typeBlock} ${signal.typeBlockCompact}`}>
@@ -965,54 +1052,40 @@ export function ProjectPageOverlayWindow({ pageId, onClose }: { pageId: string; 
                 <SignalVideoBlock src={colossalMedia.step4} captionLabel="Making Of - Step 04" captionMeta="03 / 05" />
               </section>
 
-              <DividerTicker s={signal} />
+              <ProjectSectionDivider s={signal} label="◆ SIGNAL CONTINUES ◆" />
 
               <section className={signal.section}>
                 <div className={`${signal.typeBlock} ${signal.typeBlockCompact}`}>
                   <div className={signal.typeBlockSeq}>Making Of Sequence</div>
-                  <p className={signal.stepHeading}>5-7) Gene Alignment, Filter Variants &amp; Genome Engineering</p>
+                  <p className={signal.stepHeading}>5-7) Gene alignment, filter variants &amp; genome engineering</p>
                 </div>
                 <SignalVideoBlock src={colossalMedia.step57} captionLabel="Making Of - Step 05 / 07" captionMeta="04 / 05" />
               </section>
 
-              <DividerTicker s={signal} />
+              <ProjectSectionDivider s={signal} label="◆ SIGNAL CONTINUES ◆" />
 
               <section className={signal.section}>
                 <div className={`${signal.typeBlock} ${signal.typeBlockCompact}`}>
                   <div className={signal.typeBlockSeq}>Making Of Sequence</div>
-                  <p className={signal.stepHeading}>8) Clone Cells</p>
+                  <p className={signal.stepHeading}>8) Clone cells</p>
                 </div>
                 <SignalVideoBlock src={colossalMedia.step8} captionLabel="Making Of - Step 08" captionMeta="05 / 05" />
               </section>
 
               {/* ── CREDITS 01 ── */}
-              <div className={signal.credits}>
-                <div className={signal.creditsLabel}>Credits - Making Of</div>
-                <div className={signal.creditsGrid}>
-                  <div className={signal.creditItem}>
-                    <span className={signal.creditRole}>Creative Lead</span>
-                    <span className={signal.creditName}>Chris Klee</span>
-                  </div>
-                  <div className={signal.creditItem}>
-                    <span className={signal.creditRole}>Director</span>
-                    <span className={signal.creditName}>Ryan Padgett</span>
-                  </div>
-                  <div className={signal.creditItem}>
-                    <span className={signal.creditRole}>Visual Designer</span>
-                    <span className={signal.creditName}>Nathan Walker</span>
-                  </div>
-                  <div className={signal.creditItem}>
-                    <span className={signal.creditRole}>Editor</span>
-                    <span className={signal.creditName}>Kaley Hanson</span>
-                  </div>
-                  <div className={signal.creditItem}>
-                    <span className={signal.creditRole}>Motion Designer</span>
-                    <span className={signal.creditName}>Lyon Graulty</span>
-                  </div>
-                </div>
-              </div>
+              <ProjectCredits
+                s={signal}
+                label="Credits - Making Of"
+                entries={[
+                  { role: "Creative Lead", name: "Chris Klee" },
+                  { role: "Director", name: "Ryan Padgett" },
+                  { role: "Visual Designer", name: "Nathan Walker" },
+                  { role: "Editor", name: "Kaley Hanson" },
+                  { role: "Motion Designer", name: "Lyon Graulty" },
+                ]}
+              />
 
-              <DividerTicker s={signal} />
+              <ProjectSectionDivider s={signal} label="◆ SIGNAL CONTINUES ◆" />
 
               {/* ── YELLOWSTONE SUB-HEADER ── */}
               <header className={signal.sectionHeader}>
@@ -1027,15 +1100,19 @@ export function ProjectPageOverlayWindow({ pageId, onClose }: { pageId: string; 
                   <div className={signal.headerSeq}>Transmission - {String(pageNumber).padStart(3, "0")} / Colossal Biosciences</div>
                   <h2 className={signal.headerTitle}>Bioacoustics</h2>
                   <p className={signal.headerIntro}>
-                    Acoustic intelligence for wild landscapes isn&apos;t a future idea—it&apos;s already listening.{" "}
-                    I handled motion design, 3D modeling, and visual effects—translating that data into something you can actually follow on screen.
+                    Acoustic intelligence for wild landscapes isn&apos;t a future idea — it&apos;s already listening.{" "}
+                    I handled motion design, 3D modeling, and visual effects — translating that data into something you can actually follow on screen.
                     Turning audio into visuals, shaping patterns into something readable, and guiding attention to the meaningful parts.{" "}
-                    There&apos;s a lot of detail work behind the scenes too—down to masking out individual snowflakes in one of the spectrograph shots, just to get it to sit right.
+                    There&apos;s a lot of detail work behind the scenes too — down to masking out individual snowflakes in one of the spectrograph shots, just to get it to sit right.
                   </p>
                   <div className={signal.headerMetaRow}>
                     <div className={signal.headerMetaItem}>
                       <span className={signal.headerMetaLabel}>Client</span>
                       <span className={signal.headerMetaVal}>Colossal Biosciences</span>
+                    </div>
+                    <div className={signal.headerMetaItem}>
+                      <span className={signal.headerMetaLabel}>Studio</span>
+                      <span className={signal.headerMetaVal}>Belle Epoch</span>
                     </div>
                     <div className={signal.headerMetaItem}>
                       <span className={signal.headerMetaLabel}>Year</span>
@@ -1053,96 +1130,71 @@ export function ProjectPageOverlayWindow({ pageId, onClose }: { pageId: string; 
               <section className={signal.section}>
                 <div className={`${signal.typeBlock} ${signal.typeBlockCompact}`}>
                   <div className={signal.typeBlockSeq}>Yellowstone Sequence</div>
-                  <p className={signal.stepHeading}>1) Yellowstone Bioacoustics</p>
+                  <p className={signal.stepHeading}>1) Title</p>
                 </div>
                 <SignalVideoBlock src={colossalMedia.master} captionLabel="Yellowstone Bioacoustics" captionMeta="01 / 03" />
               </section>
 
-              <DividerTicker s={signal} />
+              <ProjectSectionDivider s={signal} label="◆ SIGNAL CONTINUES ◆" />
 
               <section className={signal.section}>
                 <div className={`${signal.typeBlock} ${signal.typeBlockCompact}`}>
                   <div className={signal.typeBlockSeq}>Yellowstone Sequence</div>
-                  <p className={signal.stepHeading}>2) Spectrogram and Map</p>
+                  <p className={signal.stepHeading}>2) Spectrogram and map</p>
                 </div>
                 <SignalVideoBlock src={colossalMedia.spectrogramMap} captionLabel="Spectrogram and Map" captionMeta="02 / 03" />
               </section>
 
-              <DividerTicker s={signal} />
+              <ProjectSectionDivider s={signal} label="◆ SIGNAL CONTINUES ◆" />
 
               <section className={signal.section}>
                 <div className={`${signal.typeBlock} ${signal.typeBlockCompact}`}>
                   <div className={signal.typeBlockSeq}>Yellowstone Sequence</div>
-                  <p className={signal.stepHeading}>3) Acoustic Recording Unit</p>
+                  <p className={signal.stepHeading}>3) Acoustic recording unit</p>
                 </div>
                 <SignalVideoBlock src={colossalMedia.aru} captionLabel="Acoustic Recording Unit" captionMeta="03 / 03" />
               </section>
 
               {/* ── CREDITS 02 ── */}
-              <div className={signal.credits}>
-                <div className={signal.creditsLabel}>Credits - Yellowstone Bioacoustics</div>
-                <div className={signal.creditsGrid}>
-                  <div className={signal.creditItem}>
-                    <span className={signal.creditRole}>Creative Lead</span>
-                    <span className={signal.creditName}>Chris Klee</span>
-                  </div>
-                  <div className={signal.creditItem}>
-                    <span className={signal.creditRole}>Director</span>
-                    <span className={signal.creditName}>Ryan Padgett</span>
-                  </div>
-                  <div className={signal.creditItem}>
-                    <span className={signal.creditRole}>Motion Designer</span>
-                    <span className={signal.creditName}>Lyon Graulty</span>
-                  </div>
-                  <div className={signal.creditItem}>
-                    <span className={signal.creditRole}>Editor</span>
-                    <span className={signal.creditName}>Kaley Hanson</span>
-                  </div>
-                </div>
-              </div>
+              <ProjectCredits
+                s={signal}
+                label="Credits - Yellowstone Bioacoustics"
+                entries={[
+                  { role: "Creative Lead", name: "Chris Klee" },
+                  { role: "Director", name: "Ryan Padgett" },
+                  { role: "Motion Designer", name: "Lyon Graulty" },
+                  { role: "Editor", name: "Kaley Hanson" },
+                ]}
+              />
 
               {/* ── FOOTER NAV ── */}
-              <nav className={signal.footerNav} aria-label="Project pagination">
-                <button
-                  type="button"
-                  className={signal.footerNavBtn}
-                  onClick={() => navigateToPage(previousPage)}
-                  disabled={!previousPage}
-                  aria-label="Previous project"
-                >
-                  <span className={signal.footerNavDir}>Prev</span>
-                  <span className={signal.footerNavTitle}>{previousPageTitle}</span>
-                </button>
-                <button
-                  type="button"
-                  className={`${signal.footerNavBtn} ${signal.footerNavBtnNext}`}
-                  onClick={() => navigateToPage(nextPage)}
-                  disabled={!nextPage}
-                  aria-label="Next project"
-                >
-                  <span className={signal.footerNavDir}>Next</span>
-                  <span className={signal.footerNavTitle}>{nextPageTitle}</span>
-                </button>
-              </nav>
+              <ProjectFooterNav
+                s={signal}
+                previousPage={previousPage}
+                nextPage={nextPage}
+                previousTitle={previousPageTitle}
+                nextTitle={nextPageTitle}
+                onPrev={() => navigateToPage(previousPage)}
+                onNext={() => navigateToPage(nextPage)}
+              />
             </div>
           ) : useTexasMonthlyLayout ? (
             <div className={editorial.shell}>
               {/* ── TOP NAV ── */}
-              <nav className={editorial.topNav} aria-label="Project controls">
-                <button type="button" className={editorial.topNavBtn} onClick={() => navigateToPage(previousPage)} disabled={!previousPage || !isReady} aria-label="Previous project">Prev</button>
-                <button type="button" className={editorial.topNavBtn} onClick={closeOverlay}>Close</button>
-                <button type="button" className={editorial.topNavBtn} onClick={shareProject} disabled={!isReady}>{shareState === "copied" ? "Copied" : shareState === "error" ? "Failed" : "Share"}</button>
-                <button type="button" className={editorial.topNavBtn} onClick={() => navigateToPage(nextPage)} disabled={!nextPage || !isReady} aria-label="Next project">Next</button>
-              </nav>
+              <ProjectTopNav
+                s={editorial}
+                previousPage={previousPage}
+                nextPage={nextPage}
+                isReady={isReady}
+                shareState={shareState}
+                onPrev={() => navigateToPage(previousPage)}
+                onClose={closeOverlay}
+                onShare={shareProject}
+                onNext={() => navigateToPage(nextPage)}
+              />
 
               {/* ── TICKER ── */}
-              <div className={editorial.ticker}>
-                <div className={editorial.tickerTrack}>
-                  {["Texas Monthly", "Editorial Animation", "2022 – 2025", "Animated Cover Design", "Texas Monthly", "Editorial Animation", "2022 – 2025", "Animated Cover Design"].map((t, i) => (
-                    <span key={i} className={editorial.tickerItem}>{t}</span>
-                  ))}
-                </div>
-              </div>
+              <ProjectTicker s={editorial} items={["Texas Monthly", "Editorial Animation", "2022 – 2025", "Animated Cover Design"]} />
 
               {/* ── HEADER (light) ── */}
               <header className={editorial.header}>
@@ -1154,6 +1206,12 @@ export function ProjectPageOverlayWindow({ pageId, onClose }: { pageId: string; 
                     <span className={editorial.headerMetaLabel}>Client</span>
                     <span className={editorial.headerMetaVal}>{pageClient}</span>
                   </div>
+                  {pageStudio && (
+                  <div className={editorial.headerMetaItem}>
+                    <span className={editorial.headerMetaLabel}>Studio</span>
+                    <span className={editorial.headerMetaVal}>{pageStudio}</span>
+                  </div>
+                  )}
                   <div className={editorial.headerMetaItem}>
                     <span className={editorial.headerMetaLabel}>Year</span>
                     <span className={editorial.headerMetaVal}>{pageYear || "2022–2025"}</span>
@@ -1199,46 +1257,23 @@ export function ProjectPageOverlayWindow({ pageId, onClose }: { pageId: string; 
                   })}
                   </div>
                 </div>
-                <div className={editorial.credits}>
-                  <div className={editorial.creditsLabel}>Animated Covers – Credits</div>
-                  <div className={editorial.creditsGrid}>
-                    <div className={editorial.creditItem}>
-                      <span className={editorial.creditRole}>Animation by</span>
-                      <span className={editorial.creditName}>Lyon Graulty</span>
-                    </div>
-                    <div className={editorial.creditItem}>
-                      <span className={editorial.creditRole}>Produced by</span>
-                      <span className={editorial.creditName}>Emily Kimbro</span>
-                    </div>
-                    <div className={editorial.creditItem}>
-                      <span className={editorial.creditRole}>Illustrations by</span>
-                      <span className={editorial.creditName}>Mercedes deBellard</span>
-                    </div>
-                    <div className={editorial.creditItem}>
-                      <span className={editorial.creditRole}>Illustrations by</span>
-                      <span className={editorial.creditName}>Mike McQuade</span>
-                    </div>
-                    <div className={editorial.creditItem}>
-                      <span className={editorial.creditRole}>Illustrations by</span>
-                      <span className={editorial.creditName}>Nicolás Ortega</span>
-                    </div>
-                    <div className={editorial.creditItem}>
-                      <span className={editorial.creditRole}>Illustrations by</span>
-                      <span className={editorial.creditName}>Tim O&apos;Brien</span>
-                    </div>
-                    <div className={editorial.creditItem}>
-                      <span className={editorial.creditRole}>Illustrations by</span>
-                      <span className={editorial.creditName}>Hokyoung Kim</span>
-                    </div>
-                    <div className={editorial.creditItem}>
-                      <span className={editorial.creditRole}>Illustrations by</span>
-                      <span className={editorial.creditName}>Doug Chayka</span>
-                    </div>
-                  </div>
-                </div>
+                <ProjectCredits
+                  s={editorial}
+                  label="Animated Covers – Credits"
+                  entries={[
+                    { role: "Animation by", name: "Lyon Graulty" },
+                    { role: "Produced by", name: "Emily Kimbro" },
+                    { role: "Illustrations by", name: "Mercedes deBellard" },
+                    { role: "Illustrations by", name: "Mike McQuade" },
+                    { role: "Illustrations by", name: "Nicolás Ortega" },
+                    { role: "Illustrations by", name: "Tim O'Brien" },
+                    { role: "Illustrations by", name: "Hokyoung Kim" },
+                    { role: "Illustrations by", name: "Doug Chayka" },
+                  ]}
+                />
               </section>
 
-              <EditorialDividerTicker />
+              <ProjectSectionDivider s={editorial} />
               {/* ── TOM BROWN'S BODY ── */}
               <section className={editorial.section}>
                 <div className={editorial.featureLayout}>
@@ -1251,26 +1286,18 @@ export function ProjectPageOverlayWindow({ pageId, onClose }: { pageId: string; 
                     <p className={editorial.featureCopyCaption}>Texas Monthly · Tom Brown&apos;s Body · 2023</p>
                   </div>
                 </div>
-                <div className={editorial.credits}>
-                  <div className={editorial.creditsLabel}>Tom Brown&apos;s Body – Credits</div>
-                  <div className={editorial.creditsGrid}>
-                    <div className={editorial.creditItem}>
-                      <span className={editorial.creditRole}>Animation by</span>
-                      <span className={editorial.creditName}>Lyon Graulty</span>
-                    </div>
-                    <div className={editorial.creditItem}>
-                      <span className={editorial.creditRole}>Produced by</span>
-                      <span className={editorial.creditName}>Emily Kimbro</span>
-                    </div>
-                    <div className={editorial.creditItem}>
-                      <span className={editorial.creditRole}>Illustrations by</span>
-                      <span className={editorial.creditName}>Hokyoung Kim</span>
-                    </div>
-                  </div>
-                </div>
+                <ProjectCredits
+                  s={editorial}
+                  label="Tom Brown's Body – Credits"
+                  entries={[
+                    { role: "Animation by", name: "Lyon Graulty" },
+                    { role: "Produced by", name: "Emily Kimbro" },
+                    { role: "Illustrations by", name: "Hokyoung Kim" },
+                  ]}
+                />
               </section>
 
-              <EditorialDividerTicker />
+              <ProjectSectionDivider s={editorial} />
               {/* ── 50TH ANNIVERSARY ── */}
               <section className={editorial.section}>
                 <div className={editorial.fiftiethFeature}>
@@ -1298,73 +1325,43 @@ export function ProjectPageOverlayWindow({ pageId, onClose }: { pageId: string; 
                     </div>
                   </div>
                 </div>
-                <div className={editorial.credits}>
-                  <div className={editorial.creditsLabel}>50th Anniversary – Credits</div>
-                  <div className={editorial.creditsGrid}>
-                    <div className={editorial.creditItem}>
-                      <span className={editorial.creditRole}>Produced by</span>
-                      <span className={editorial.creditName}>Emily Kimbro</span>
-                    </div>
-                    <div className={editorial.creditItem}>
-                      <span className={editorial.creditRole}>Animation by</span>
-                      <span className={editorial.creditName}>Lyon Graulty</span>
-                    </div>
-                    <div className={editorial.creditItem}>
-                      <span className={editorial.creditRole}>Illustration by</span>
-                      <span className={editorial.creditName}>Braulio Amado</span>
-                    </div>
-                  </div>
-                </div>
+                <ProjectCredits
+                  s={editorial}
+                  label="50th Anniversary – Credits"
+                  entries={[
+                    { role: "Produced by", name: "Emily Kimbro" },
+                    { role: "Animation by", name: "Lyon Graulty" },
+                    { role: "Illustration by", name: "Braulio Amado" },
+                  ]}
+                />
               </section>
 
               {/* ── FOOTER NAV ── */}
-              <nav className={editorial.footerNav} aria-label="Project pagination">
-                <button type="button" className={editorial.footerNavBtn} onClick={() => navigateToPage(previousPage)} disabled={!previousPage} aria-label="Previous project">
-                  <span className={editorial.footerNavDir}>Prev</span>
-                  <span className={editorial.footerNavTitle}>{previousPageTitle}</span>
-                </button>
-                <button type="button" className={`${editorial.footerNavBtn} ${editorial.footerNavBtnNext}`} onClick={() => navigateToPage(nextPage)} disabled={!nextPage} aria-label="Next project">
-                  <span className={editorial.footerNavDir}>Next</span>
-                  <span className={editorial.footerNavTitle}>{nextPageTitle}</span>
-                </button>
-              </nav>
+              <ProjectFooterNav
+                s={editorial}
+                previousPage={previousPage}
+                nextPage={nextPage}
+                previousTitle={previousPageTitle}
+                nextTitle={nextPageTitle}
+                onPrev={() => navigateToPage(previousPage)}
+                onNext={() => navigateToPage(nextPage)}
+              />
             </div>
           ) : (
             <div className="projectpage-main-stream">
-              <nav className={signal.topNav} aria-label="Project controls">
-                <button
-                  type="button"
-                  className={signal.topNavBtn}
-                  onClick={() => navigateToPage(previousPage)}
-                  disabled={!previousPage || !isReady}
-                  aria-label="Previous project"
-                >
-                  Prev
-                </button>
-                <button type="button" className={signal.topNavBtn} onClick={closeOverlay}>
-                  Close
-                </button>
-                <button type="button" className={signal.topNavBtn} onClick={shareProject} disabled={!isReady}>
-                  {shareState === "copied" ? "Copied" : shareState === "error" ? "Failed" : "Share"}
-                </button>
-                <button
-                  type="button"
-                  className={signal.topNavBtn}
-                  onClick={() => navigateToPage(nextPage)}
-                  disabled={!nextPage || !isReady}
-                  aria-label="Next project"
-                >
-                  Next
-                </button>
-              </nav>
+              <ProjectTopNav
+                s={signal}
+                previousPage={previousPage}
+                nextPage={nextPage}
+                isReady={isReady}
+                shareState={shareState}
+                onPrev={() => navigateToPage(previousPage)}
+                onClose={closeOverlay}
+                onShare={shareProject}
+                onNext={() => navigateToPage(nextPage)}
+              />
 
-              <div className={signal.ticker}>
-                <div className={signal.tickerTrack}>
-                  {[...streamTickerItems, ...streamTickerItems].map((item, i) => (
-                    <span key={`ticker-${i}`} className={signal.tickerItem}>{item}</span>
-                  ))}
-                </div>
-              </div>
+              <ProjectTicker s={signal} items={streamTickerItems} />
 
               <header className={signal.header}>
                 {streamHeaderMedia ? (
@@ -1389,6 +1386,12 @@ export function ProjectPageOverlayWindow({ pageId, onClose }: { pageId: string; 
                       <span className={signal.headerMetaLabel}>Client</span>
                       <span className={signal.headerMetaVal}>{pageClient}</span>
                     </div>
+                    {pageStudio && (
+                    <div className={signal.headerMetaItem}>
+                      <span className={signal.headerMetaLabel}>Studio</span>
+                      <span className={signal.headerMetaVal}>{pageStudio}</span>
+                    </div>
+                    )}
                     <div className={signal.headerMetaItem}>
                       <span className={signal.headerMetaLabel}>Year</span>
                       <span className={signal.headerMetaVal}>{pageYear || "----"}</span>
@@ -1480,33 +1483,20 @@ export function ProjectPageOverlayWindow({ pageId, onClose }: { pageId: string; 
                         </>
                       )}
                     </section>
-                    {index < blocks.length - 1 ? <DividerTicker s={signal} /> : null}
+                    {index < blocks.length - 1 ? <ProjectSectionDivider s={signal} label="◆ SIGNAL CONTINUES ◆" /> : null}
                   </Fragment>
                 );
               })}
 
-              <nav className={signal.footerNav} aria-label="Project pagination">
-                <button
-                  type="button"
-                  className={signal.footerNavBtn}
-                  onClick={() => navigateToPage(previousPage)}
-                  disabled={!previousPage}
-                  aria-label="Previous project"
-                >
-                  <span className={signal.footerNavDir}>Prev</span>
-                  <span className={signal.footerNavTitle}>{previousPageTitle}</span>
-                </button>
-                <button
-                  type="button"
-                  className={`${signal.footerNavBtn} ${signal.footerNavBtnNext}`}
-                  onClick={() => navigateToPage(nextPage)}
-                  disabled={!nextPage}
-                  aria-label="Next project"
-                >
-                  <span className={signal.footerNavDir}>Next</span>
-                  <span className={signal.footerNavTitle}>{nextPageTitle}</span>
-                </button>
-              </nav>
+              <ProjectFooterNav
+                s={signal}
+                previousPage={previousPage}
+                nextPage={nextPage}
+                previousTitle={previousPageTitle}
+                nextTitle={nextPageTitle}
+                onPrev={() => navigateToPage(previousPage)}
+                onNext={() => navigateToPage(nextPage)}
+              />
             </div>
           )}
         </div>

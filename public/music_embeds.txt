@@ -63,3 +63,34 @@ https://soundcloud.com/lyongraulty?utm_source=clipboard&utm_medium=text&utm_camp
   // Recalculate on resize
   window.addEventListener('resize', scaleCalendar);
 </script>
+
+
+<div class="video-wrapper">
+  <iframe class="youtube-video" src="https://www.youtube.com/embed/70pNiXMOSzU" 
+    title="YouTube video player" frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+</div>
+
+
+
+<div class="video-wrapper">
+  <iframe class="youtube-video" src="https://www.youtube.com/embed/DfvMPFQHzPU" 
+    title="YouTube video player" frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+</div>
+
+<div class="video-wrapper">
+  <iframe class="youtube-video" src="https://www.youtube.com/embed/MA8rRv_qUFY?si=Tq_B4rPJVJniXVoz" 
+    title="YouTube video player" frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+</div>
+
+
+
+

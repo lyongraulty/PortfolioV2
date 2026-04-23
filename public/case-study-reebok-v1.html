@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reebok Sustainability — Case Study v1</title>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0d0d0d; }
+
+    .shell {
+      background: #0d0d0d;
+      color: #f0ede6;
+      font-family: "PT Mono", "Courier New", monospace;
+      max-width: 1400px;
+      margin: 0 auto;
+      border-left: 1px solid rgba(240,237,230,0.05);
+      border-right: 1px solid rgba(240,237,230,0.05);
+    }
+
+    .shell::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      background: repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(240,237,230,0.016) 3px, rgba(240,237,230,0.016) 4px);
+    }
+
+    .topNav {
+      position: sticky; top: 0; z-index: 20;
+      display: grid; grid-template-columns: 1fr auto auto 1fr;
+      gap: 0.65rem; padding: 0.4rem clamp(1rem,2.8vw,1.4rem);
+      border-bottom: 1px solid rgba(240,237,230,0.08);
+      background: rgba(13,13,13,0.92); backdrop-filter: blur(8px);
+    }
+
+    .topNavBtn {
+      border: 1px solid rgba(240,237,230,0.18); border-radius: 9px;
+      background: transparent; color: rgba(240,237,230,0.65);
+      font-family: "PT Mono","Courier New",monospace; font-size: 10px;
+      letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;
+      min-height: 30px; padding: 0.24rem 0.62rem; text-align: center; cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .topNavBtn:first-child { justify-self: start; }
+    .topNavBtn:nth-child(2), .topNavBtn:nth-child(3) { justify-self: center; }
+    .topNavBtn:last-child { justify-self: end; }
+    .topNavBtn:hover { background: #f0ede6; color: #0d0d0d; border-color: #f0ede6; }
+    .topNavBtn:disabled { opacity: 0.26; cursor: default; }
+
+    .ticker {
+      overflow: hidden; background: #e8380a; height: 28px;
+      display: flex; align-items: center;
+    }
+    .tickerTrack {
+      display: flex; animation: tickerScroll 28s linear infinite; white-space: nowrap;
+    }
+    .tickerItem { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #fff; padding: 0 3rem; }
+    .tickerItem::after { content: "◆"; margin-left: 3rem; opacity: 0.5; }
+    @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* ── HERO VIDEO full-width 16:9 ── */
+    .heroWrap {
+      position: relative; background: #000; aspect-ratio: 16/9; overflow: hidden;
+    }
+    .heroWrap video { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .heroWrap::before, .heroWrap::after {
+      content: ""; position: absolute; width: 28px; height: 28px; z-index: 2; pointer-events: none;
+    }
+    .heroWrap::before { top: 14px; left: 14px; border-top: 1.5px solid #e8380a; border-left: 1.5px solid #e8380a; }
+    .heroWrap::after { bottom: 14px; right: 14px; border-bottom: 1.5px solid #e8380a; border-right: 1.5px solid #e8380a; }
+
+    .captionBar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.6rem clamp(1.5rem,5vw,4rem);
+      border-bottom: 1px solid rgba(240,237,230,0.06);
+    }
+    .captionLabel { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240,237,230,0.28); }
+    .captionMeta { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: #e8380a; }
+
+    /* ── PROJECT INFO ── */
+    .projectInfo {
+      display: grid; grid-template-columns: 5fr 7fr;
+      gap: clamp(2rem,5vw,6rem);
+      padding: clamp(3rem,6vw,5rem) clamp(1.5rem,5vw,4rem);
+      border-bottom: 1px solid rgba(240,237,230,0.07);
+    }
+    @media (max-width: 700px) { .projectInfo { grid-template-columns: 1fr; } }
+
+    .projectSeq { font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(232,56,10,0.8); }
+    .projectTitle {
+      font-family: "Arial Black","Helvetica Neue",Arial,sans-serif;
+      font-size: clamp(2rem,5.5vw,4.5rem); line-height: 0.9;
+      text-transform: uppercase; letter-spacing: -0.025em; color: #f0ede6; margin: 0.8rem 0 0;
+    }
+    .projectCopy { font-size: 13px; line-height: 1.85; color: rgba(240,237,230,0.5); }
+    .projectCopy + .projectCopy { color: rgba(240,237,230,0.3); font-size: 12px; }
+
+    /* ── META STRIP ── */
+    .metaStrip { display: flex; border-bottom: 1px solid rgba(240,237,230,0.07); overflow-x: auto; }
+    .metaCell { flex: 1; min-width: 100px; padding: 1.2rem clamp(1.5rem,3vw,2.5rem); border-right: 1px solid rgba(240,237,230,0.07); display: flex; flex-direction: column; gap: 0.35rem; }
+    .metaCell:last-child { border-right: none; }
+    .metaCellLabel { font-size: 8px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(232,56,10,0.7); }
+    .metaCellValue { font-size: 12px; letter-spacing: 0.04em; color: rgba(240,237,230,0.82); }
+
+    /* ── SECTION TICKER ── */
+    .sectionTicker {
+      overflow: hidden; height: 34px; display: flex; align-items: center;
+      border-top: 1px solid rgba(240,237,230,0.05); border-bottom: 1px solid rgba(240,237,230,0.05);
+    }
+    .sectionTickerTrack { display: flex; animation: tickerScroll 20s linear infinite; white-space: nowrap; }
+    .sectionTickerItem { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240,237,230,0.09); padding: 0 2rem; }
+    .sectionTickerHi { color: #e8380a; opacity: 0.45; }
+
+    /* ── SECTION HEADER ── */
+    .sectionHeader {
+      padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem) clamp(1rem,2vw,1.4rem);
+      border-bottom: 1px solid rgba(240,237,230,0.06);
+      display: flex; justify-content: space-between; align-items: baseline;
+    }
+    .sectionHeaderLabel { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(240,237,230,0.5); }
+    .sectionHeaderSub { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(232,56,10,0.6); }
+
+    /* ── 2-UP VIDEO GRID ── */
+    .videoGrid2up { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: #080808; }
+    @media (max-width: 640px) { .videoGrid2up { grid-template-columns: 1fr; } }
+
+    .videoCell { position: relative; background: #060606; aspect-ratio: 16/9; overflow: hidden; }
+    .videoCell video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+    .videoCellCaption {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+      padding: 0.5rem 0.75rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);
+    }
+    .videoCellLabel { font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(240,237,230,0.6); }
+
+    /* ── FULL-WIDTH VIDEO ── */
+    .videoFull { position: relative; background: #060606; overflow: hidden; }
+    .videoFullWrap { position: relative; aspect-ratio: 16/9; overflow: hidden; }
+    .videoFullWrap video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── GIF STRIP (3-wide) ── */
+    .gifStrip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: #080808; }
+    @media (max-width: 640px) { .gifStrip { grid-template-columns: repeat(2, 1fr); } }
+    .gifCell { position: relative; background: #060606; aspect-ratio: 1/1; overflow: hidden; }
+    .gifCell img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gifCellBadge {
+      position: absolute; top: 8px; left: 8px; z-index: 2;
+      font-size: 7px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: #e8380a; background: rgba(6,6,6,0.7); padding: 0.2rem 0.4rem;
+    }
+
+    /* ── COPY BLOCK ── */
+    .copyBlock { padding: clamp(2rem,4vw,3.5rem) clamp(1.5rem,5vw,4rem); border-bottom: 1px solid rgba(240,237,230,0.06); }
+    .copyText { max-width: 72ch; font-size: 13px; line-height: 1.85; color: rgba(240,237,230,0.42); }
+
+    /* ── CREDITS ── */
+    .credits { padding: clamp(2.5rem,5vw,5rem) clamp(1.5rem,5vw,4rem); border-bottom: 1px solid rgba(240,237,230,0.07); }
+    .creditsLabel { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: #e8380a; margin-bottom: 1.8rem; }
+    .creditsGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.4rem 3rem; }
+    .creditItem { display: flex; flex-direction: column; gap: 0.2rem; }
+    .creditRole { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240,237,230,0.32); }
+    .creditName { font-size: 12px; font-weight: 700; color: #f0ede6; }
+
+    /* ── FOOTER NAV ── */
+    .footerNav { display: flex; justify-content: space-between; align-items: stretch; border-top: 1px solid rgba(240,237,230,0.07); }
+    .footerNavBtn { flex: 1; padding: 2rem clamp(1.5rem,5vw,4rem); display: flex; flex-direction: column; gap: 0.5rem; cursor: pointer; background: transparent; border: none; text-align: left; transition: background 0.15s; }
+    .footerNavBtn:hover { background: rgba(240,237,230,0.02); }
+    .footerNavBtnNext { text-align: right; border-left: 1px solid rgba(240,237,230,0.07); }
+    .footerNavDir { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: #e8380a; }
+    .footerNavTitle { font-family: "Arial Black","Helvetica Neue",Arial,sans-serif; font-size: clamp(0.9rem,2vw,1.5rem); text-transform: uppercase; color: #f0ede6; letter-spacing: -0.01em; }
+  </style>
+</head>
+<body>
+<div class="shell">
+
+  <nav class="topNav">
+    <button class="topNavBtn">← Prev</button>
+    <button class="topNavBtn">Index</button>
+    <button class="topNavBtn">4 / 10</button>
+    <button class="topNavBtn">Next →</button>
+  </nav>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="tickerTrack">
+      <span class="tickerItem">Reebok</span>
+      <span class="tickerItem">Sustainability</span>
+      <span class="tickerItem">3D / Brand</span>
+      <span class="tickerItem">2024</span>
+      <span class="tickerItem">Black Math</span>
+      <span class="tickerItem">Reebok</span>
+      <span class="tickerItem">Sustainability</span>
+      <span class="tickerItem">3D / Brand</span>
+      <span class="tickerItem">2024</span>
+      <span class="tickerItem">Black Math</span>
+    </div>
+  </div>
+
+  <!-- ── HERO VIDEO ── -->
+  <div class="heroWrap">
+    <video autoplay muted loop playsinline>
+      <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/reebok-sustainability/BlackMath_ReebokSustainability_3x1_card.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="captionBar">
+    <span class="captionLabel">Reebok Sustainability Campaign · Main Reel</span>
+    <span class="captionMeta">3D / Brand / 2024</span>
+  </div>
+
+  <!-- ── PROJECT INFO ── -->
+  <div class="projectInfo">
+    <div>
+      <p class="projectSeq">04 / 3D Brand</p>
+      <h1 class="projectTitle">Reebok<br>Sustainability</h1>
+    </div>
+    <div style="padding-top:0.25rem;display:flex;flex-direction:column;gap:1.6rem;">
+      <p class="projectCopy">Abstract 3D material exploration for Reebok's sustainability campaign — bouncy simulations, tactile surfaces, and buttery smooth animation. Every element designed to make recycled material feel premium and desirable.</p>
+      <p class="projectCopy">I handled 3D modeling, simulation, and animation — building out a system of material behaviors that felt cohesive across multiple deliverables and aspect ratios. The focus was on tactility: making things you want to touch.</p>
+    </div>
+  </div>
+
+  <!-- ── META STRIP ── -->
+  <div class="metaStrip">
+    <div class="metaCell"><span class="metaCellLabel">Client</span><span class="metaCellValue">Reebok</span></div>
+    <div class="metaCell"><span class="metaCellLabel">Studio</span><span class="metaCellValue">Black Math</span></div>
+    <div class="metaCell"><span class="metaCellLabel">Year</span><span class="metaCellValue">2024</span></div>
+    <div class="metaCell"><span class="metaCellLabel">Category</span><span class="metaCellValue">3D / Brand</span></div>
+    <div class="metaCell"><span class="metaCellLabel">Role</span><span class="metaCellValue">3D Animation &amp; Simulation</span></div>
+  </div>
+
+  <!-- ── SECTION TICKER ── -->
+  <div class="sectionTicker" aria-hidden="true">
+    <div class="sectionTickerTrack">
+      <span class="sectionTickerItem">Vortex</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">Vortex</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">Vortex</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">Vortex</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">Vortex</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">Vortex</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">Vortex</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">Vortex</span><span class="sectionTickerHi sectionTickerItem">·</span>
+    </div>
+  </div>
+
+  <!-- ── 2-UP: Vortex + MSL ── -->
+  <div class="sectionHeader">
+    <span class="sectionHeaderLabel">Vortex &amp; Material Studies</span>
+    <span class="sectionHeaderSub">2 of 6 deliverables</span>
+  </div>
+  <div class="videoGrid2up">
+    <div class="videoCell">
+      <video autoplay muted loop playsinline>
+        <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/reebok-sustainability/BlackMath_Reebok_Vortex_V09.mp4" type="video/mp4">
+      </video>
+      <div class="videoCellCaption"><span class="videoCellLabel">Vortex Simulation</span></div>
+    </div>
+    <div class="videoCell">
+      <video autoplay muted loop playsinline>
+        <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/reebok-sustainability/BlackMath_ReebokMSL.mp4" type="video/mp4">
+      </video>
+      <div class="videoCellCaption"><span class="videoCellLabel">Material Study — MSL</span></div>
+    </div>
+  </div>
+
+  <!-- ── SECTION TICKER ── -->
+  <div class="sectionTicker" aria-hidden="true">
+    <div class="sectionTickerTrack">
+      <span class="sectionTickerItem">Floatride</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">Floatride</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">Floatride</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">Floatride</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">Floatride</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">Floatride</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">Floatride</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">Floatride</span><span class="sectionTickerHi sectionTickerItem">·</span>
+    </div>
+  </div>
+
+  <!-- ── FULL-WIDTH: Floatride Grow ── -->
+  <div class="sectionHeader">
+    <span class="sectionHeaderLabel">Floatride — Grow Simulation</span>
+    <span class="sectionHeaderSub">Organic growth study</span>
+  </div>
+  <div class="videoFull">
+    <div class="videoFullWrap">
+      <video autoplay muted loop playsinline>
+        <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/reebok-sustainability/BlackMath_Reebok_Floatride_Grow.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+  <div class="captionBar">
+    <span class="captionLabel">Floatride Grow · Sustainability Campaign</span>
+    <span class="captionMeta">Simulation / 2024</span>
+  </div>
+
+  <!-- ── 2-UP: Floatride Ball + Sustainability full ── -->
+  <div class="sectionHeader">
+    <span class="sectionHeaderLabel">Bounce &amp; Brand</span>
+    <span class="sectionHeaderSub">Physics simulations</span>
+  </div>
+  <div class="videoGrid2up">
+    <div class="videoCell">
+      <video autoplay muted loop playsinline>
+        <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/reebok-sustainability/BlackMath_Reebok_Floatride_BallsLoop1.mp4" type="video/mp4">
+      </video>
+      <div class="videoCellCaption"><span class="videoCellLabel">Floatride — Balls Loop</span></div>
+    </div>
+    <div class="videoCell">
+      <video autoplay muted loop playsinline>
+        <source src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/reebok-sustainability/BlackMath_ReebokSustainability.mp4" type="video/mp4">
+      </video>
+      <div class="videoCellCaption"><span class="videoCellLabel">Full Campaign Spot</span></div>
+    </div>
+  </div>
+
+  <!-- ── SECTION TICKER ── -->
+  <div class="sectionTicker" aria-hidden="true">
+    <div class="sectionTickerTrack">
+      <span class="sectionTickerItem">GIF Studies</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">GIF Studies</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">GIF Studies</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">GIF Studies</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">GIF Studies</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">GIF Studies</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">GIF Studies</span><span class="sectionTickerHi sectionTickerItem">·</span>
+      <span class="sectionTickerItem">GIF Studies</span><span class="sectionTickerHi sectionTickerItem">·</span>
+    </div>
+  </div>
+
+  <!-- ── GIF STRIP ── -->
+  <div class="sectionHeader">
+    <span class="sectionHeaderLabel">Social Cut-Downs</span>
+    <span class="sectionHeaderSub">4 GIF loops</span>
+  </div>
+  <div class="gifStrip">
+    <div class="gifCell">
+      <img src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/reebok-sustainability/BlackMathReebokDynamics.gif" alt="Reebok Dynamics GIF" loading="lazy">
+      <span class="gifCellBadge">GIF</span>
+    </div>
+    <div class="gifCell">
+      <img src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/reebok-sustainability/BlackMathReebokFloatride2.gif" alt="Reebok Floatride GIF 2" loading="lazy">
+      <span class="gifCellBadge">GIF</span>
+    </div>
+    <div class="gifCell">
+      <img src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/reebok-sustainability/BlackMathReebokFloatride3.gif" alt="Reebok Floatride GIF 3" loading="lazy">
+      <span class="gifCellBadge">GIF</span>
+    </div>
+    <div class="gifCell">
+      <img src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/reebok-sustainability/BlackMathReebokFloatride4.gif" alt="Reebok Floatride GIF 4" loading="lazy">
+      <span class="gifCellBadge">GIF</span>
+    </div>
+    <div class="gifCell">
+      <img src="https://portfolio-media.b-cdn.net/SYNC/media_live/projects/reebok-sustainability/BlackMathReebokSustainability.gif" alt="Reebok Sustainability GIF" loading="lazy">
+      <span class="gifCellBadge">GIF</span>
+    </div>
+  </div>
+
+  <!-- ── CREDITS ── -->
+  <div class="credits">
+    <div class="creditsLabel">Credits</div>
+    <div class="creditsGrid">
+      <div class="creditItem"><span class="creditRole">3D Animation &amp; Simulation</span><span class="creditName">Lyon Graulty</span></div>
+      <div class="creditItem"><span class="creditRole">Studio</span><span class="creditName">Black Math</span></div>
+      <div class="creditItem"><span class="creditRole">Client</span><span class="creditName">Reebok</span></div>
+      <div class="creditItem"><span class="creditRole">Year</span><span class="creditName">2024</span></div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER NAV ── -->
+  <nav class="footerNav">
+    <button class="footerNavBtn">
+      <span class="footerNavDir">← Previous</span>
+      <span class="footerNavTitle">Colossal Biosciences</span>
+    </button>
+    <button class="footerNavBtn footerNavBtnNext">
+      <span class="footerNavDir">Next →</span>
+      <span class="footerNavTitle">Main Title: Sellout</span>
+    </button>
+  </nav>
+
+</div>
+</body>
+</html>

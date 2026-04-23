@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dire Wolf Modal - Light Archive</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --paper: #f6f1e7;
+    --ink: #101010;
+    --muted: rgba(16,16,16,0.55);
+    --rule: rgba(16,16,16,0.16);
+    --accent: #b43a10;
+    --mono: "IBM Plex Mono", "Courier New", monospace;
+    --display: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  }
+  body {
+    font-family: var(--mono); background: var(--paper); color: var(--ink); overflow-x: hidden;
+    background-image: radial-gradient(circle at 6% 20%, rgba(255,255,255,0.9), transparent 45%),
+      radial-gradient(circle at 90% 10%, rgba(180,58,16,0.1), transparent 55%);
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; pointer-events: none; opacity: 0.15;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+    height: 56px; display: grid; grid-template-columns: auto 1fr auto; align-items: center;
+    padding: 0 clamp(1rem, 4vw, 2.5rem); border-bottom: 1px solid var(--rule);
+    backdrop-filter: blur(8px); background: rgba(246,241,231,0.82);
+  }
+  .nav .arr { font-size: 22px; color: var(--muted); }
+  .nav .center { justify-self: center; display: flex; gap: 1rem; align-items: center; }
+  .nav .close, .nav .share {
+    text-transform: uppercase; letter-spacing: 0.17em; font-size: 10px; padding: 0.35rem 0.7rem;
+    border: 1px solid var(--rule);
+  }
+  .nav .share { border-color: transparent; color: var(--muted); }
+  .hero {
+    min-height: 95vh; padding-top: 56px; border-bottom: 1px solid var(--rule); position: relative;
+    display: grid; align-items: end;
+  }
+  .hero h1 {
+    font-family: var(--display); text-transform: uppercase; letter-spacing: -0.055em;
+    line-height: 0.78; font-size: clamp(4.2rem, 17vw, 18rem);
+    padding: 0 clamp(1rem, 4vw, 2.5rem) 1.2rem;
+  }
+  .hero h1 .small { display: block; font-size: 0.48em; letter-spacing: -0.03em; margin-left: 0.2em; color: var(--accent); }
+  .hero .meta {
+    position: absolute; top: 82px; left: clamp(1rem, 4vw, 2.5rem);
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted);
+  }
+  .hero .index {
+    position: absolute; right: clamp(1rem, 4vw, 2.5rem); bottom: 1rem;
+    font-family: var(--display); font-size: clamp(3rem, 11vw, 11rem); color: rgba(16,16,16,0.08);
+  }
+  .label {
+    border-bottom: 1px solid var(--rule); padding: 0.95rem clamp(1rem, 4vw, 2.5rem);
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+    background: rgba(255,255,255,0.5);
+  }
+  .type-clock {
+    border-bottom: 1px solid var(--rule); padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 4vw, 2.5rem);
+  }
+  .type-clock .word {
+    font-family: var(--display); text-transform: uppercase; line-height: 0.8; letter-spacing: -0.05em;
+    font-size: clamp(4rem, 20vw, 19rem);
+  }
+  .type-clock .word.thin {
+    color: transparent; -webkit-text-stroke: 1px rgba(16,16,16,0.28); font-size: clamp(2.2rem, 12vw, 12rem);
+    text-align: right;
+  }
+  .type-clock .note {
+    margin-top: 1rem; max-width: 55ch; line-height: 1.85; font-size: 13px; color: var(--muted);
+  }
+  .video {
+    min-height: 54vh; border-bottom: 1px solid var(--rule);
+    background-image: linear-gradient(0deg, rgba(246,241,231,0.2), rgba(246,241,231,0.2)), url("mockup/02_colossal.jpg");
+    background-size: cover; background-position: center;
+    position: relative;
+    filter: grayscale(0.95) contrast(1.05);
+  }
+  .video.inset {
+    min-height: 42vh; margin: clamp(1rem, 4vw, 2.2rem);
+    border: 1px solid var(--rule); background-position: 50% 35%;
+  }
+  .cap {
+    position: absolute; right: 0.9rem; bottom: 0.8rem;
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(16,16,16,0.6);
+  }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="arr">&lt;</div>
+  <div class="center"><span class="close">Close</span><span class="share">Share</span></div>
+  <div class="arr">&gt;</div>
+</nav>
+
+<header class="hero">
+  <p class="meta">02 / archival treatment / light modal</p>
+  <h1>Colossal <span class="small">Dire Wolf</span></h1>
+  <div class="index">02</div>
+</header>
+
+<div class="label">01 / Morphology</div>
+<section class="type-clock">
+  <div class="word">SKULL</div>
+  <div class="note">Paper-archive tone with oversized display forms and narrow annotation copy, so each text block feels like a catalog plate.</div>
+</section>
+<section class="video"><p class="cap">plate_01.mp4 / fossil map</p></section>
+
+<div class="label">02 / Acoustic Model</div>
+<section class="type-clock">
+  <div class="word">SOUND</div>
+  <div class="word thin">80HZ</div>
+  <div class="note">This version leans into outline counters and white space to make scale shifts hit harder between blocks.</div>
+</section>
+<section class="video inset"><p class="cap">plate_02.mp4 / wave matrix</p></section>
+
+<div class="label">03 / Reveal System</div>
+<section class="type-clock">
+  <div class="word">RE</div>
+  <div class="word thin">VEAL</div>
+  <div class="note">Split giant words plus inset media keeps the alternating rhythm while giving each section a distinct beat.</div>
+</section>
+<section class="video"><p class="cap">plate_03.mp4 / launch graphics</p></section>
+</body>
+</html>

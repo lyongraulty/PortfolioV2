@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lyon Graulty — Project Mockup</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --font-display: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "PT Mono", "Courier New", monospace;
+    --accent: #E8380A;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: #0a0a0a; font-family: var(--font-mono); color: #fff; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: 58px; display: flex; align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(1.5rem, 4vw, 3rem);
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .nav-logo {
+    font-family: var(--font-display); font-weight: 900;
+    font-size: 15px; letter-spacing: -0.01em;
+    text-transform: uppercase; color: #0a0a0a;
+  }
+  nav ul { list-style: none; display: flex; gap: clamp(1rem, 2.5vw, 2rem); }
+  nav a {
+    text-decoration: none; color: #0a0a0a;
+    font-family: var(--font-mono); font-size: 12px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    transition: opacity .15s;
+  }
+  nav a:hover { opacity: .4; }
+
+  /* ── INTRO ── */
+  .intro {
+    padding: 120px clamp(2rem, 6vw, 5rem) 80px;
+    background: #fff; color: #0a0a0a;
+  }
+  .intro-label {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: rgba(10,10,10,.35); margin-bottom: 1rem;
+  }
+  .intro h1 {
+    font-family: var(--font-display); font-weight: 900;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    line-height: 1.0; letter-spacing: -.025em;
+    text-transform: uppercase; margin-bottom: 2.5rem;
+  }
+  .intro h1 em { color: var(--accent); font-style: normal; }
+
+  .rules {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1px; background: rgba(10,10,10,.08);
+    border: 1px solid rgba(10,10,10,.08);
+    margin-bottom: 0;
+  }
+  .rule {
+    background: #fff; padding: 1.4rem 1.5rem;
+  }
+  .rule .num {
+    font-family: var(--font-display); font-weight: 900;
+    font-size: 2.2rem; color: var(--accent);
+    line-height: 1; margin-bottom: .5rem;
+  }
+  .rule h3 {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: rgba(10,10,10,.4); margin-bottom: .5rem;
+  }
+  .rule p {
+    font-family: var(--font-mono); font-size: 13px;
+    line-height: 1.75; color: rgba(10,10,10,.7);
+  }
+
+  /* ── DIVIDER ── */
+  .strip {
+    background: #0a0a0a; color: #fff;
+    padding: .9rem clamp(2rem, 4vw, 3rem);
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+  .strip span {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: .1em; text-transform: uppercase;
+  }
+  .strip span:first-child { opacity: .3; }
+  .strip strong {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ── CARDS ── */
+  .stack { display: flex; flex-direction: column; }
+
+  .card {
+    position: relative;
+    height: 100vh; min-height: 500px;
+    background-size: cover; background-position: center;
+    overflow: hidden; cursor: pointer;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    transition: background-color .3s;
+  }
+
+  .card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,.82) 0%,
+      rgba(0,0,0,.3) 40%,
+      rgba(0,0,0,.05) 100%
+    );
+    transition: background .25s ease;
+  }
+  .card:hover .card-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,.88) 0%,
+      rgba(0,0,0,.45) 50%,
+      rgba(0,0,0,.1) 100%
+    );
+  }
+
+  .card-body {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .card-eyebrow {
+    display: flex; gap: 1.2rem; align-items: center;
+    margin-bottom: .7rem;
+  }
+  .card-cat {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+  }
+  .card-year {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: .05em; color: rgba(255,255,255,.3);
+  }
+
+  .card-title {
+    font-family: var(--font-display); font-weight: 900;
+    font-size: clamp(1.8rem, 3.8vw, 3rem);
+    letter-spacing: -.015em; line-height: 1.05;
+    text-transform: uppercase; color: #fff;
+    margin-bottom: .6rem; max-width: 740px;
+  }
+
+  .card-desc {
+    font-family: var(--font-mono); font-size: 13.5px;
+    line-height: 1.75; color: rgba(255,255,255,.6);
+    max-width: 540px; margin-bottom: 1.1rem;
+  }
+
+  .card-actions {
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+  .card-btn {
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,.55);
+    border-radius: 3px; background: transparent;
+    color: #fff; font-family: var(--font-mono);
+    font-size: 12px; letter-spacing: .08em;
+    text-transform: uppercase; padding: .6rem 1.2rem;
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .card-btn:hover { background: #fff; color: #000; border-color: #fff; }
+  .card-index {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: .05em; color: rgba(255,255,255,.2);
+  }
+
+  /* ── NOTES TABLE ── */
+  .notes {
+    background: #fff; color: #0a0a0a;
+    padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 6vw, 5rem);
+  }
+  .notes h2 {
+    font-family: var(--font-display); font-weight: 900;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    text-transform: uppercase; letter-spacing: -.01em;
+    margin-bottom: 2.5rem; padding-bottom: 1rem;
+    border-bottom: 3px solid #0a0a0a;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: rgba(10,10,10,.35); text-align: left;
+    padding: .5rem 1rem .5rem 0;
+    border-bottom: 1px solid rgba(10,10,10,.08);
+  }
+  td {
+    font-family: var(--font-mono); font-size: 13px;
+    line-height: 1.65; color: #0a0a0a;
+    padding: 1rem 1rem 1rem 0;
+    border-bottom: 1px solid rgba(10,10,10,.06);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: 0; }
+  .tag {
+    display: inline-block; font-size: 10px;
+    letter-spacing: .07em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 2px;
+    background: rgba(232,56,10,.1); color: var(--accent);
+  }
+
+  /* ── FOOTER ANNOTATION ── */
+  .footer-note {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+    background: var(--accent);
+    padding: 9px clamp(1.5rem, 4vw, 3rem);
+    display: flex; gap: 2rem; flex-wrap: wrap;
+  }
+  .footer-note p {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: .05em; color: #fff; opacity: .9;
+  }
+  .footer-note strong { opacity: 1; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Lyon Graulty</span>
+  <ul>
+    <li><a href="#">Reel</a></li>
+    <li><a href="#">Info</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- INTRO -->
+<section class="intro">
+  <p class="intro-label">Project Selection — Mockup · April 2026</p>
+  <h1>8 Projects.<br><em>8 Lanes.</em></h1>
+
+  <div class="rules">
+    <div class="rule">
+      <div class="num">7–8</div>
+      <h3>Recommended count</h3>
+      <p>Enough to show real range without becoming a catalog. Below 6 looks thin. Above 10 feels like a client list. 8 is the sweet spot.</p>
+    </div>
+    <div class="rule">
+      <div class="num">1</div>
+      <h3>Project per lane</h3>
+      <p>Each card should cover a different visual register — editorial, 3D abstract, character, data, VFX, brand. If two look similar, cut one.</p>
+    </div>
+    <div class="rule">
+      <div class="num">↑</div>
+      <h3>Weight toward recency</h3>
+      <p>Top 4 slots should be 2023–2025 work. Visitors rarely scroll past card 5 before forming an opinion. Lead with the newest.</p>
+    </div>
+    <div class="rule">
+      <div class="num">★</div>
+      <h3>Colossal at #2</h3>
+      <p>It's the most distinctive and culturally interesting work in the library. It defines a lane nobody else is in. Don't bury it below the fold.</p>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <span>LYONGRAULTY.COM</span>
+  <strong>SELECTED PROJECTS</strong>
+  <span>— 8 of 8 —</span>
+  <span>Stills only. Production cards use looping video.</span>
+</div>
+
+<!-- PROJECT STACK -->
+<div class="stack" id="projects">
+
+  <article class="card" style="background-image:url(01_texas_monthly.jpg)">
+    <div class="card-overlay"></div>
+    <div class="card-body">
+      <div class="card-eyebrow">
+        <span class="card-cat">Editorial Animation</span>
+        <span class="card-year">2022 – 2024</span>
+      </div>
+      <h2 class="card-title">Texas Monthly</h2>
+      <p class="card-desc">Animated editorial covers and custom illustrations for one of America's great regional magazines — bringing flat illustration to life, cover by cover.</p>
+      <div class="card-actions">
+        <button class="card-btn">View Project</button>
+        <span class="card-index">01.</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="card" style="background-image:url(02_colossal.jpg)">
+    <div class="card-overlay"></div>
+    <div class="card-body">
+      <div class="card-eyebrow">
+        <span class="card-cat">Science-Tech Design</span>
+        <span class="card-year">2025</span>
+      </div>
+      <h2 class="card-title">Colossal Biosciences</h2>
+      <p class="card-desc">Motion design for a high-profile de-extinction launch — skull reconstructions, bioacoustic data visualization, lab system design, and documentary graphics for the Dire Wolf reveal.</p>
+      <div class="card-actions">
+        <button class="card-btn">View Project</button>
+        <span class="card-index">02.</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="card" style="background-image:url(03_reebok.jpg)">
+    <div class="card-overlay"></div>
+    <div class="card-body">
+      <div class="card-eyebrow">
+        <span class="card-cat">3D / Brand</span>
+        <span class="card-year">2024</span>
+      </div>
+      <h2 class="card-title">Reebok — Sustainability</h2>
+      <p class="card-desc">Abstract 3D material exploration for Reebok's sustainability campaign — bouncy simulations, tactile surfaces, and buttery smooth animation.</p>
+      <div class="card-actions">
+        <button class="card-btn">View Project</button>
+        <span class="card-index">03.</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="card" style="background-image:url(04_sellout.jpg)">
+    <div class="card-overlay"></div>
+    <div class="card-body">
+      <div class="card-eyebrow">
+        <span class="card-cat">Title Design</span>
+        <span class="card-year">2024</span>
+      </div>
+      <h2 class="card-title">Main Title Sequence: Sellout</h2>
+      <p class="card-desc">Title design for a feature film — hand-illustrated characters, charming environments, and original music. A longtime goal, realized frame by frame.</p>
+      <div class="card-actions">
+        <button class="card-btn">View Project</button>
+        <span class="card-index">04.</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="card" style="background-image:url(05_meta.jpg)">
+    <div class="card-overlay"></div>
+    <div class="card-body">
+      <div class="card-eyebrow">
+        <span class="card-cat">Character Animation</span>
+        <span class="card-year">2023</span>
+      </div>
+      <h2 class="card-title">Meta — Character Design</h2>
+      <p class="card-desc">An ensemble of original characters for Meta — DJ, alien robot, monster, and beyond. Each with distinct personality, form language, and movement.</p>
+      <div class="card-actions">
+        <button class="card-btn">View Project</button>
+        <span class="card-index">05.</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="card" style="background-image:url(06_anheuser.jpg)">
+    <div class="card-overlay"></div>
+    <div class="card-body">
+      <div class="card-eyebrow">
+        <span class="card-cat">Brand Animation</span>
+        <span class="card-year">2023</span>
+      </div>
+      <h2 class="card-title">Anheuser-Busch</h2>
+      <p class="card-desc">A liquid-gold logo reveal for the Anheuser-Busch rebrand — precision 3D animation in service of a classic American icon.</p>
+      <div class="card-actions">
+        <button class="card-btn">View Project</button>
+        <span class="card-index">06.</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="card" style="background-image:url(07_drumwave.jpg)">
+    <div class="card-overlay"></div>
+    <div class="card-body">
+      <div class="card-eyebrow">
+        <span class="card-cat">AR / Data Visualization</span>
+        <span class="card-year">2024</span>
+      </div>
+      <h2 class="card-title">Drumwave</h2>
+      <p class="card-desc">Making the invisible architecture of your data feel personal — AR motion graphics and data visualization for a consumer data platform.</p>
+      <div class="card-actions">
+        <button class="card-btn">View Project</button>
+        <span class="card-index">07.</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="card" style="background-image:url(08_lyft.jpg)">
+    <div class="card-overlay"></div>
+    <div class="card-body">
+      <div class="card-eyebrow">
+        <span class="card-cat">Brand Motion</span>
+        <span class="card-year">2022</span>
+      </div>
+      <h2 class="card-title">Lyft — Driver Center</h2>
+      <p class="card-desc">3D brand motion for Lyft's Driver Center launch — playful, tactile, and very purple. Character-driven 3D animation at scale for a major platform brand.</p>
+      <div class="card-actions">
+        <button class="card-btn">View Project</button>
+        <span class="card-index">08.</span>
+      </div>
+    </div>
+  </article>
+
+</div>
+
+<!-- SELECTION NOTES -->
+<section class="notes">
+  <h2>Selection Notes</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:32px">#</th>
+        <th style="width:200px">Project</th>
+        <th style="width:140px">Role in stack</th>
+        <th>What it proves</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>01</td><td><strong>Texas Monthly</strong></td><td><span class="tag">Opener</span></td><td>Editorial intelligence + illustration animation. The Selena cover is immediately recognizable and sets a high bar. Best opener in the library.</td></tr>
+      <tr><td>02</td><td><strong>Colossal Biosciences</strong></td><td><span class="tag">Flagship</span></td><td>Most distinctive work here — science-tech-design in a lane nobody else is occupying. Culturally loaded, visually original. Should always be #2.</td></tr>
+      <tr><td>03</td><td><strong>Reebok Sustainability</strong></td><td><span class="tag">3D Craft</span></td><td>Best commercial 3D — abstract, material-rich, tactile. Shows premium brand 3D capability and is currently very on-trend.</td></tr>
+      <tr><td>04</td><td><strong>Sellout Title Sequence</strong></td><td><span class="tag">Narrative</span></td><td>Film title design establishes you work with story and character. The illustrated hand-drawn world is warm contrast against the Colossal dark.</td></tr>
+      <tr><td>05</td><td><strong>Meta — Characters</strong></td><td><span class="tag">IP / Character</span></td><td>Strongest character design work. The 4-character ensemble shows range across 2D and 3D, and demonstrates IP creation ability beyond client briefs.</td></tr>
+      <tr><td>06</td><td><strong>Anheuser-Busch</strong></td><td><span class="tag">Brand Credibility</span></td><td>The gold eagle logo reveal is high-craft VFX work. Major brand name adds trust. The dark/cinematic aesthetic pairs well with Colossal.</td></tr>
+      <tr><td>07</td><td><strong>Drumwave</strong></td><td><span class="tag">Emerging Tech</span></td><td>AR + data visualization is a growing brief category. Shows you can work at the intersection of motion and data — a differentiating capability.</td></tr>
+      <tr><td>08</td><td><strong>Lyft Driver Center</strong></td><td><span class="tag">Brand Warmth</span></td><td>Playful, colorful, tactile 3D. Good tonal contrast closing the stack after the AB dark work. Demonstrates range across tones and brand personalities.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="footer-note">
+  <p><strong>MOCKUP NOTE —</strong> Cards use video frame stills. Production cards will use autoplay looping video.</p>
+  <p>Typography: Arial Black (display) + PT Mono (body) — matching your current site type tokens.</p>
+</div>
+
+</body>
+</html>

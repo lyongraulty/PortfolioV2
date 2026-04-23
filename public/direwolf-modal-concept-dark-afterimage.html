@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dire Wolf Modal - Dark Afterimage</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #090909;
+    --fg: #f4f1eb;
+    --muted: rgba(244,241,235,0.48);
+    --rule: rgba(244,241,235,0.16);
+    --hot: #ff5d1a;
+    --cold: #8aa5ff;
+    --mono: "IBM Plex Mono", "Courier New", monospace;
+    --display: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  }
+  body {
+    background: radial-gradient(circle at 85% 8%, rgba(138,165,255,0.16), transparent 32%), var(--bg);
+    color: var(--fg);
+    font-family: var(--mono);
+    overflow-x: hidden;
+  }
+  .texture {
+    position: fixed; inset: 0; pointer-events: none; opacity: 0.14; z-index: 99;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 4px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 10px);
+    mix-blend-mode: screen;
+  }
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 20; height: 56px;
+    border-bottom: 1px solid var(--rule);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(1rem, 3vw, 2.4rem);
+    background: rgba(9,9,9,0.86); backdrop-filter: blur(10px);
+  }
+  .nav .arr { font-size: 22px; color: var(--muted); }
+  .nav .mid { display: flex; gap: 1rem; }
+  .nav .btn {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    border: 1px solid var(--rule); padding: 0.3rem 0.7rem;
+  }
+  .nav .btn.share { border-color: transparent; color: var(--muted); }
+  .hero {
+    min-height: 96vh; padding-top: 56px; border-bottom: 1px solid var(--rule); position: relative;
+    display: grid; align-items: end;
+    background: linear-gradient(180deg, rgba(255,93,26,0.08) 0%, transparent 35%),
+      linear-gradient(120deg, #121212 0%, #090909 60%);
+  }
+  .hero h1 {
+    font-family: var(--display); text-transform: uppercase; line-height: 0.78; letter-spacing: -0.055em;
+    font-size: clamp(4.6rem, 18vw, 19rem);
+    padding: 0 clamp(1rem, 3vw, 2.4rem) 1rem;
+  }
+  .hero h1 .ghost { color: transparent; -webkit-text-stroke: 1px rgba(244,241,235,0.3); display: block; font-size: 0.72em; margin-left: 0.2em; }
+  .meta {
+    position: absolute; top: 84px; left: clamp(1rem, 3vw, 2.4rem);
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+  }
+  .index {
+    position: absolute; bottom: 0.8rem; right: clamp(1rem, 3vw, 2.4rem);
+    font-family: var(--display); font-size: clamp(3rem, 11vw, 12rem); color: rgba(244,241,235,0.07);
+  }
+  .label {
+    padding: 0.95rem clamp(1rem, 3vw, 2.4rem); border-bottom: 1px solid var(--rule);
+    font-size: 9px; letter-spacing: 0.19em; text-transform: uppercase; color: var(--muted);
+  }
+  .type-clock {
+    padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 3vw, 2.4rem);
+    border-bottom: 1px solid var(--rule); position: relative;
+  }
+  .type-clock::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(90deg, rgba(255,93,26,0.06), transparent 30%, rgba(138,165,255,0.08));
+  }
+  .type-clock .word {
+    position: relative; z-index: 1;
+    font-family: var(--display); text-transform: uppercase; line-height: 0.78; letter-spacing: -0.055em;
+    font-size: clamp(4rem, 21vw, 20rem);
+  }
+  .type-clock .word.hot { color: var(--hot); }
+  .type-clock .word.cold { color: var(--cold); font-size: clamp(2.7rem, 12vw, 11rem); text-align: right; }
+  .type-clock .copy {
+    position: relative; z-index: 1; margin-top: 1rem; max-width: 54ch;
+    font-size: 13px; line-height: 1.85; color: var(--muted);
+  }
+  .video {
+    min-height: 58vh; border-bottom: 1px solid var(--rule);
+    background-image: linear-gradient(0deg, rgba(9,9,9,0.35), rgba(9,9,9,0.35)), url("mockup/02_colossal.jpg");
+    background-size: cover; background-position: center;
+    position: relative;
+  }
+  .video.short {
+    min-height: 40vh; margin: clamp(1rem, 4vw, 2.2rem); border: 1px solid var(--rule);
+  }
+  .cap {
+    position: absolute; right: 0.9rem; bottom: 0.7rem;
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(244,241,235,0.65);
+  }
+</style>
+</head>
+<body>
+<div class="texture"></div>
+<nav class="nav">
+  <span class="arr">&lt;</span>
+  <div class="mid"><span class="btn">Close</span><span class="btn share">Share</span></div>
+  <span class="arr">&gt;</span>
+</nav>
+
+<header class="hero">
+  <p class="meta">02 / afterimage treatment / dramatic contrast</p>
+  <h1>Colossal <span class="ghost">Dire Wolf</span></h1>
+  <div class="index">02</div>
+</header>
+
+<div class="label">01 / Frame: Anatomy</div>
+<section class="type-clock">
+  <div class="word">SKULL</div>
+  <p class="copy">High-impact opener that reads like a film poster: giant type, narrow annotation, then immediate cut to media.</p>
+</section>
+<section class="video"><p class="cap">scan_01.mp4 / cranial mesh</p></section>
+
+<div class="label">02 / Frame: Bioacoustics</div>
+<section class="type-clock">
+  <div class="word hot">SOUND</div>
+  <div class="word cold">80HZ</div>
+  <p class="copy">Hot/cold color split creates a dramatic tonal shift while preserving the alternating type-clock rhythm.</p>
+</section>
+<section class="video short"><p class="cap">scan_02.mp4 / frequency terrain</p></section>
+
+<div class="label">03 / Frame: Reveal</div>
+<section class="type-clock">
+  <div class="word">RE</div>
+  <div class="word hot">VEAL</div>
+  <p class="copy">Final section keeps pacing tight and cinematic before the closing media shot.</p>
+</section>
+<section class="video"><p class="cap">scan_03.mp4 / launch cut</p></section>
+</body>
+</html>
