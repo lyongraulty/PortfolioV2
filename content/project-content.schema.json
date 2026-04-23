@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "project-content.schema.json",
+  "title": "Portfolio Project Content",
+  "type": "object",
+  "required": ["schema_version", "source", "generated_at", "projects"],
+  "properties": {
+    "schema_version": { "type": "number" },
+    "source": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "projects": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/project" }
+    }
+  },
+  "$defs": {
+    "project": {
+      "type": "object",
+      "required": ["page", "slug", "status", "title", "template", "blocks"],
+      "properties": {
+        "page": { "type": "number" },
+        "slug": { "type": "string" },
+        "status": { "enum": ["live", "draft", "hidden"] },
+        "title": { "type": "string" },
+        "client": { "type": "string" },
+        "studio": { "type": "string" },
+        "year": { "type": "string" },
+        "category": { "type": "string" },
+        "template": { "enum": ["signal", "editorial", "case-study", "gallery", "minimal"] },
+        "theme": { "type": "string" },
+        "featured": { "type": "boolean" },
+        "sortOrder": { "type": "number" },
+        "summary": { "type": "string" },
+        "intro": { "type": "string" },
+        "card": { "$ref": "#/$defs/media" },
+        "hero": { "$ref": "#/$defs/media" },
+        "blocks": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/block" }
+        },
+        "credits": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/credit" }
+        },
+        "creditGroups": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/credit" }
+          }
+        },
+        "tickerGroups": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "linkGroups": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/link" }
+          }
+        }
+      }
+    },
+    "block": {
+      "type": "object",
+      "required": ["id", "order", "type", "layout"],
+      "properties": {
+        "id": { "type": "string" },
+        "order": { "type": "number" },
+        "type": {
+          "enum": ["header", "intro", "text", "media", "image", "video", "video_embed", "gallery", "feature", "process", "credits", "external-link", "divider"]
+        },
+        "layout": {
+          "enum": [
+            "single",
+            "two-up",
+            "three-up",
+            "grid",
+            "stack",
+            "media-left",
+            "media-right",
+            "cover-grid",
+            "process-sequence",
+            "filmstrip",
+            "full-bleed"
+          ]
+        },
+        "variant": { "type": "string" },
+        "tone": { "type": "string" },
+        "eyebrow": { "type": "string" },
+        "title": { "type": "string" },
+        "copy": { "type": "string" },
+        "caption": { "type": "string" },
+        "captionMeta": { "type": "string" },
+        "mediaGroup": { "type": "string" },
+        "creditGroup": { "type": "string" },
+        "linkGroup": { "type": "string" },
+        "tickerGroup": { "type": "string" },
+        "spacingBefore": { "enum": ["none", "sm", "md", "lg", "xl", "cinematic"] },
+        "spacingAfter": { "enum": ["none", "sm", "md", "lg", "xl", "cinematic"] },
+        "sectionHeight": { "enum": ["auto", "compact", "standard", "tall", "full"] },
+        "media": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/media" }
+        },
+        "credits": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/credit" }
+        }
+      }
+    },
+    "media": {
+      "type": "object",
+      "required": ["purpose", "src", "type"],
+      "properties": {
+        "purpose": { "type": "string" },
+        "src": { "type": "string" },
+        "type": { "enum": ["image", "video", "embed"] },
+        "label": { "type": "string" },
+        "alt": { "type": "string" },
+        "caption": { "type": "string" },
+        "poster": { "type": "string" },
+        "thumbnailAt": { "type": "number" },
+        "aspect": { "enum": ["auto", "native", "16x9", "3x1", "4x5", "1x1"] },
+        "fit": { "enum": ["cover", "contain"] },
+        "autoplay": { "type": "boolean" },
+        "loop": { "type": "boolean" },
+        "controls": { "type": "boolean" }
+      }
+    },
+    "credit": {
+      "type": "object",
+      "required": ["role", "name"],
+      "properties": {
+        "role": { "type": "string" },
+        "name": { "type": "string" },
+        "url": { "type": "string" }
+      }
+    },
+    "link": {
+      "type": "object",
+      "required": ["label", "url"],
+      "properties": {
+        "label": { "type": "string" },
+        "url": { "type": "string" },
+        "target": { "type": "string" }
+      }
+    }
+  }
+}

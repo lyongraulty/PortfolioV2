@@ -7,10 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sync:bunny-media": "echo 'sync scripts live in the BunnySync repo'",
+    "content:import-workbook": "node scripts/import-projects-workbook.mjs",
+    "content:migrate-schema": "node scripts/migrate-workbook-content-schema.mjs",
+    "content:sync-workbook-media": "node scripts/sync-workbook-media.mjs",
+    "sync:bunny-media": "node scripts/refresh-bunny-media-manifest.mjs",
     "sync:projects": "echo 'sync scripts live in the BunnySync repo'",
     "sync:local-pages": "echo 'sync scripts live in the BunnySync repo'",
-    "validate:content": "echo 'sync scripts live in the BunnySync repo'"
+    "validate:content": "npm run content:import-workbook"
   },
   "dependencies": {
     "cloudinary": "^2.9.0",

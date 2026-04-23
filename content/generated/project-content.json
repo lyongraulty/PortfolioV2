@@ -1,0 +1,1520 @@
+{
+  "schema_version": 2,
+  "source": "workbook",
+  "generated_at": "2026-04-23T04:49:41.891Z",
+  "projects": [
+    {
+      "page": 1,
+      "slug": "motion-reel",
+      "status": "live",
+      "title": "MOTION REEL",
+      "client": "MOTION REEL",
+      "year": "2026",
+      "category": "Motion Reel",
+      "template": "case-study",
+      "theme": "dark",
+      "featured": true,
+      "sortOrder": 1,
+      "summary": "A tightly edited compilation of recent work - both client and personal",
+      "card": {
+        "purpose": "card",
+        "src": "projects/reel/reel-card.jpg",
+        "type": "image"
+      },
+      "hero": {
+        "purpose": "hero",
+        "src": "projects/reel/reel-thumb.jpg",
+        "type": "image"
+      },
+      "blocks": [
+        {
+          "id": "block01",
+          "order": 1,
+          "type": "video_embed",
+          "layout": "single",
+          "variant": "19",
+          "copy": "\"Con Mi Madre\" // Zoticus // Animation&#10;\"Tomlinson's\" // Mishnoon // Design & Animation&#10;\"Glitch Callout\" // Captive // Animation&#10;\"Tradestation - Fresh Look\" // Black Math // 3D Animation&#10;\"Reach\" // Mishnoon // Design & Animation&#10;\"MTN\" // Personal Work // Design & Animation&#10;\"Idea Energy - unreleased\" // Perfect Form // Design & Animation&#10;\"Package Sensor\" // Captive // Animation&#10;\"Ash Britt\" // Zoticus // Design & Animation&#10;\"Electrolab\" // Zoticus // Design, Lighting, Texture, Camera & Animation&#10;\"Hammer Down\" // Personal Work // Design, Lighting, Texture, Camera, 2D & 3D Animation&#10;\"Tradestation - Discipline\" // Black Math // 3D Animation&#10;\"Universal Returns\" // Captive // Animation&#10;\"Jump\" // Personal Work // Design & Animation&#10;\"2019 Title Sequence\" // Personal Work // Design, Lighting, Texture, Camera & Animation&#10;Music: \"Same Old Shit\" - Mulle Beats",
+          "caption": "112",
+          "mediaGroup": "block01",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "poster",
+              "src": "projects/reel/reel-thumb.jpg",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "video",
+              "src": "projects/reel/reel.mp4",
+              "type": "video",
+              "caption": "26"
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "block02",
+          "order": 2,
+          "type": "text",
+          "layout": "single",
+          "variant": "120",
+          "copy": "Project reel metadata can live here during migration.",
+          "caption": "118",
+          "mediaGroup": "block02",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [],
+          "credits": []
+        }
+      ],
+      "credits": [],
+      "creditGroups": {},
+      "tickerGroups": {},
+      "linkGroups": {}
+    },
+    {
+      "page": 2,
+      "slug": "texas-monthly",
+      "status": "live",
+      "title": "Texas Monthly",
+      "client": "Texas Monthly",
+      "year": "2022 - 2025",
+      "category": "Editorial Animation",
+      "template": "editorial",
+      "theme": "editorial",
+      "featured": true,
+      "sortOrder": 2,
+      "summary": "Over the last few years I've been providing editorial animation for Texas Monthly. The goal wasn't to add anything extra — it was to add just enough subtle motion to support the illustration, give it a sense of depth, and let the original artwork stay front and center.",
+      "card": {
+        "purpose": "card",
+        "src": "projects/texas-monthly/TexasMonthly_3x1_card.mp4",
+        "type": "video"
+      },
+      "hero": {
+        "purpose": "hero",
+        "src": "projects/texas-monthly/TexasMonthly_3x1_card.mp4",
+        "type": "video"
+      },
+      "blocks": [
+        {
+          "id": "block01",
+          "order": 1,
+          "type": "video",
+          "layout": "single",
+          "variant": "123",
+          "copy": "112",
+          "mediaGroup": "block01",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "video",
+              "src": "projects/texas-monthly/TexasMonthly_3x1_card.mp4",
+              "type": "video",
+              "caption": "26"
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "editorial-header",
+          "order": 1,
+          "type": "header",
+          "layout": "single",
+          "variant": "editorial-header",
+          "tone": "paper",
+          "eyebrow": "Editorial Animation · 2022–2025",
+          "title": "Texas Monthly",
+          "mediaGroup": "editorial-header",
+          "tickerGroup": "main",
+          "spacingBefore": "md",
+          "spacingAfter": "lg",
+          "sectionHeight": "auto",
+          "media": [],
+          "credits": []
+        },
+        {
+          "id": "animated-covers",
+          "order": 10,
+          "type": "gallery",
+          "layout": "cover-grid",
+          "variant": "editorial-covers",
+          "tone": "paper",
+          "title": "Animated Covers",
+          "copy": "Six covers, all with distinct styles and tones. Each piece called for a slightly different approach, but the throughline was restraint—finding the smallest move that makes the image feel alive.&#10;&#10;Except for the water piece. I got to let loose on that one a little more with some directed liquid simulations.",
+          "mediaGroup": "covers",
+          "creditGroup": "animated-covers",
+          "spacingBefore": "lg",
+          "spacingAfter": "lg",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "cover",
+              "src": "projects/texas-monthly/TexasMonthly_Selena.mp4",
+              "type": "video",
+              "label": "Selena",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            },
+            {
+              "purpose": "cover",
+              "src": "projects/texas-monthly/TexasMonthly_TomBrownsBody_Chapter04_V01.mp4",
+              "type": "video"
+            },
+            {
+              "purpose": "cover",
+              "src": "projects/texas-monthly/TexasMonthly_TomBrownsBody_Chapter06_V01.mp4",
+              "type": "video"
+            },
+            {
+              "purpose": "cover",
+              "src": "projects/texas-monthly/TexasMonthly_TomBrownsBody_Chapter08_V01.mp4",
+              "type": "video"
+            },
+            {
+              "purpose": "cover",
+              "src": "projects/texas-monthly/TexasMonthly_Water_CoverRatio.mp4",
+              "type": "video"
+            },
+            {
+              "purpose": "cover",
+              "src": "projects/texas-monthly/TexasMonthly_bumscover_H264.mp4",
+              "type": "video",
+              "label": "Greg Abbott – Bum Steer of the Year",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            },
+            {
+              "purpose": "cover",
+              "src": "projects/texas-monthly/TexasMonthly_TomBrownsBody_Chapter02_V02.mp4",
+              "type": "video"
+            },
+            {
+              "purpose": "cover",
+              "src": "projects/texas-monthly/TexasMonthly_Water_CoverRatio_Title.mp4",
+              "type": "video",
+              "label": "Who's Wasting Our Water?",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            },
+            {
+              "purpose": "cover",
+              "src": "projects/texas-monthly/TexasMonthly_TrumpsApostle_V06.mp4",
+              "type": "video",
+              "label": "Trump's Apostle",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            },
+            {
+              "purpose": "cover",
+              "src": "projects/texas-monthly/TexasMonthly_ComeAndFakeIt.mp4",
+              "type": "video",
+              "label": "Come and Fake It",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            },
+            {
+              "purpose": "cover",
+              "src": "projects/texas-monthly/TexasMonthly_TomBrownsBody_V01.mp4",
+              "type": "video",
+              "label": "Tom Brown's Body",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "tom-browns-body",
+          "order": 20,
+          "type": "feature",
+          "layout": "media-left",
+          "variant": "editorial-feature",
+          "tone": "paper",
+          "title": "Tom Brown's Body",
+          "copy": "For this true crime piece, the work leaned more into tone. I developed a series of moody, atmospheric animations that extend the feeling of the illustrations—letting moments linger, adding tension, and giving the visuals a sense of unease without overstating it.&#10;&#10;It was less about movement and more about pacing and restraint—helping set the emotional temperature of the story.",
+          "caption": "Texas Monthly · Tom Brown's Body · 2023",
+          "mediaGroup": "tom-browns-body",
+          "creditGroup": "tom-browns-body",
+          "spacingBefore": "lg",
+          "spacingAfter": "lg",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "feature_video",
+              "src": "projects/texas-monthly/TexasMonthly_TomBrownsBody_ALL.mp4",
+              "type": "video",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "fiftieth-anniversary",
+          "order": 30,
+          "type": "feature",
+          "layout": "media-right",
+          "variant": "editorial-anniversary",
+          "tone": "paper",
+          "title": "50th Anniversary",
+          "copy": "I also contributed animation for the magazine's 50th anniversary feature—an especially meaningful piece to be part of.&#10;&#10;The goal here was to support the storytelling in a way that felt considered and respectful of that history—adding motion where it helps, and staying out of the way where it doesn't.",
+          "mediaGroup": "fiftieth-anniversary",
+          "creditGroup": "fiftieth-anniversary",
+          "linkGroup": "fiftieth-anniversary",
+          "spacingBefore": "lg",
+          "spacingAfter": "lg",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "web_video",
+              "src": "projects/texas-monthly/TexasMontly50th_Web.mp4",
+              "type": "video",
+              "label": "Web Version ↗",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            },
+            {
+              "purpose": "feature_video",
+              "src": "projects/texas-monthly/TexasMonthly_50thAll.mp4",
+              "type": "video",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            }
+          ],
+          "credits": []
+        }
+      ],
+      "credits": [],
+      "creditGroups": {
+        "animated-covers": [
+          {
+            "role": "Animation by",
+            "name": "Lyon Graulty"
+          },
+          {
+            "role": "Produced by",
+            "name": "Emily Kimbro"
+          },
+          {
+            "role": "Illustrations by",
+            "name": "Mercedes deBellard"
+          },
+          {
+            "role": "Illustrations by",
+            "name": "Mike McQuade"
+          },
+          {
+            "role": "Illustrations by",
+            "name": "Nicolás Ortega"
+          },
+          {
+            "role": "Illustrations by",
+            "name": "Tim O'Brien"
+          },
+          {
+            "role": "Illustrations by",
+            "name": "Hokyoung Kim"
+          },
+          {
+            "role": "Illustrations by",
+            "name": "Doug Chayka"
+          }
+        ],
+        "tom-browns-body": [
+          {
+            "role": "Animation by",
+            "name": "Lyon Graulty"
+          },
+          {
+            "role": "Produced by",
+            "name": "Emily Kimbro"
+          },
+          {
+            "role": "Illustrations by",
+            "name": "Hokyoung Kim"
+          }
+        ],
+        "fiftieth-anniversary": [
+          {
+            "role": "Produced by",
+            "name": "Emily Kimbro"
+          },
+          {
+            "role": "Animation by",
+            "name": "Lyon Graulty"
+          },
+          {
+            "role": "Illustration by",
+            "name": "Braulio Amado"
+          }
+        ]
+      },
+      "tickerGroups": {
+        "main": [
+          "Texas Monthly",
+          "Editorial Animation",
+          "2022 – 2025",
+          "Animated Cover Design"
+        ]
+      },
+      "linkGroups": {
+        "fiftieth-anniversary": [
+          {
+            "label": "Web Version ↗",
+            "url": "https://www.texasmonthly.com/50th-anniversary-issue/",
+            "target": "_blank"
+          }
+        ]
+      }
+    },
+    {
+      "page": 3,
+      "slug": "colossal",
+      "status": "live",
+      "title": "Colossal Biosciences",
+      "client": "Colossal Biosciences",
+      "studio": "Belle Epoch",
+      "year": "2025",
+      "category": "Science-Tech Documentary",
+      "template": "signal",
+      "theme": "signal",
+      "featured": true,
+      "sortOrder": 3,
+      "summary": "Motion design for a high-profile media launch — one with science, storytelling, and a bit of spectacle. Site-specific projections, large-scale screen installations, and the unique challenge of making cutting-edge science feel understandable and alive.",
+      "card": {
+        "purpose": "card",
+        "src": "projects/colossal/colossal_3x1_card.mp4",
+        "type": "video"
+      },
+      "hero": {
+        "purpose": "hero",
+        "src": "projects/colossal/colossal_pageheader3.mp4",
+        "type": "video"
+      },
+      "blocks": [
+        {
+          "id": "block01",
+          "order": 1,
+          "type": "image",
+          "layout": "single",
+          "variant": "125",
+          "copy": "112",
+          "mediaGroup": "block01",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "main_thumb",
+              "src": "projects/colossal/MAIN_THUMB.png",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "step_01",
+              "src": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 1 _SHORT.mp4",
+              "type": "video",
+              "caption": "26"
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "signal-hero",
+          "order": 1,
+          "type": "header",
+          "layout": "full-bleed",
+          "variant": "signal-hero",
+          "tone": "signal",
+          "eyebrow": "Transmission - 003 / Colossal Biosciences",
+          "title": "Dire Wolf",
+          "copy": "This piece was an exciting challenge: visualizing breakthrough science in a way that felt both cinematic and clear. From microscopic cell animations to bold typographic transitions, every moment had to balance precision with energy — a rewarding push to make complexity feel intuitive and alive. I worked across motion design, some 3D, and a lot of the system thinking—building out the animated icon language, lower thirds, logo treatments, and transitions that carry the piece. The focus was on guiding the viewer's eye to what matters, when it matters, and keeping everything cohesive across a wide range of content.",
+          "mediaGroup": "colossal-hero",
+          "tickerGroup": "main",
+          "spacingBefore": "md",
+          "spacingAfter": "lg",
+          "sectionHeight": "full",
+          "media": [
+            {
+              "purpose": "hero",
+              "src": "projects/colossal/colossal_pageheader2.mp4",
+              "type": "video",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "block02",
+          "order": 2,
+          "type": "image",
+          "layout": "two-up",
+          "variant": "127",
+          "copy": "118",
+          "mediaGroup": "block02",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "step_02_03",
+              "src": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 2 and 3 - SHORT.mp4",
+              "type": "video",
+              "caption": "26"
+            },
+            {
+              "purpose": "step_04",
+              "src": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 4 - SHORT.mp4",
+              "type": "video",
+              "caption": "26"
+            },
+            {
+              "purpose": "step_05_07",
+              "src": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 5 - 7 - SHORT.mp4",
+              "type": "video",
+              "caption": "26"
+            },
+            {
+              "purpose": "step_08",
+              "src": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 8 - SHORT.mp4",
+              "type": "video",
+              "caption": "26"
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "block03",
+          "order": 3,
+          "type": "image",
+          "layout": "single",
+          "variant": "129",
+          "copy": "128",
+          "mediaGroup": "block03",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "yellowstone_aru",
+              "src": "projects/colossal/Belle Epoch - Colossal - Yellowstone Bioacoustics - ARU.mp4",
+              "type": "video",
+              "caption": "26"
+            },
+            {
+              "purpose": "yellowstone_map",
+              "src": "projects/colossal/Belle Epoch - Colossal - Yellowstone Bioacoustics - H264 4K - Spectrogram and MAP.mp4",
+              "type": "video",
+              "caption": "26"
+            },
+            {
+              "purpose": "yellowstone_master",
+              "src": "projects/colossal/Belle Epoch - Colossal - Yellowstone Bioacoustics - H264 4K - TITLE.mp4",
+              "type": "video",
+              "caption": "26"
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "making-of-step-01",
+          "order": 10,
+          "type": "process",
+          "layout": "process-sequence",
+          "variant": "signal-step",
+          "tone": "signal",
+          "eyebrow": "Making Of Sequence",
+          "title": "1) Collect Dire Wolf Cells",
+          "caption": "Making Of - Step 01",
+          "captionMeta": "01 / 05",
+          "mediaGroup": "making-of-step-01",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "step_01",
+              "src": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 1 _SHORT.mp4",
+              "type": "video",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "making-of-step-02-03",
+          "order": 20,
+          "type": "process",
+          "layout": "process-sequence",
+          "variant": "signal-step",
+          "tone": "signal",
+          "eyebrow": "Making Of Sequence",
+          "title": "2/3) Sequence DW Genome & Identify Pure Gray Wolf",
+          "caption": "Making Of - Step 02 / 03",
+          "captionMeta": "02 / 05",
+          "mediaGroup": "making-of-step-02-03",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "step_02_03",
+              "src": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 2 and 3 - SHORT.mp4",
+              "type": "video",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "making-of-step-04",
+          "order": 30,
+          "type": "process",
+          "layout": "process-sequence",
+          "variant": "signal-step",
+          "tone": "signal",
+          "eyebrow": "Making Of Sequence",
+          "title": "4) Sequence Gray Wolf genome",
+          "caption": "Making Of - Step 04",
+          "captionMeta": "03 / 05",
+          "mediaGroup": "making-of-step-04",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "step_04",
+              "src": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 4 - SHORT.mp4",
+              "type": "video",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "making-of-step-05-07",
+          "order": 40,
+          "type": "process",
+          "layout": "process-sequence",
+          "variant": "signal-step",
+          "tone": "signal",
+          "eyebrow": "Making Of Sequence",
+          "title": "5-7) Gene Alignment, Filter Variants & Genome Engineering",
+          "caption": "Making Of - Step 05 / 07",
+          "captionMeta": "04 / 05",
+          "mediaGroup": "making-of-step-05-07",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "step_05_07",
+              "src": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 5 - 7 - SHORT.mp4",
+              "type": "video",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "making-of-step-08",
+          "order": 50,
+          "type": "process",
+          "layout": "process-sequence",
+          "variant": "signal-step",
+          "tone": "signal",
+          "eyebrow": "Making Of Sequence",
+          "title": "8) Clone Cells",
+          "caption": "Making Of - Step 08",
+          "captionMeta": "05 / 05",
+          "mediaGroup": "making-of-step-08",
+          "spacingBefore": "md",
+          "spacingAfter": "lg",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "step_08",
+              "src": "projects/colossal/Belle Epoch - Colossal - Dire Wolf Making Of - Cutdowns - 1920 x 1080 - Step 8 - SHORT.mp4",
+              "type": "video",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "making-of-credits",
+          "order": 60,
+          "type": "credits",
+          "layout": "grid",
+          "variant": "signal-credits",
+          "tone": "signal",
+          "title": "Credits - Making Of",
+          "mediaGroup": "making-of-credits",
+          "creditGroup": "making-of",
+          "spacingBefore": "md",
+          "spacingAfter": "lg",
+          "sectionHeight": "auto",
+          "media": [],
+          "credits": []
+        },
+        {
+          "id": "bioacoustics-header",
+          "order": 70,
+          "type": "header",
+          "layout": "full-bleed",
+          "variant": "signal-section-header",
+          "tone": "signal",
+          "eyebrow": "Transmission - 003 / Colossal Biosciences",
+          "title": "Bioacoustics",
+          "copy": "Acoustic intelligence for wild landscapes isn't a future idea—it's already listening. I handled motion design, 3D modeling, and visual effects—translating that data into something you can actually follow on screen. Turning audio into visuals, shaping patterns into something readable, and guiding attention to the meaningful parts. There's a lot of detail work behind the scenes too—down to masking out individual snowflakes in one of the spectrograph shots, just to get it to sit right.",
+          "mediaGroup": "bioacoustics-header",
+          "spacingBefore": "lg",
+          "spacingAfter": "lg",
+          "sectionHeight": "tall",
+          "media": [
+            {
+              "purpose": "hero",
+              "src": "projects/colossal/colossal_pageheader3.mp4",
+              "type": "video",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "yellowstone-step-01",
+          "order": 80,
+          "type": "process",
+          "layout": "process-sequence",
+          "variant": "signal-step",
+          "tone": "signal",
+          "eyebrow": "Yellowstone Sequence",
+          "title": "1) Yellowstone Bioacoustics",
+          "caption": "Yellowstone Bioacoustics",
+          "captionMeta": "01 / 03",
+          "mediaGroup": "yellowstone-step-01",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "yellowstone_master",
+              "src": "projects/colossal/Belle Epoch - Colossal - Yellowstone Bioacoustics - H264 4K - TITLE.mp4",
+              "type": "video",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "yellowstone-step-02",
+          "order": 90,
+          "type": "process",
+          "layout": "process-sequence",
+          "variant": "signal-step",
+          "tone": "signal",
+          "eyebrow": "Yellowstone Sequence",
+          "title": "2) Spectrogram and Map",
+          "caption": "Spectrogram and Map",
+          "captionMeta": "02 / 03",
+          "mediaGroup": "yellowstone-step-02",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "yellowstone_map",
+              "src": "projects/colossal/Belle Epoch - Colossal - Yellowstone Bioacoustics - H264 4K - Spectrogram and MAP.mp4",
+              "type": "video",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "yellowstone-step-03",
+          "order": 100,
+          "type": "process",
+          "layout": "process-sequence",
+          "variant": "signal-step",
+          "tone": "signal",
+          "eyebrow": "Yellowstone Sequence",
+          "title": "3) Acoustic Recording Unit",
+          "caption": "Acoustic Recording Unit",
+          "captionMeta": "03 / 03",
+          "mediaGroup": "yellowstone-step-03",
+          "spacingBefore": "md",
+          "spacingAfter": "lg",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "yellowstone_aru",
+              "src": "projects/colossal/Belle Epoch - Colossal - Yellowstone Bioacoustics - ARU.mp4",
+              "type": "video",
+              "autoplay": true,
+              "loop": true,
+              "controls": false
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "yellowstone-credits",
+          "order": 110,
+          "type": "credits",
+          "layout": "grid",
+          "variant": "signal-credits",
+          "tone": "signal",
+          "title": "Credits - Yellowstone Bioacoustics",
+          "mediaGroup": "yellowstone-credits",
+          "creditGroup": "yellowstone",
+          "spacingBefore": "md",
+          "spacingAfter": "lg",
+          "sectionHeight": "auto",
+          "media": [],
+          "credits": []
+        }
+      ],
+      "credits": [],
+      "creditGroups": {
+        "making-of": [
+          {
+            "role": "Creative Lead",
+            "name": "Chris Klee"
+          },
+          {
+            "role": "Director",
+            "name": "Ryan Padgett"
+          },
+          {
+            "role": "Visual Designer",
+            "name": "Nathan Walker"
+          },
+          {
+            "role": "Editor",
+            "name": "Kaley Hanson"
+          },
+          {
+            "role": "Motion Designer",
+            "name": "Lyon Graulty"
+          }
+        ],
+        "yellowstone": [
+          {
+            "role": "Creative Lead",
+            "name": "Chris Klee"
+          },
+          {
+            "role": "Director",
+            "name": "Ryan Padgett"
+          },
+          {
+            "role": "Motion Designer",
+            "name": "Lyon Graulty"
+          },
+          {
+            "role": "Editor",
+            "name": "Kaley Hanson"
+          }
+        ]
+      },
+      "tickerGroups": {
+        "main": [
+          "Colossal Biosciences",
+          "Dire Wolf",
+          "De-extinction - 2025",
+          "Science-Tech Design",
+          "Motion Design: Lyon Graulty"
+        ]
+      },
+      "linkGroups": {}
+    },
+    {
+      "page": 4,
+      "slug": "reebok-sustainability",
+      "status": "live",
+      "title": "Reebok — Sustainability",
+      "client": "Reebok",
+      "studio": "Black Math",
+      "year": "2024",
+      "category": "3D / Brand",
+      "template": "case-study",
+      "theme": "dark",
+      "featured": true,
+      "sortOrder": 4,
+      "summary": "Abstract 3D material exploration for Reebok's sustainability campaign — bouncy simulations, tactile surfaces, and buttery smooth animation.",
+      "card": {
+        "purpose": "card",
+        "src": "projects/reebok-sustainability/BlackMath_ReebokSustainability_3x1_card.mp4",
+        "type": "video"
+      },
+      "hero": {
+        "purpose": "hero",
+        "src": "projects/reebok-sustainability/BlackMath_ReebokSustainability_3x1_card.mp4",
+        "type": "video"
+      },
+      "blocks": [
+        {
+          "id": "block01",
+          "order": 1,
+          "type": "video",
+          "layout": "single",
+          "variant": "47",
+          "copy": "112",
+          "mediaGroup": "block01",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "video",
+              "src": "projects/reebok-sustainability/BlackMath_ReebokSustainability_3x1_card.mp4",
+              "type": "video",
+              "caption": "26"
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "block03",
+          "order": 3,
+          "type": "text",
+          "layout": "single",
+          "variant": "130",
+          "copy": "3D / Brand / 2024",
+          "caption": "128",
+          "mediaGroup": "block03",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [],
+          "credits": []
+        }
+      ],
+      "credits": [],
+      "creditGroups": {},
+      "tickerGroups": {},
+      "linkGroups": {}
+    },
+    {
+      "page": 5,
+      "slug": "sellout",
+      "status": "live",
+      "title": "Main Title Sequence: Sellout",
+      "client": "Mishnoon",
+      "year": "2024",
+      "category": "Title Design",
+      "template": "signal",
+      "theme": "dark",
+      "featured": true,
+      "sortOrder": 5,
+      "summary": "Title design for a feature film — hand-illustrated characters, charming environments, and original music. A longtime goal, realized frame by frame.",
+      "card": {
+        "purpose": "card",
+        "src": "projects/sellout/Sellout_3x1_03_card.png",
+        "type": "image"
+      },
+      "hero": {
+        "purpose": "hero",
+        "src": "projects/sellout/reel.mp4",
+        "type": "video"
+      },
+      "blocks": [
+        {
+          "id": "block01",
+          "order": 1,
+          "type": "video",
+          "layout": "single",
+          "variant": "132",
+          "copy": "112",
+          "mediaGroup": "block01",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "video",
+              "src": "projects/sellout/reel.mp4",
+              "type": "video",
+              "caption": "26"
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "block02",
+          "order": 2,
+          "type": "image",
+          "layout": "grid",
+          "variant": "134",
+          "copy": "118",
+          "mediaGroup": "block02",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "image",
+              "src": "projects/sellout/album-01.png",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/album-02.png",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/reel-thumb.png",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/still-01.png",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/still-02.png",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/still-03.png",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/still-04.png",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/still-05.png",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/still-06.png",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/still-07.png",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/still-08.png",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/still-09.png",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/still-10.png",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/still-11.gif",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/still-12.gif",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/still-13.gif",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/still-14.gif",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/still-15.gif",
+              "type": "image",
+              "caption": "26"
+            },
+            {
+              "purpose": "image",
+              "src": "projects/sellout/still-16.gif",
+              "type": "image",
+              "caption": "26"
+            }
+          ],
+          "credits": []
+        }
+      ],
+      "credits": [],
+      "creditGroups": {},
+      "tickerGroups": {},
+      "linkGroups": {}
+    },
+    {
+      "page": 6,
+      "slug": "meta",
+      "status": "live",
+      "title": "Meta — Character Design",
+      "client": "Meta",
+      "studio": "Black Math",
+      "year": "2023",
+      "category": "3D Character Animation",
+      "template": "case-study",
+      "theme": "dark",
+      "featured": true,
+      "sortOrder": 6,
+      "summary": "An ensemble of original characters for Meta — DJ, alien robot, monster, and beyond. Each with distinct personality, form language, and movement.",
+      "card": {
+        "purpose": "card",
+        "src": "projects/meta/Meta_card.mp4",
+        "type": "video"
+      },
+      "hero": {
+        "purpose": "hero",
+        "src": "projects/meta/Meta_card.mp4",
+        "type": "video"
+      },
+      "blocks": [
+        {
+          "id": "block01",
+          "order": 1,
+          "type": "video",
+          "layout": "single",
+          "variant": "63",
+          "copy": "112",
+          "mediaGroup": "block01",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "video",
+              "src": "projects/meta/Meta_card.mp4",
+              "type": "video",
+              "caption": "26"
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "block02",
+          "order": 2,
+          "type": "text",
+          "layout": "single",
+          "variant": "135",
+          "copy": "An ensemble of original characters for Meta — DJ, alien robot, monster, and beyond. Each with distinct personality, form language, and movement.",
+          "caption": "118",
+          "mediaGroup": "block02",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [],
+          "credits": []
+        },
+        {
+          "id": "block03",
+          "order": 3,
+          "type": "text",
+          "layout": "single",
+          "variant": "130",
+          "copy": "Character Animation / 2023",
+          "caption": "128",
+          "mediaGroup": "block03",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [],
+          "credits": []
+        }
+      ],
+      "credits": [],
+      "creditGroups": {},
+      "tickerGroups": {},
+      "linkGroups": {}
+    },
+    {
+      "page": 7,
+      "slug": "anheuser-busch",
+      "status": "live",
+      "title": "Anheuser-Busch",
+      "client": "Anheuser-Busch",
+      "studio": "Springbox",
+      "year": "2023",
+      "category": "Brand Animation",
+      "template": "case-study",
+      "theme": "dark",
+      "featured": true,
+      "sortOrder": 7,
+      "summary": "A liquid-gold logo reveal for the Anheuser-Busch rebrand — precision 3D animation in service of a classic American icon.",
+      "card": {
+        "purpose": "card",
+        "src": "projects/anheuser-busch/anheuser-busch_card.png",
+        "type": "image"
+      },
+      "hero": {
+        "purpose": "hero",
+        "src": "projects/anheuser-busch/Springbox_AnheuserBusch_2x1_HERO.mp4",
+        "type": "video"
+      },
+      "blocks": [
+        {
+          "id": "block01",
+          "order": 1,
+          "type": "image",
+          "layout": "single",
+          "variant": "71",
+          "copy": "112",
+          "mediaGroup": "block01",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "image",
+              "src": "projects/anheuser-busch/anheuser-busch_card.png",
+              "type": "image",
+              "caption": "26"
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "block02",
+          "order": 2,
+          "type": "text",
+          "layout": "single",
+          "variant": "135",
+          "copy": "A liquid-gold logo reveal for the Anheuser-Busch rebrand — precision 3D animation in service of a classic American icon.",
+          "caption": "118",
+          "mediaGroup": "block02",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [],
+          "credits": []
+        },
+        {
+          "id": "block03",
+          "order": 3,
+          "type": "text",
+          "layout": "single",
+          "variant": "130",
+          "copy": "Brand Animation / 2023",
+          "caption": "128",
+          "mediaGroup": "block03",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [],
+          "credits": []
+        }
+      ],
+      "credits": [],
+      "creditGroups": {},
+      "tickerGroups": {},
+      "linkGroups": {}
+    },
+    {
+      "page": 8,
+      "slug": "drumwave",
+      "status": "live",
+      "title": "Drumwave",
+      "client": "Drumwave",
+      "studio": "Swng",
+      "year": "2024",
+      "category": "AR / Data Visualization",
+      "template": "case-study",
+      "theme": "dark",
+      "featured": true,
+      "sortOrder": 8,
+      "summary": "Making the invisible architecture of your data feel personal — AR motion graphics and data visualization for a consumer data platform.",
+      "card": {
+        "purpose": "card",
+        "src": "projects/drumwave/DrumWave_card.mp4",
+        "type": "video"
+      },
+      "hero": {
+        "purpose": "hero",
+        "src": "projects/drumwave/DrumWave_card.mp4",
+        "type": "video"
+      },
+      "blocks": [
+        {
+          "id": "block01",
+          "order": 1,
+          "type": "video",
+          "layout": "single",
+          "variant": "78",
+          "copy": "112",
+          "mediaGroup": "block01",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "video",
+              "src": "projects/drumwave/DrumWave_card.mp4",
+              "type": "video",
+              "caption": "26"
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "block02",
+          "order": 2,
+          "type": "text",
+          "layout": "single",
+          "variant": "135",
+          "copy": "Making the invisible architecture of your data feel personal — AR motion graphics and data visualization for a consumer data platform.",
+          "caption": "118",
+          "mediaGroup": "block02",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [],
+          "credits": []
+        },
+        {
+          "id": "block03",
+          "order": 3,
+          "type": "text",
+          "layout": "single",
+          "variant": "130",
+          "copy": "AR / Data Visualization / 2024",
+          "caption": "128",
+          "mediaGroup": "block03",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [],
+          "credits": []
+        }
+      ],
+      "credits": [],
+      "creditGroups": {},
+      "tickerGroups": {},
+      "linkGroups": {}
+    },
+    {
+      "page": 9,
+      "slug": "netrma-safe-driving",
+      "status": "live",
+      "title": "Netrma Safe Driving",
+      "client": "North East Texas Regional Mobility Authority",
+      "studio": "Zoticus",
+      "year": "2022-2024",
+      "category": "3D Character Animation",
+      "template": "case-study",
+      "theme": "dark",
+      "featured": true,
+      "sortOrder": 9,
+      "card": {
+        "purpose": "card",
+        "src": "projects/netrma-safe-driving/NETRMA_card.mp4",
+        "type": "video"
+      },
+      "hero": {
+        "purpose": "hero",
+        "src": "projects/netrma-safe-driving/NETRMA_card.mp4",
+        "type": "video"
+      },
+      "blocks": [
+        {
+          "id": "block01",
+          "order": 1,
+          "type": "video",
+          "layout": "single",
+          "variant": "85",
+          "copy": "112",
+          "mediaGroup": "block01",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "video",
+              "src": "projects/netrma-safe-driving/NETRMA_card.mp4",
+              "type": "video",
+              "caption": "26"
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "block02",
+          "order": 2,
+          "type": "text",
+          "layout": "single",
+          "variant": "135",
+          "copy": "118",
+          "mediaGroup": "block02",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [],
+          "credits": []
+        },
+        {
+          "id": "block03",
+          "order": 3,
+          "type": "text",
+          "layout": "single",
+          "variant": "130",
+          "copy": "128",
+          "mediaGroup": "block03",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [],
+          "credits": []
+        }
+      ],
+      "credits": [],
+      "creditGroups": {},
+      "tickerGroups": {},
+      "linkGroups": {}
+    },
+    {
+      "page": 10,
+      "slug": "lyft",
+      "status": "live",
+      "title": "Lyft — Driver Center",
+      "client": "Lyft",
+      "studio": "McGarrah Jesse",
+      "year": "2022",
+      "category": "Brand Motion",
+      "template": "case-study",
+      "theme": "dark",
+      "featured": true,
+      "sortOrder": 10,
+      "summary": "3D brand motion for Lyft's Driver Center launch — playful, tactile, and very purple. Character-driven 3D animation at scale for a major platform brand.",
+      "card": {
+        "purpose": "card",
+        "src": "projects/lyft/Lyft02_card.mp4",
+        "type": "video"
+      },
+      "hero": {
+        "purpose": "hero",
+        "src": "projects/lyft/Lyft02_card.mp4",
+        "type": "video"
+      },
+      "blocks": [
+        {
+          "id": "block01",
+          "order": 1,
+          "type": "video",
+          "layout": "single",
+          "variant": "92",
+          "copy": "112",
+          "mediaGroup": "block01",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [
+            {
+              "purpose": "video",
+              "src": "projects/lyft/Lyft02_card.mp4",
+              "type": "video",
+              "caption": "26"
+            }
+          ],
+          "credits": []
+        },
+        {
+          "id": "block02",
+          "order": 2,
+          "type": "text",
+          "layout": "single",
+          "variant": "135",
+          "copy": "3D brand motion for Lyft's Driver Center launch — playful, tactile, and very purple. Character-driven 3D animation at scale for a major platform brand.",
+          "caption": "118",
+          "mediaGroup": "block02",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [],
+          "credits": []
+        },
+        {
+          "id": "block03",
+          "order": 3,
+          "type": "text",
+          "layout": "single",
+          "variant": "130",
+          "copy": "Brand Motion / 2022",
+          "caption": "128",
+          "mediaGroup": "block03",
+          "spacingBefore": "md",
+          "spacingAfter": "md",
+          "sectionHeight": "auto",
+          "media": [],
+          "credits": []
+        }
+      ],
+      "credits": [],
+      "creditGroups": {},
+      "tickerGroups": {},
+      "linkGroups": {}
+    }
+  ]
+}
