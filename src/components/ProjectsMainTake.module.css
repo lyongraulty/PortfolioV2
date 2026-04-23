@@ -2,6 +2,8 @@
   background: #0a0a0a;
   color: #ffffff;
   min-height: 100svh;
+  width: 100%;
+  overflow-x: clip;
 }
 
 .intro {
@@ -62,9 +64,9 @@
 
 .card {
   position: relative;
-  aspect-ratio: 3 / 1;
-  min-height: 40vh;
-  max-height: 100vh;
+  aspect-ratio: 3.4 / 1;
+  min-height: 28vh;
+  max-height: 42vh;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
   animation: cardReveal 480ms ease both;
@@ -124,6 +126,8 @@
   right: clamp(1rem, 2.6vw, 1.5rem);
   bottom: clamp(1rem, 2.6vw, 1.5rem);
   z-index: 1;
+  width: auto;
+  min-width: 0;
 }
 
 .meta {
@@ -132,6 +136,9 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.58);
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .firstCard .title {
@@ -145,14 +152,24 @@
   line-height: 0.95;
   letter-spacing: -0.018em;
   text-transform: uppercase;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: visible;
 }
 
 .description {
   margin: 0 0 0.85rem;
   max-width: 62ch;
+  width: 100%;
+  min-width: 0;
   font-size: 13px;
   line-height: 1.62;
   color: rgba(255, 255, 255, 0.78);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .button {
@@ -216,13 +233,55 @@
   }
 
   .card {
-    min-height: 30vh;
+    aspect-ratio: auto;
+    min-height: clamp(18rem, 36vh, 22rem);
+    max-height: none;
   }
 
   .description {
     font-size: 12px;
     line-height: 1.55;
     max-width: 36ch;
+  }
+
+  .title {
+    font-size: clamp(1.05rem, 5.2vw, 1.7rem);
+    letter-spacing: -0.03em;
+  }
+}
+
+@media (max-width: 420px) {
+  .intro,
+  .label,
+  .systemRow {
+    padding-inline: 0.75rem;
+  }
+
+  .cardContent {
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.75rem;
+  }
+
+  .title {
+    font-size: clamp(0.78rem, 5.2vw, 1.1rem);
+    letter-spacing: -0.045em;
+  }
+
+  .description {
+    max-width: none;
+  }
+
+  .meta,
+  .title,
+  .description {
+    max-width: 100%;
+  }
+
+  .button {
+    padding: 0.52rem 0.72rem;
+    font-size: 10px;
+    letter-spacing: 0.08em;
   }
 }
 

@@ -21,10 +21,29 @@ function formatIndex(n: number): string {
 }
 
 function splitTitle(title: string): { lead: string; trail: string } {
-  const words = title.trim().split(/\s+/).filter(Boolean);
+  const normalized = title
+    .replace(/[:;,!?./\\()[\]{}]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const separatedParts = title
+    .split(/\s*(?:—|–|-|:)\s*/g)
+    .map((part) => part.replace(/[:;,!?./\\()[\]{}]+/g, " ").replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+
+  if (separatedParts.length >= 2) {
+    return {
+      lead: separatedParts[0] ?? "PROJECT",
+      trail: separatedParts.slice(1).join(" "),
+    };
+  }
+
+  const words = normalized.split(/\s+/).filter(Boolean);
   if (words.length <= 1) return { lead: words[0] ?? "PROJECT", trail: "" };
-  const mid = Math.ceil(words.length / 2);
-  return { lead: words.slice(0, mid).join(" "), trail: words.slice(mid).join(" ") };
+  const mid = words.length === 3 ? 1 : Math.ceil(words.length / 2);
+  return {
+    lead: words.slice(0, mid).join(" "),
+    trail: words.slice(mid).join(" "),
+  };
 }
 
 export async function ProjectsMainTakeLightArchive() {
@@ -52,7 +71,6 @@ export async function ProjectsMainTakeLightArchive() {
           </video>
         )}
         <div className={styles.heroOverlay}>
-          <p className={styles.heroEyebrow}>Selected Work - {total} Specimens</p>
           <h1 className={styles.heroTitle}>
             Lyon<br />Graulty
           </h1>
@@ -95,9 +113,6 @@ export async function ProjectsMainTakeLightArchive() {
 
               {/* type clock */}
               <div className={styles.typeClock}>
-                <p className={styles.seqLabel}>
-                  <em>{seq}</em>{category || "Motion Design"}
-                </p>
                 <h2 className={styles.wordLead}>{lead}</h2>
                 {trail && <p className={styles.wordTrail}>{trail}</p>}
                 {description && <p className={styles.copy}>{description}</p>}
@@ -130,7 +145,6 @@ export async function ProjectsMainTakeLightArchive() {
                 ) : (
                   <div className={styles.mediaFallback}>Media unavailable</div>
                 )}
-                <div className={styles.corners} aria-hidden="true" />
                 <div className={styles.videoFooter}>
                   <ModalLink className={styles.button} modal="project-page" page={String(pageNumber)}>
                     {buttonText}

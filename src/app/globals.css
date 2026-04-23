@@ -1193,12 +1193,12 @@ body.projectpage-overlay-open .site-header-backdrop {
 }
 
 .project-card-inner {
-  min-height: calc(clamp(14rem, 40vh, 30rem) + 200px);
+  min-height: clamp(15rem, 24vh, 20rem);
   display: grid;
   align-content: center;
   justify-items: start;
   gap: 0.7rem;
-  transform: translateY(-10%);
+  transform: translateY(0);
   position: relative;
   z-index: 2;
 }
@@ -1437,7 +1437,7 @@ body.projectpage-overlay-open .site-header-backdrop {
   .window-panel,
   .sandbox-inner,
   .music-dark-inner {
-    min-height: calc(clamp(12rem, 35vh, 22rem) + 200px);
+    min-height: clamp(13rem, 22vh, 17rem);
   }
 
   .reel-controls {
@@ -2737,7 +2737,8 @@ body.projectpage-overlay-open .site-header-backdrop {
 
 .projects-take-card {
   position: relative;
-  min-height: 72vh;
+  min-height: 56vh;
+  max-height: 64vh;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
 }
@@ -2819,7 +2820,8 @@ body.projectpage-overlay-open .site-header-backdrop {
 
 @media (max-width: 900px) {
   .projects-take-card {
-    min-height: 64vh;
+    min-height: 50vh;
+    max-height: 58vh;
   }
 
   .projects-take-description {
