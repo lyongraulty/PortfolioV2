@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solar Eclipse Shader</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  canvas { display: block; width: 100vw; height: 100vh; cursor: grab; }
+  canvas:active { cursor: grabbing; }
+  #hud {
+    position: fixed; left: 16px; bottom: 16px;
+    font: 12px/1.4 ui-monospace, Menlo, monospace; color: rgba(255,255,255,.45);
+    user-select: none; pointer-events: none;
+  }
+  #err {
+    position: fixed; inset: 16px; display: none; white-space: pre-wrap;
+    font: 12px/1.5 ui-monospace, Menlo, monospace; color: #ffb4a8;
+    background: rgba(20,0,0,.85); padding: 16px; overflow: auto;
+  }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hud">loading shader…</div>
+<div id="err"></div>
+<script>
+(async () => {
+  const canvas = document.getElementById('c');
+  const hud = document.getElementById('hud');
+  const err = document.getElementById('err');
+  const fail = (msg) => { err.style.display = 'block'; err.textContent = msg; hud.textContent = ''; };
+
+  const gl = canvas.getContext('webgl2', { antialias: false });
+  if (!gl) return fail('WebGL2 is not available in this browser. Try a recent Chrome, Firefox or Safari.');
+
+  let src;
+  try {
+    const res = await fetch('solar-eclipse.frag', { cache: 'no-store' });
+    if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
+    src = await res.text();
+  } catch (e) {
+    return fail('Could not load solar-eclipse.frag (' + e.message + ').\nServe this folder over http (e.g. `npm run dev`) instead of opening the file directly.');
+  }
+
+  const vs = `#version 300 es
+  in vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }`;
+  const compile = (type, s) => {
+    const sh = gl.createShader(type); gl.shaderSource(sh, s); gl.compileShader(sh);
+    if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(sh));
+    return sh;
+  };
+  const prog = gl.createProgram();
+  try {
+    gl.attachShader(prog, compile(gl.VERTEX_SHADER, vs));
+    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, src));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+  } catch (e) { return fail('Shader error:\n\n' + e.message); }
+  gl.useProgram(prog);
+
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog, 'p');
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+  const uRes = gl.getUniformLocation(prog, 'iResolution');
+  const uTime = gl.getUniformLocation(prog, 'iTime');
+  const uMouse = gl.getUniformLocation(prog, 'iMouse');
+
+  // Render scale: lower = faster. ?scale=0.5 in the URL to override.
+  const params = new URLSearchParams(location.search);
+  const scale = Math.min(2, Math.max(0.25, parseFloat(params.get('scale')) || 1));
+  const startTime = parseFloat(params.get('t')) || 0;
+
+  const resize = () => {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2) * scale;
+    canvas.width = Math.round(innerWidth * dpr);
+    canvas.height = Math.round(innerHeight * dpr);
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  };
+  addEventListener('resize', resize); resize();
+
+  const mouse = [0, 0, 0, 0];
+  const setMouse = (e) => {
+    const r = canvas.getBoundingClientRect();
+    mouse[0] = (e.clientX - r.left) / r.width * canvas.width;
+    mouse[1] = (1 - (e.clientY - r.top) / r.height) * canvas.height;
+  };
+  canvas.addEventListener('pointerdown', (e) => { setMouse(e); mouse[2] = 1; canvas.setPointerCapture(e.pointerId); });
+  canvas.addEventListener('pointermove', (e) => { if (mouse[2]) setMouse(e); });
+  canvas.addEventListener('pointerup', () => { mouse[2] = 0; });
+
+  let paused = false, t = startTime, last = performance.now(), frames = 0, fpsT = last, fps = 0;
+  addEventListener('keydown', (e) => {
+    if (e.code === 'Space') { paused = !paused; e.preventDefault(); }
+    if (e.key === 'r') t = 0;
+  });
+
+  const frame = (now) => {
+    const dt = (now - last) / 1000; last = now;
+    if (!paused) t += dt;
+    gl.uniform3f(uRes, canvas.width, canvas.height, 1);
+    gl.uniform1f(uTime, t);
+    gl.uniform4fv(uMouse, mouse);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    frames++;
+    if (now - fpsT > 500) { fps = frames * 1000 / (now - fpsT); frames = 0; fpsT = now; }
+    hud.textContent = `${paused ? 'paused' : 'playing'} · t ${t.toFixed(1)}s · ${fps.toFixed(0)} fps · drag to orbit · space pause · r restart`;
+    requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
